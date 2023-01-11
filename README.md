@@ -6,7 +6,7 @@ In this assignment we are looking to become familiar with Git, GitHub, Pull-Requ
 
 ## Reading
 
-Read Chapters 1-6.  This will take several hours! Much of this content is similar to Java so feel free to speed-read content you are already familiar with.
+Read [Essential C#](https://EssentialCSharp.com) - Chapters 1-6.  This will take several hours! Much of this content is similar to Java so feel free to speed-read content you are already familiar with.
 
 ## Assignment Details
 
