@@ -7,7 +7,7 @@ namespace PrincessBrideTrivia
     {
         public static void Main(string[] args)
         {
-            string filePath = GetFilePath(); //returns string of file path
+            string filePath = GetFilePath();
             Question[] questions = LoadQuestions(filePath);
 
             int numberCorrect = 0;
