@@ -6,7 +6,7 @@ In this assignment we are looking to become familiar with Git, GitHub, Pull-Requ
 
 ## Reading
 
-Read [Essential C#](https://EssentialCSharp.com) - Chapters 1-6.  This will take several hours! Much of this content is similar to Java so feel free to speed-read content you are already familiar with.
+Read [Essential C#](https://EssentialCSharp.com) - Chapters 1-3.  This will take several hours! Much of this content is similar to Java so feel free to speed-read content you are already familiar with.
 
 ## Assignment Details
 
@@ -20,3 +20,5 @@ Read [Essential C#](https://EssentialCSharp.com) - Chapters 1-6.  This will take
 * Come up with a new feature for the application
   * Issue 3: Add a new feature request implemented ✔❌
   * Issue 3: Feature request unit tested ✔❌
+
+See [Docs](https://github.com/IntelliTect-Samples/EWU-CSCD371-2023-Winter/blob/main/Docs)
