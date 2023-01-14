@@ -5,33 +5,57 @@ namespace PrincessBrideTrivia
 {
     public class Program
     {
+        static int Hints = 0;
         public static void Main(string[] args)
         {
             string filePath = GetFilePath();
             Question[] questions = LoadQuestions(filePath);
 
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine("Type ? to use a hint! (Only works once per question) \n");
+            Console.ForegroundColor = ConsoleColor.White;
             int numberCorrect = 0;
             for (int i = 0; i < questions.Length; i++)
             {
-                bool result = AskQuestion(questions[i]);
+                bool result = AskQuestion(questions[i], (i + 1), questions.Length);
                 if (result)
                 {
                     numberCorrect++;
-                }
+                } 
             }
-            Console.WriteLine("You got " + GetPercentCorrect(numberCorrect, questions.Length) + " correct");
+            string hintTxt;
+            if (Hints == 0)
+            {
+                hintTxt = "you didn't use any hints!";
+            } else if (Hints == 1)
+            {
+                hintTxt = "you only used 1 hint!";
+            } else
+            {
+                hintTxt = "you only used " + Hints + " hints!";
+            }
+            Console.WriteLine("You got " + GetPercentCorrect(numberCorrect, questions.Length) + " correct and " + hintTxt);
         }
 
-        public static string GetPercentCorrect(int numberCorrectAnswers, int numberOfQuestions)
+        public static string GetPercentCorrect(double numberCorrectAnswers, int numberOfQuestions)
         {
             double num1 = numberCorrectAnswers;
             double num2 = numberOfQuestions;
-            return ((int)(num1 / num2 * 100)) + "%";
+            return ((int)(numberCorrectAnswers / num2 * 100)) + "%";
         }
 
-        public static bool AskQuestion(Question question)
+        public static bool AskQuestion(Question question, int numQ, int total)
         {
-            DisplayQuestion(question);
+            DisplayQuestionPt1(numQ, total);
+            DisplayQuestionPt2(question);
+
+            string userGuess = GetGuessFromUser();
+            return DisplayResult(userGuess, question);
+        }
+
+        public static bool AskQuestionHint(Question question)
+        {
+            DisplayQuestionHint(question);
 
             string userGuess = GetGuessFromUser();
             return DisplayResult(userGuess, question);
@@ -44,24 +68,52 @@ namespace PrincessBrideTrivia
 
         public static bool DisplayResult(string userGuess, Question question)
         {
+            if (userGuess == "?")
+            {
+                Hints++;
+                return AskQuestionHint(question);
+            }
             if (userGuess == question.CorrectAnswerIndex)
             {
-                Console.WriteLine("Correct");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Correct \n");
+                Console.ForegroundColor = ConsoleColor.White;
                 return true;
             }
-
-            Console.WriteLine("Incorrect");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Incorrect \n");
+            Console.ForegroundColor = ConsoleColor.White;
             return false;
         }
-
-        public static void DisplayQuestion(Question question)
+        public static void DisplayQuestionPt1(int numberDone, int numberTotal)
         {
-            if (question == null)
-                return;
-            Console.WriteLine("Question: " + question.Text);
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("Question " + numberDone + " / " + numberTotal);
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+        public static void DisplayQuestionPt2(Question question)
+        {
+            Console.WriteLine(question.Text + "\n");
             for (int i = 0; i < question.Answers.Length; i++)
             {
                 Console.WriteLine((i + 1) + ": " + question.Answers[i]);
+            }
+        }
+        public static void DisplayQuestionHint(Question question)
+        {
+            Console.WriteLine("\n" + question.Text + "\n");
+            if (question.CorrectAnswerIndex == "1" || question.CorrectAnswerIndex == "2")
+            {
+                for (int i = 0; i < question.Answers.Length - 1; i++)
+                {
+                    Console.WriteLine((i + 1) + ": " + question.Answers[i]);
+                }
+            } else
+            {
+                for (int i = 1; i < question.Answers.Length; i++)
+                {
+                    Console.WriteLine((i + 1) + ": " + question.Answers[i]);
+                }
             }
         }
 
