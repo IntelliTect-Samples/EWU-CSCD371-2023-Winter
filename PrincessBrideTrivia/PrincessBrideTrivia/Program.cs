@@ -10,16 +10,27 @@ namespace PrincessBrideTrivia
             string filePath = GetFilePath();
             Question[] questions = LoadQuestions(filePath);
 
-            int numberCorrect = 0;
-            for (int i = 0; i < questions.Length; i++)
+            //our addition/suggestion for feature added to code, replay
+            bool replay = true;
+            while (replay)
             {
-                bool result = AskQuestion(questions[i]);
-                if (result)
+                int numberCorrect = 0;
+                for (int i = 0; i < questions.Length; i++)
                 {
-                    numberCorrect++;
+                    bool result = AskQuestion(questions[i]);
+                    if (result)
+                    {
+                        numberCorrect++;
+                    }
                 }
+                Console.WriteLine("You got " + GetPercentCorrect(numberCorrect, questions.Length) + " correct");
+                Console.WriteLine("Would you like to take the quiz again?");
+                Console.WriteLine("1. Yes");
+                Console.WriteLine("2. No");
+                string ans = GetGuessFromUser();
+                replay = ReplayQuizCheck(ans);
             }
-            Console.WriteLine("You got " + GetPercentCorrect(numberCorrect, questions.Length) + " correct");
+
         }
 
         public static string GetPercentCorrect(int numberCorrectAnswers, int numberOfQuestions)
@@ -93,6 +104,18 @@ namespace PrincessBrideTrivia
                 questions[i] = question;
             }
             return questions;
+        }
+
+        public static bool ReplayQuizCheck(string yesOrNo)
+        {
+            string ans = yesOrNo;
+            if (ans == "1")
+            {
+                Console.WriteLine("Restarting quiz...");
+                return true;
+            }
+            Console.WriteLine("Goodbye!");
+            return false;
         }
     }
 }

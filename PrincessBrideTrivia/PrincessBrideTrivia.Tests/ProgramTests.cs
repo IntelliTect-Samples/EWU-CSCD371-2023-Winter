@@ -72,6 +72,16 @@ namespace PrincessBrideTrivia.Tests
             Assert.AreEqual(expectedString, percentage);
         }
 
+        [TestMethod]
+        [DataRow("1", true)]
+        [DataRow("2", false)]
+        public void TestReplayQuizCheck_ReturnsCorrectBoolean(string userInput, bool expectedResult)
+        {
+            bool displayResult = Program.ReplayQuizCheck(userInput);
+
+            Assert.AreEqual(expectedResult, displayResult);
+        }
+
 
         private static void GenerateQuestionsFile(string filePath, int numberOfQuestions)
         {
