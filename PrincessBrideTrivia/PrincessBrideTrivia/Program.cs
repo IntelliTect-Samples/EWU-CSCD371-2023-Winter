@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace PrincessBrideTrivia
@@ -24,7 +25,7 @@ namespace PrincessBrideTrivia
 
         public static string GetPercentCorrect(int numberCorrectAnswers, int numberOfQuestions)
         {
-            return (numberCorrectAnswers / numberOfQuestions * 100) + "%";
+            return (numberCorrectAnswers * 100 / numberOfQuestions) + "%";
         }
 
         public static bool AskQuestion(Question question)
@@ -35,9 +36,16 @@ namespace PrincessBrideTrivia
             return DisplayResult(userGuess, question);
         }
 
+        // Modified for EC
         public static string GetGuessFromUser()
         {
-            return Console.ReadLine();
+            string guess = Console.ReadLine();
+            while (CheckGuess(guess) == false)
+            {
+                Console.WriteLine("Invalid guess, please try again.");
+                guess = Console.ReadLine();
+            }
+            return guess;
         }
 
         public static bool DisplayResult(string userGuess, Question question)
@@ -89,8 +97,23 @@ namespace PrincessBrideTrivia
                 question.Answers[1] = answer2;
                 question.Answers[2] = answer3;
                 question.CorrectAnswerIndex = correctAnswerIndex;
+                questions[i] = question;
             }
             return questions;
+        }
+
+        // EXTRA CREDIT ATTEMPT
+        public static bool CheckGuess(string guess)
+        {
+            List<string> allowedGuesses = new() { "1", "2", "3" };
+            if (allowedGuesses.Contains(guess))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

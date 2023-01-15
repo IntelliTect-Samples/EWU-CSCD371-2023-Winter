@@ -86,5 +86,24 @@ namespace PrincessBrideTrivia.Tests
                 File.AppendAllLines(filePath, lines);
             }
         }
+
+        // EXTRA CREDIT ATTEMPT
+        [TestMethod]
+        [DataRow("1", true)]
+        [DataRow("2", true)]
+        [DataRow("3", true)]
+        [DataRow("4", false)]
+        [DataRow("a", false)]
+
+        public void CheckGuess_ReturnsTrue(string guess, bool check)
+        {
+            // Arrange
+
+            // Act
+            bool allowed = Program.CheckGuess(guess);
+
+            // Assert
+            Assert.AreEqual(allowed, check);
+        }
     }
 }
