@@ -18,13 +18,30 @@ namespace PrincessBrideTrivia
                 {
                     numberCorrect++;
                 }
+                if (!result)
+                {
+                    Console.WriteLine("Try Again? y/n");
+                    string userGuess = GetGuessFromUser();
+                    if(userGuess == "y")
+                    {
+                        AskQuestion(questions[i]);
+                        if (result)
+                        {
+                            numberCorrect++;
+                        }
+                        if (userGuess == "n")
+                        {
+                            AskQuestion(questions[i++]);
+                        }
+                    }
+                }
             }
             Console.WriteLine("You got " + GetPercentCorrect(numberCorrect, questions.Length) + " correct");
         }
 
         public static string GetPercentCorrect(int numberCorrectAnswers, int numberOfQuestions)
         {
-            return (numberCorrectAnswers / numberOfQuestions * 100) + "%";
+            return ((double)numberCorrectAnswers / (double)numberOfQuestions * 100) + "%";
         }
 
         public static bool AskQuestion(Question question)
@@ -89,6 +106,7 @@ namespace PrincessBrideTrivia
                 question.Answers[1] = answer2;
                 question.Answers[2] = answer3;
                 question.CorrectAnswerIndex = correctAnswerIndex;
+                questions[i] = question;
             }
             return questions;
         }
