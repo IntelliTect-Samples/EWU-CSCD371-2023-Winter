@@ -7,10 +7,4 @@
     <WarningsAsErrors />
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Update="Trivia.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>

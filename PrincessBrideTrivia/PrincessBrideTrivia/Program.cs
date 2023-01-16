@@ -1,8 +1,6 @@
 ﻿using System;
 using System.IO;
 
-// This is Vera commenting on this document
-
 namespace PrincessBrideTrivia
 {
     public class Program
