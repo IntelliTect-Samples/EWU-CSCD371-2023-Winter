@@ -18,8 +18,7 @@ namespace PrincessBrideTrivia
 
             string userGuess = GetGuessFromUser();
 
-
-            string filePath = GetFilePath();
+            string filePath = GetFilePath(userGuess);
             Question[] questions = LoadQuestions(filePath);
 
             int numberCorrect = 0;
@@ -73,9 +72,19 @@ namespace PrincessBrideTrivia
             }
         }
 
-        public static string GetFilePath()
+        public static string GetFilePath(string choice)
         {
-            return "Easy.txt";
+            switch (choice)
+            {
+                case "1":
+                    return "Easy.txt";
+                case "2":
+                    return "Medium.txt";
+                case "3":
+                    return "Hard.txt";
+                default:
+                    return "Medium.txt";
+            }
         }
 
         public static Question[] LoadQuestions(string filePath)

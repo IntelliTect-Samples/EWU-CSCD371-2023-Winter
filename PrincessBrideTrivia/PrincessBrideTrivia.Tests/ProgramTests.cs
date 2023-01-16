@@ -44,15 +44,33 @@ namespace PrincessBrideTrivia.Tests
         }
 
         [TestMethod]
-        public void GetFilePath_ReturnsFileThatExists()
+        [DataRow("1")]
+        [DataRow("2")]
+        [DataRow("3")]
+        public void GetFilePath_ReturnsFileThatExists(string choice)
         {
             // Arrange
 
             // Act
-            string filePath = Program.GetFilePath();
+            string filePath = Program.GetFilePath(choice);
 
             // Assert
             Assert.IsTrue(File.Exists(filePath));
+        }
+
+        [TestMethod]
+        [DataRow("1", "Easy.txt")]
+        [DataRow("2", "Medium.txt")]
+        [DataRow("3", "Hard.txt")]
+        public void GetFilePath_ReturnsCorrectFile(string choice, string expectedResult)
+        {
+            // Arrange
+
+            // Act
+            string actualResult = Program.GetFilePath(choice);
+            
+            // Assert
+            Assert.AreEqual(actualResult, expectedResult);
         }
 
         [TestMethod]
