@@ -7,6 +7,18 @@ namespace PrincessBrideTrivia
     {
         public static void Main(string[] args)
         {
+            Question menu = new Question();
+            menu.Text = "What mode do you want to play in?";
+            menu.Answers = new string[3];
+            menu.Answers[0] = "Easy";
+            menu.Answers[1] = "Medium";
+            menu.Answers[2] = "Hard";
+            menu.CorrectAnswerIndex = "1";
+            DisplayQuestion(menu);
+
+            string userGuess = GetGuessFromUser();
+
+
             string filePath = GetFilePath();
             Question[] questions = LoadQuestions(filePath);
 
@@ -63,7 +75,7 @@ namespace PrincessBrideTrivia
 
         public static string GetFilePath()
         {
-            return "Trivia.txt";
+            return "Easy.txt";
         }
 
         public static Question[] LoadQuestions(string filePath)
