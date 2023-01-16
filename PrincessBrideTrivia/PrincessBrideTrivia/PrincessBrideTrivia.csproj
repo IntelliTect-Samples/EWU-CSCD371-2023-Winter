@@ -8,6 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Update="Menu.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Easy.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

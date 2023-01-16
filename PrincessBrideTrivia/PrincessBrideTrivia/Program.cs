@@ -7,17 +7,10 @@ namespace PrincessBrideTrivia
     {
         public static void Main(string[] args)
         {
-            Question menu = new Question();
-            menu.Text = "What mode do you want to play in?";
-            menu.Answers = new string[3];
-            menu.Answers[0] = "Easy";
-            menu.Answers[1] = "Medium";
-            menu.Answers[2] = "Hard";
-            menu.CorrectAnswerIndex = "1";
-            DisplayQuestion(menu);
-
+            Question[] menu = LoadQuestions("Menu.txt");
+            DisplayQuestion(menu[0]);
             string userGuess = GetGuessFromUser();
-
+           
             string filePath = GetFilePath(userGuess);
             Question[] questions = LoadQuestions(filePath);
 
