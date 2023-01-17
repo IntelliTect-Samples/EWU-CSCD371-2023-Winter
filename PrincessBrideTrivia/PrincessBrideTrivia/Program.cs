@@ -11,12 +11,34 @@ namespace PrincessBrideTrivia
             Question[] questions = LoadQuestions(filePath);
 
             int numberCorrect = 0;
+            //For loop for getting whether or not the user answers correctly
             for (int i = 0; i < questions.Length; i++)
             {
                 bool result = AskQuestion(questions[i]);
+                //If correct
                 if (result)
                 {
                     numberCorrect++;
+                }
+                //If not correct
+                if (!result)
+                {
+                    Console.WriteLine("Would you like to try again? Y/N");
+                    string userGuess = GetGuessFromUser();
+
+                    if (userGuess == "y" || userGuess == "Y")
+                    {
+                        AskQuestion(questions[i]);
+                        if (result)
+                        {
+                            numberCorrect++;
+                        }
+                        //Resumes to the next question if the user replies n or N
+                        if (userGuess == "n" || userGuess == "N")
+                        {
+                            AskQuestion(questions[i++]);
+                        }
+                    }
                 }
             }
             Console.WriteLine("You got " + GetPercentCorrect(numberCorrect, questions.Length) + " correct");
@@ -24,7 +46,7 @@ namespace PrincessBrideTrivia
 
         public static string GetPercentCorrect(int numberCorrectAnswers, int numberOfQuestions)
         {
-            return (numberCorrectAnswers / numberOfQuestions * 100) + "%";
+            return ((double)numberCorrectAnswers / (double)numberOfQuestions * 100) + "%";
         }
 
         public static bool AskQuestion(Question question)
@@ -89,6 +111,7 @@ namespace PrincessBrideTrivia
                 question.Answers[1] = answer2;
                 question.Answers[2] = answer3;
                 question.CorrectAnswerIndex = correctAnswerIndex;
+                questions[i] = question;
             }
             return questions;
         }

@@ -42,8 +42,24 @@ namespace PrincessBrideTrivia.Tests
             // Assert
             Assert.AreEqual(expectedResult, displayResult);
         }
-
         [TestMethod]
+        [DataRow("1", true)]
+        [DataRow("2", false)]
+        public void DisplayResult_ReturnsFalseIfIncorrect(string userGuess, bool expectedResult)
+        {
+            // Arrange
+            Question question = new Question();
+            question.CorrectAnswerIndex = "2";
+
+            // Act
+            bool displayResult = Program.DisplayResult(userGuess, question);
+
+            // Assert
+            Assert.AreNotEqual(expectedResult, displayResult);
+
+            }
+
+            [TestMethod]
         public void GetFilePath_ReturnsFileThatExists()
         {
             // Arrange
