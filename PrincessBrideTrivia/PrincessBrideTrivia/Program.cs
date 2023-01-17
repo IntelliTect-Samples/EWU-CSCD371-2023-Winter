@@ -7,7 +7,11 @@ namespace PrincessBrideTrivia
     {
         public static void Main(string[] args)
         {
-            string filePath = GetFilePath();
+            Question[] menu = LoadQuestions("Menu.txt");
+            DisplayQuestion(menu[0]);
+            string userGuess = GetGuessFromUser();
+
+            string filePath = GetFilePath(userGuess);
             Question[] questions = LoadQuestions(filePath);
 
             int numberCorrect = 0;
@@ -24,7 +28,7 @@ namespace PrincessBrideTrivia
 
         public static string GetPercentCorrect(int numberCorrectAnswers, int numberOfQuestions)
         {
-            return (numberCorrectAnswers / numberOfQuestions * 100) + "%";
+            return ((double)numberCorrectAnswers / numberOfQuestions * 100) + "%";
         }
 
         public static bool AskQuestion(Question question)
@@ -61,9 +65,19 @@ namespace PrincessBrideTrivia
             }
         }
 
-        public static string GetFilePath()
+        public static string GetFilePath(string choice)
         {
-            return "Trivia.txt";
+            switch (choice)
+            {
+                case "1":
+                    return "Easy.txt";
+                case "2":
+                    return "Medium.txt";
+                case "3":
+                    return "Hard.txt";
+                default:
+                    return "Medium.txt";
+            }
         }
 
         public static Question[] LoadQuestions(string filePath)
@@ -89,6 +103,8 @@ namespace PrincessBrideTrivia
                 question.Answers[1] = answer2;
                 question.Answers[2] = answer3;
                 question.CorrectAnswerIndex = correctAnswerIndex;
+
+                questions[i] = question;
             }
             return questions;
         }

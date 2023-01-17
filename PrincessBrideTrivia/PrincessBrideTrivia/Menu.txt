@@ -1,0 +1,5 @@
+What mode do you want to play in?
+Easy
+Medium
+Hard
+-1
