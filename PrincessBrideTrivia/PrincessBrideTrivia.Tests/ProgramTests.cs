@@ -77,9 +77,9 @@ namespace PrincessBrideTrivia.Tests
         [DataRow("2", false)]
         public void TestReplayQuizCheck_ReturnsCorrectBoolean(string userInput, bool expectedResult)
         {
-            bool displayResult = Program.ReplayQuizCheck(userInput);
+            bool replayQuiz = Program.ReplayQuizCheck(userInput);
 
-            Assert.AreEqual(expectedResult, displayResult);
+            Assert.AreEqual(expectedResult, replayQuiz);
         }
 
 

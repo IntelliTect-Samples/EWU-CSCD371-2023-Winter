@@ -35,7 +35,7 @@ namespace PrincessBrideTrivia
 
         public static string GetPercentCorrect(int numberCorrectAnswers, int numberOfQuestions)
         {
-            return (int)((double)numberCorrectAnswers / (double)numberOfQuestions * 100) + "%";
+            return (int)((double)numberCorrectAnswers / numberOfQuestions * 100) + "%";
         }
 
         public static bool AskQuestion(Question question)
@@ -106,10 +106,9 @@ namespace PrincessBrideTrivia
             return questions;
         }
 
-        public static bool ReplayQuizCheck(string yesOrNo)
+        public static bool ReplayQuizCheck(string ans)
         {
-            string ans = yesOrNo;
-            if (ans == "1")
+            if (ans.Trim() == "1")
             {
                 Console.WriteLine("Restarting quiz...");
                 return true;
