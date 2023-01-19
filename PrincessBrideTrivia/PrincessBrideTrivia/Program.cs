@@ -24,11 +24,7 @@ namespace PrincessBrideTrivia
                     }
                 }
                 Console.WriteLine("You got " + GetPercentCorrect(numberCorrect, questions.Length) + " correct");
-                Console.WriteLine("Would you like to take the quiz again?");
-                Console.WriteLine("1. Yes");
-                Console.WriteLine("2. No");
-                string ans = GetGuessFromUser();
-                replay = ReplayQuizCheck(ans);
+                replay = PromptReplayQuiz();
             }
 
         }
@@ -115,6 +111,15 @@ namespace PrincessBrideTrivia
             }
             Console.WriteLine("Goodbye!");
             return false;
+        }
+
+        public static bool PromptReplayQuiz()
+        {
+            Console.WriteLine("Would you like to take the quiz again?");
+            Console.WriteLine("1. Yes");
+            Console.WriteLine("2. No");
+            string ans = GetGuessFromUser();
+            return ReplayQuizCheck(ans);
         }
     }
 }
