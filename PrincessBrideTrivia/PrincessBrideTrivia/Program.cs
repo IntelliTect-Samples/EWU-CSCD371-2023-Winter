@@ -5,7 +5,9 @@ namespace PrincessBrideTrivia
 {
     public class Program
     {
-        static int Hints = 0;
+        private static int Hints = 0;
+        public static int _Hints { get => Hints; set => Hints = value; }
+
         public static void Main(string[] args)
         {
             string filePath = GetFilePath();
@@ -23,25 +25,29 @@ namespace PrincessBrideTrivia
                     numberCorrect++;
                 } 
             }
-            string hintTxt;
-            if (Hints == 0)
-            {
-                hintTxt = "you didn't use any hints!";
-            } else if (Hints == 1)
-            {
-                hintTxt = "you only used 1 hint!";
-            } else
-            {
-                hintTxt = "you only used " + Hints + " hints!";
-            }
+            string hintTxt = GetHintTxt(_Hints);
             Console.WriteLine("You got " + GetPercentCorrect(numberCorrect, questions.Length) + " correct and " + hintTxt);
         }
 
-        public static string GetPercentCorrect(double numberCorrectAnswers, int numberOfQuestions)
+        public static string GetHintTxt(int h)
         {
-            double num1 = numberCorrectAnswers;
-            double num2 = numberOfQuestions;
-            return ((int)(numberCorrectAnswers / num2 * 100)) + "%";
+            if (h == 0)
+            {
+                return "you didn't use any hints!";
+            }
+            else if (h == 1)
+            {
+                return "you only used 1 hint!";
+            }
+            else
+            {
+                return "you only used " + h + " hints!";
+            }
+        }
+
+        public static string GetPercentCorrect(int numberCorrectAnswers, int numberOfQuestions)
+        {
+            return ((int)((double)numberCorrectAnswers / (double)numberOfQuestions * 100)) + "%";
         }
 
         public static bool AskQuestion(Question question, int numQ, int total)
@@ -70,7 +76,7 @@ namespace PrincessBrideTrivia
         {
             if (userGuess == "?")
             {
-                Hints++;
+                _Hints++;
                 return AskQuestionHint(question);
             }
             if (userGuess == question.CorrectAnswerIndex)

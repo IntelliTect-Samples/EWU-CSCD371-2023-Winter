@@ -72,6 +72,21 @@ namespace PrincessBrideTrivia.Tests
             Assert.AreEqual(expectedString, percentage);
         }
 
+        [TestMethod]
+        public void GetHintTxt_ProperlyChangesHintTxt()
+        {
+            string v1 = "you didn't use any hints!";
+            string v2 = "you only used 1 hint!";
+            string v3 = "you only used 5 hints!";
+            string t1 = Program.GetHintTxt(0);
+            string t2 = Program.GetHintTxt(1);
+            string t3 = Program.GetHintTxt(5);
+            Assert.AreEqual(t1, v1);
+            Assert.AreEqual(t2, v2);
+            Assert.AreEqual(t3, v3);
+
+        }
+
         private static void GenerateQuestionsFile(string filePath, int numberOfQuestions)
         {
             for (int i = 0; i < numberOfQuestions; i++)
