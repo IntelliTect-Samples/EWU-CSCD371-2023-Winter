@@ -10,7 +10,7 @@ namespace PrincessBrideTrivia
             string filePath = GetFilePath();
             Question[] questions = LoadQuestions(filePath);
 
-            //our addition/suggestion for feature added to code, replay
+            //our addition, suggestion for feature added to code, replay
             bool replay = true;
             while (replay)
             {
