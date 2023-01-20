@@ -87,7 +87,6 @@ namespace PrincessBrideTrivia.Tests
             }
         }
 
-        // EXTRA CREDIT ATTEMPT
         [TestMethod]
         [DataRow("1", true)]
         [DataRow("2", true)]
