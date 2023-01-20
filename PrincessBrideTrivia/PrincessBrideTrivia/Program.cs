@@ -102,7 +102,6 @@ namespace PrincessBrideTrivia
             return questions;
         }
 
-        // EXTRA CREDIT ATTEMPT
         public static bool CheckGuess(string guess)
         {
             List<string> allowedGuesses = new() { "1", "2", "3" };
