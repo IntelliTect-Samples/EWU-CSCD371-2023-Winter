@@ -29,15 +29,36 @@ namespace PrincessBrideTrivia
 
         public static bool AskQuestion(Question question)
         {
+            
             DisplayQuestion(question);
-
-            string userGuess = GetGuessFromUser();
+            string userGuess = GetGuessFromUser(question);
+            
+            
             return DisplayResult(userGuess, question);
         }
 
-        public static string GetGuessFromUser()
+        public static string GetGuessFromUser(Question question)
         {
-            return Console.ReadLine();
+            bool indexInBounds = true;
+            string guess = Console.ReadLine();
+            while (indexInBounds)
+            {
+
+                if (guess == "1" || guess == "2" || guess == "3" || guess == "x" || guess == "X")
+                {
+                    indexInBounds = false;
+                }
+                else
+                {
+                    Console.WriteLine("you are out of bounds");     
+                    DisplayQuestion(question);
+                    guess = Console.ReadLine();
+                    indexInBounds = true;
+                }
+            }
+
+            return guess;
+           
         }
 
         public static bool DisplayResult(string userGuess, Question question)
