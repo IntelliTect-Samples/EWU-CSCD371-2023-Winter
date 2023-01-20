@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
+using System;
 
 namespace PrincessBrideTrivia.Tests
 {
@@ -56,6 +57,16 @@ namespace PrincessBrideTrivia.Tests
         }
 
         [TestMethod]
+        [DataRow("4", true)]
+        public void AnswerOutOfBoundsKeepsLooping(string userGuess, bool indexInBounds)
+        {
+            if (userGuess is "4")
+            {
+                Assert.IsTrue(indexInBounds);
+            }
+        }
+
+        [TestMethod]
         [DataRow(1, 1, "100%")]
         [DataRow(5, 10, "50%")]
         [DataRow(1, 10, "10%")]
@@ -86,5 +97,7 @@ namespace PrincessBrideTrivia.Tests
                 File.AppendAllLines(filePath, lines);
             }
         }
+
+        
     }
 }

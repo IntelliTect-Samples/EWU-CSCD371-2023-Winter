@@ -44,9 +44,13 @@ namespace PrincessBrideTrivia
             while (indexInBounds)
             {
 
-                if (guess == "1" || guess == "2" || guess == "3" || guess == "x" || guess == "X")
+                if (guess == "1" || guess == "2" || guess == "3")
                 {
                     indexInBounds = false;
+                }
+                else if (guess is "x" or "X")
+                {
+                    Environment.Exit(10);
                 }
                 else
                 {
@@ -75,7 +79,7 @@ namespace PrincessBrideTrivia
 
         public static void DisplayQuestion(Question question)
         {
-            Console.WriteLine("Question: " + question.Text); //System.NullReferenceException thrown here
+            Console.WriteLine("Question: " + question.Text);
             for (int i = 0; i < question.Answers.Length; i++)
             {
                 Console.WriteLine((i + 1) + ": " + question.Answers[i]);
@@ -110,7 +114,7 @@ namespace PrincessBrideTrivia
                 question.Answers[1] = answer2;
                 question.Answers[2] = answer3;
                 question.CorrectAnswerIndex = correctAnswerIndex;
-                questions[i] = question; //added to resolve NullReferenceException
+                questions[i] = question; 
             }
             return questions;
         }
