@@ -11,5 +11,13 @@ namespace Logger.Tests
         {
 
         }
+
+        [TestMethod]
+        public void LogFactoryTest_ConfigureFileLogger()
+        {
+            LogFactory fact = new LogFactory();
+            fact.configureFileLogger("abc123.txt");
+
+        }
     }
 }
