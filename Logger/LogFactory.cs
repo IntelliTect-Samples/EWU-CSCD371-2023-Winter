@@ -12,14 +12,16 @@ public class LogFactory
     }
     public BaseLogger? CreateLogger(string className)
     {
-        if (LogFilePath == null)
-        {
-            return null;
-        }
         BaseLogger? log;
         switch (className)
         {
+            case "ConsoleLogger":
+                log = new ConsoleLogger();
+                log.ClassName = className;
+                break;
             case "FileLogger":
+                if (LogFilePath is null)
+                    return null;
                 log = new FileLogger(LogFilePath);
                 log.ClassName = className;
                 break;
