@@ -9,11 +9,7 @@ namespace Logger.Tests;
 
 [TestClass]
 public class FileLoggerTests
-{
-
-    [TestClass]
-    public class FileLoggerTests
-    {
+{ 
 
         [TestMethod]
         public void FileLogger_LoggingLines()
@@ -36,7 +32,7 @@ public class FileLoggerTests
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void EmptyFilePath_FileLogger_ThrowsExceptioned()
+        public void EmptyFilePath_FileLogger_ThrowsExceptions()
         {
             // Arrange
             FileLogger testLogger = new FileLogger("");
@@ -62,6 +58,6 @@ public class FileLoggerTests
 
 
         }
-    }
+    
 
 }
