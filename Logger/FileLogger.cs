@@ -14,11 +14,12 @@ public class FileLogger : BaseLogger
 	public FileLogger(string filePath)
 	{
         this.filePath = filePath;
+        this.ClassName = "";
 	}
 
     public override void Log(LogLevel logLevel, string message)
     {
         StreamWriter file = new StreamWriter(this.filePath, true);
-        file.WriteLineAsync("Fourth line");
+        file.WriteLineAsync(DateTime.Now + " " + this.ClassName + " " + logLevel + ": " + message);
     }
 }
