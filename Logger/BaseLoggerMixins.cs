@@ -1,7 +1,6 @@
-﻿namespace Logger
+﻿namespace Logger;
+
+public static class BaseLoggerMixins
 {
-    public static class BaseLoggerMixins
-    {
-        
-    }
+    
 }
