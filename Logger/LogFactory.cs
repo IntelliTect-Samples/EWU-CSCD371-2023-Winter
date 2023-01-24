@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace Logger;
 
@@ -15,7 +16,7 @@ public class LogFactory
         {
             return null;
         }
-        BaseLogger? log = null;
+        BaseLogger? log;
         switch (className)
         {
             case "FileLogger":
@@ -25,6 +26,7 @@ public class LogFactory
             default:
                 throw new ArgumentException($"Unrecognized className argument '{className}");
         }
+        log.CallingClass = new StackFrame(1).GetMethod().DeclaringType.Name;
         return log;
     }
 }

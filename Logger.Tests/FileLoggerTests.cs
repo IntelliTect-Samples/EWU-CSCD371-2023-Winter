@@ -19,4 +19,19 @@ public class FileLoggerTests
         //Assert
         Assert.IsNotNull(fileLogger);
     }
+
+    [TestMethod]
+    public void FileLogger_StoresCallingClass()
+    {
+        // Arrange
+        LogFactory factory = new LogFactory();
+        factory.ConfigureLogger("FileLoggerTest.log");
+        BaseLogger fileLogger = factory.CreateLogger("FileLogger");
+
+        // Act
+        fileLogger.Log(LogLevel.Information, "This should show FileLoggerTests as the calling class");
+
+        // Assert
+        Assert.AreEqual("FileLoggerTests", fileLogger.CallingClass);
+    }
 }

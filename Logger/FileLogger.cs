@@ -10,23 +10,24 @@ internal class FileLogger : BaseLogger
     }
     public override void Log(LogLevel logLevel, string message)
     {
-        string msgOut = $"{DateTime.Now} {ClassName} ";
+        string msgOut = $"[{DateTime.Now} {CallingClass} ";
         switch(logLevel)
         {
             case LogLevel.Error:
-                msgOut += "Error ";
+                msgOut += "Error";
                 break;
             case LogLevel.Warning:
-                msgOut += "Warning ";
+                msgOut += "Warning";
                 break;
             case LogLevel.Information:
-                msgOut += "Information ";
+                msgOut += "Information";
                 break;
             case LogLevel.Debug:
-                msgOut += "Debug ";
+                msgOut += "Debug";
                 break;
         }
 
-        LogFile.WriteLine(msgOut + message);
+        LogFile.WriteLine(msgOut + "] " + message);
+        LogFile.Flush();
     }
 }
