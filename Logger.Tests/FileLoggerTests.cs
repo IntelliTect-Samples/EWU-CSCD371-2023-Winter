@@ -3,30 +3,29 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
 
-namespace Logger.Tests
-{
-    [TestClass]
-    public class FileLoggerTests
-    { 
-        [TestMethod]
-        [DataRow(LogLevel.Error, "This is a message")]
-        public void Log_VerifyCorrectOutput(LogLevel logLevel, string message)
-        {
-            // Arrange
-            string path = "output.txt";
+namespace Logger.Tests;
 
-            LogFactory factory = new LogFactory();
-            factory.ConfigureFileLogger = path;
-            var logger = factory.CreateLogger(factory.GetType().FullName);
+[TestClass]
+public class FileLoggerTests
+{ 
+    [TestMethod]
+    [DataRow(LogLevel.Error, "This is a message")]
+    public void Log_VerifyCorrectOutput(LogLevel logLevel, string message)
+    {
+        // Arrange
+        string path = "output.txt";
 
-            // Act
-            logger.Log(LogLevel.Error, "This is a message");
-            int count = File.ReadAllLines("output.txt").Length - 1;
-            string loggerOutput = File.ReadAllLines(path)[count];
-            string expected = $"{DateTime.Now} {factory.GetType().FullName} {logLevel}: {message}";
+        LogFactory factory = new LogFactory();
+        factory.ConfigureFileLogger = path;
+        var logger = factory.CreateLogger(factory.GetType().FullName);
 
-            // Assert
-            Assert.AreEqual(expected, loggerOutput);
-        }
+        // Act
+        logger.Log(LogLevel.Error, "This is a message");
+        int count = File.ReadAllLines("output.txt").Length - 1;
+        string loggerOutput = File.ReadAllLines(path)[count];
+        string expected = $"{DateTime.Now} {factory.GetType().FullName} {logLevel}: {message}";
+
+        // Assert
+        Assert.AreEqual(expected, loggerOutput);
     }
 }

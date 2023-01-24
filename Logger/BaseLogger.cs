@@ -1,29 +1,28 @@
 ﻿using System.IO;
 using System;
 
-namespace Logger
+namespace Logger;
+
+public abstract class BaseLogger
 {
-    public abstract class BaseLogger
-    {
-        public string? ClassName { get; set; }
+    public string? ClassName { get; set; }
 
-        public abstract void Log(LogLevel logLevel, string message);
+    public abstract void Log(LogLevel logLevel, string message);
+}
+class FileLogger : BaseLogger
+{
+    private string _Path { get; }
+
+    public FileLogger(string path)
+    {
+        _Path = path;
     }
-    class FileLogger : BaseLogger
+
+    public override void Log(LogLevel logLevel, string message)
     {
-        private string _Path { get; }
-
-        public FileLogger(string path)
+        using (StreamWriter sw = File.AppendText(_Path))
         {
-            _Path = path;
-        }
-
-        public override void Log(LogLevel logLevel, string message)
-        {
-            using (StreamWriter sw = File.AppendText(_Path))
-            {
-                sw.WriteLine($"{DateTime.Now} {ClassName} {logLevel}: {message}");
-            }  
-        }
+            sw.WriteLine($"{DateTime.Now} {ClassName} {logLevel}: {message}");
+        }  
     }
 }

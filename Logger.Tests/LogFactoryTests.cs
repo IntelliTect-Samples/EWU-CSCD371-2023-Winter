@@ -1,36 +1,35 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 
-namespace Logger.Tests
+namespace Logger.Tests;
+
+[TestClass]
+public class LogFactoryTests
 {
-    [TestClass]
-    public class LogFactoryTests
+    [TestMethod]
+    public void CreateLogger_ReturnsNull()
     {
-        [TestMethod]
-        public void CreateLogger_ReturnsNull()
-        {
-            // Arrange
-            LogFactory factory = new LogFactory();
+        // Arrange
+        LogFactory factory = new LogFactory();
 
-            // Act
-            var logger = factory.CreateLogger(factory.GetType().FullName);
+        // Act
+        var logger = factory.CreateLogger(factory.GetType().FullName);
 
-            // Assert
-            Assert.IsNull(logger);
-        }
+        // Assert
+        Assert.IsNull(logger);
+    }
 
-        [TestMethod]
-        public void CreateLogger_ReturnsLogger()
-        {
-            // Arrange 
-            LogFactory factory = new LogFactory();
-            factory.ConfigureFileLogger = "output.txt";
+    [TestMethod]
+    public void CreateLogger_ReturnsLogger()
+    {
+        // Arrange 
+        LogFactory factory = new LogFactory();
+        factory.ConfigureFileLogger = "output.txt";
 
-            // Act
-            var logger = factory.CreateLogger(factory.GetType().FullName);  
+        // Act
+        var logger = factory.CreateLogger(factory.GetType().FullName);  
 
-            // Assert
-            Assert.IsTrue(logger is BaseLogger);
-        }
+        // Assert
+        Assert.IsTrue(logger is BaseLogger);
     }
 }
