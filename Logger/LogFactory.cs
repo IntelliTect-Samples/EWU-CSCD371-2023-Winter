@@ -1,33 +1,31 @@
-﻿using System;
-using System.Diagnostics;
-
-namespace Logger;
-
-public class LogFactory
+﻿namespace Logger
 {
-    private string? _FileLoggerPath;
-    public string? FileLoggerPath
+    public class LogFactory
     {
-        get
+        private string? _FileLoggerPath;
+        public string? FileLoggerPath
         {
-            return _FileLoggerPath;
+            get
+            {
+                return _FileLoggerPath;
+            }
+            private set
+            {
+                _FileLoggerPath = value;
+            }
         }
-        private set
+
+        public void ConfigureFileLogger(string filePath)
         {
-            _FileLoggerPath = value;
+            FileLoggerPath = filePath;
         }
-    }
 
-    public void ConfigureFileLogger(string filePath)
-    {
-        FileLoggerPath = filePath;
-    }
-
-    public BaseLogger CreateLogger(string className)
-    {
-        if (FileLoggerPath is null) { return null!; }
-        FileLogger fileLogger = new(filePath: FileLoggerPath)
-        { ClassName = className };
-        return fileLogger;
+        public BaseLogger CreateLogger(string className)
+        {
+            if (FileLoggerPath is null) { return null!; }
+            FileLogger fileLogger = new(filePath: FileLoggerPath)
+            { ClassName = className };
+            return fileLogger;
+        }
     }
 }

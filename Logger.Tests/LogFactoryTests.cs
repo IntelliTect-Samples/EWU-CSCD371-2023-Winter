@@ -1,49 +1,48 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.IO;
 
-namespace Logger.Tests;
-
-[TestClass]
-public class LogFactoryTests
+namespace Logger.Tests
 {
-    [TestMethod]
-    public void CreateLogger_GivenFileLogger_ReturnFileLogger()
+    [TestClass]
+    public class LogFactoryTests
     {
-        // Arrange
-        LogFactory testFactory = new();
-        testFactory.ConfigureFileLogger(filePath: "testPath");
-        FileLogger testFileLogger = (FileLogger)testFactory.CreateLogger(nameof(LogFactoryTests));
+        [TestMethod]
+        public void CreateLogger_GivenFileLogger_ReturnFileLogger()
+        {
+            // Arrange
+            LogFactory testFactory = new();
+            testFactory.ConfigureFileLogger(filePath: "testPath");
+            FileLogger testFileLogger = (FileLogger)testFactory.CreateLogger(nameof(LogFactoryTests));
 
-        // Act
+            // Act
 
-        // Assert
-        Assert.AreEqual(nameof(LogFactoryTests), testFileLogger.ClassName);
-    }
+            // Assert
+            Assert.AreEqual(nameof(LogFactoryTests), testFileLogger.ClassName);
+        }
 
-    [TestMethod]
-    public void CreateLogger_GivenNoConfigure_ReturnNull()
-    {
-        // Arrange
-        LogFactory testFactory = new();
-        FileLogger testFileLogger = (FileLogger)testFactory.CreateLogger(nameof(LogFactoryTests));
+        [TestMethod]
+        public void CreateLogger_GivenNoConfigure_ReturnNull()
+        {
+            // Arrange
+            LogFactory testFactory = new();
+            FileLogger testFileLogger = (FileLogger)testFactory.CreateLogger(nameof(LogFactoryTests));
 
-        // Act
+            // Act
 
-        // Assert
-        Assert.IsNull(testFileLogger);
-    }
+            // Assert
+            Assert.IsNull(testFileLogger);
+        }
 
-    [TestMethod]
-    public void ConfigureFileLogger_GivenFilePath_Success()
-    {
-        // Arrange
-        LogFactory testFactory = new();
-        testFactory.ConfigureFileLogger(filePath: "testPath");
+        [TestMethod]
+        public void ConfigureFileLogger_GivenFilePath_Success()
+        {
+            // Arrange
+            LogFactory testFactory = new();
+            testFactory.ConfigureFileLogger(filePath: "testPath");
 
-        // Act
+            // Act
 
-        // Assert
-        Assert.AreEqual("testPath", testFactory.FileLoggerPath);
+            // Assert
+            Assert.AreEqual("testPath", testFactory.FileLoggerPath);
+        }
     }
 }

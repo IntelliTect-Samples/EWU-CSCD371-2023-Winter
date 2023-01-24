@@ -1,21 +1,22 @@
 ﻿using System;
 using System.IO;
 
-namespace Logger;
-
-public class FileLogger : BaseLogger
+namespace Logger
 {
-    public FileLogger(string filePath)
+    public class FileLogger : BaseLogger
     {
-        FilePath = filePath;
-    }
+        public FileLogger(string filePath)
+        {
+            FilePath = filePath;
+        }
 
-    public string FilePath { get; private set; }
+        public string FilePath { get; private set; }
 
-    public override void Log(LogLevel logLevel, string message)
-    {
-        StreamWriter stream = File.AppendText(FilePath);
-        stream.Write(string.Format($"{DateTime.Now} {ClassName} {logLevel}: {message}\n"));
-        stream.Close();
+        public override void Log(LogLevel logLevel, string message)
+        {
+            StreamWriter stream = File.AppendText(FilePath);
+            stream.Write(string.Format($"{DateTime.Now} {ClassName} {logLevel}: {message}\n"));
+            stream.Close();
+        }
     }
 }

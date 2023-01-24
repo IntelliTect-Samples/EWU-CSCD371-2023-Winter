@@ -1,9 +1,10 @@
-﻿namespace Logger;
-
-public enum LogLevel
+﻿namespace Logger
 {
-    Error,
-    Warning,
-    Information,
-    Debug
+    public enum LogLevel
+    {
+        Error,
+        Warning,
+        Information,
+        Debug
+    }
 }
