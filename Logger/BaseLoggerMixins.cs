@@ -11,7 +11,7 @@ public static class BaseLoggerMixins
         {
             throw new ArgumentNullException("log must not be null");
         }
-        log.Log(LogLevel.Error, String.Format(message, args));
+        log.Log(LogLevel.Error, string.Format(message, args));
     }
 
     public static void Warning(this BaseLogger log, string message, params object[] args)
@@ -20,7 +20,7 @@ public static class BaseLoggerMixins
         {
             throw new ArgumentNullException("log must not be null");
         }
-        log.Log(LogLevel.Warning, $"{message} {args}");
+        log.Log(LogLevel.Warning, string.Format(message, args));
     }
 
     public static void Information(this BaseLogger log, string message, params object[] args)
@@ -29,7 +29,7 @@ public static class BaseLoggerMixins
         {
             throw new ArgumentNullException("log must not be null");
         }
-        log.Log(LogLevel.Information, $"{message} {args}");
+        log.Log(LogLevel.Information, string.Format(message, args));
     }
 
     public static void Debug(this BaseLogger log, string message, params object[] args) 
@@ -38,7 +38,7 @@ public static class BaseLoggerMixins
         {
             throw new ArgumentNullException("log must not be null");
         }
-        log.Log(LogLevel.Debug, $"{message} {args}");
+        log.Log(LogLevel.Debug, string.Format(message, args));
     }
 }
 

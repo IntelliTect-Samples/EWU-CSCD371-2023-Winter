@@ -6,6 +6,20 @@ namespace Logger.Tests;
 public class FileLoggerTests
 {
     [TestMethod]
+    public void FileLogger_IsNull_ReturnsTrue()
+    {
+        //Arrange
+        LogFactory factory = new LogFactory();
+        factory.ConfigureLogger(null);
+        BaseLogger fileLogger = factory.CreateLogger("FileLogger");
+
+        //Act
+
+        //Assert
+        Assert.IsNull(fileLogger);
+    }
+
+    [TestMethod]
     public void FileLogger_IsNotNull_ReturnsTrue()
     {
         //Arrange

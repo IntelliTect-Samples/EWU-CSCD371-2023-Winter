@@ -10,7 +10,7 @@ internal class FileLogger : BaseLogger
     }
     public override void Log(LogLevel logLevel, string message)
     {
-        string msgOut = $"[{DateTime.Now} {CallingClass} ";
+        string msgOut = $"[{DateTime.Now} {CallingClass}";
         switch(logLevel)
         {
             case LogLevel.Error:
@@ -29,5 +29,6 @@ internal class FileLogger : BaseLogger
 
         LogFile.WriteLine(msgOut + "] " + message);
         LogFile.Flush();
+        LogFile.Dispose();
     }
 }
