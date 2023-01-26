@@ -4,22 +4,22 @@ using System.IO;
 
 public class FileLogger : BaseLogger
 {
-    private string filePath;
+    private string FilePath;
     public override string ClassName { get; set; }
 
     public string getFilePath()
     {
-        return filePath;
+        return FilePath;
     }
 	public FileLogger(string filePath)
 	{
-        this.filePath = filePath;
-        this.ClassName = "";
+        FilePath = filePath;
+        ClassName = "";
 	}
 
     public override void Log(LogLevel logLevel, string message)
     {
-        StreamWriter file = new StreamWriter(this.filePath, true);
-        file.WriteLineAsync(DateTime.Now + " " + this.ClassName + " " + logLevel + ": " + message);
+        StreamWriter file = new StreamWriter(FilePath, true);
+        file.WriteLineAsync(DateTime.Now + " " + ClassName + " " + logLevel + ": " + message);
     }
 }

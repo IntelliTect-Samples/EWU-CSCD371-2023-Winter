@@ -10,7 +10,7 @@ namespace Logger.Tests
         public void LogFactoryTest_ObjectInitializer()
         {
             LogFactory fact = new LogFactory();
-            fact.configureFileLogger("abc123.txt");
+            fact.ConfigureFileLogger("abc123.txt");
             FileLogger fil = (FileLogger)fact.CreateLogger(nameof(this.GetType));
             Assert.AreEqual(nameof(this.GetType), fil.ClassName);
         }
@@ -27,7 +27,7 @@ namespace Logger.Tests
         public void LogFactoryTest_ConfigureFileLogger()
         {
             LogFactory fact = new LogFactory();
-            fact.configureFileLogger("abc123.txt");
+            fact.ConfigureFileLogger("abc123.txt");
             FileLogger fil = (FileLogger)fact.CreateLogger(nameof(this.GetType));
             Assert.AreEqual("abc123.txt", fil.getFilePath());
         }
