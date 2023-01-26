@@ -13,7 +13,7 @@ public class LogFactoryTests
         LogFactory factory = new LogFactory();
 
         // Act
-        var logger = factory.CreateLogger(factory.GetType().FullName);
+        var logger = factory.CreateLogger("Base Logger");
 
         // Assert
         Assert.IsNull(logger);
@@ -24,10 +24,10 @@ public class LogFactoryTests
     {
         // Arrange 
         LogFactory factory = new LogFactory();
-        factory.ConfigureFileLogger = "output.txt";
+        factory.ConfigureFileLogger("output.txt");
 
         // Act
-        var logger = factory.CreateLogger(factory.GetType().FullName);  
+        var logger = factory.CreateLogger("Base Logger");  
 
         // Assert
         Assert.IsTrue(logger is BaseLogger);

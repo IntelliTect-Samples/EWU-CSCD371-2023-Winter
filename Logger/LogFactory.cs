@@ -17,15 +17,8 @@ public class LogFactory
         } 
     }
 
-    public string ConfigureFileLogger
+    public void ConfigureFileLogger(string path)
     {
-        get 
-        {
-            return _Path!;
-        }
-        set 
-        { 
-            _Path = value;
-        }  
+       _Path = path;
     }
 }
