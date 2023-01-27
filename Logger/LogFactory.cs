@@ -12,7 +12,6 @@
             }
             else
             {
-                ConfigureFileLogger(_pathName);
                 BaseLogger baseLogger = new FileLogger(_pathName) { ClassName = className };
                 return baseLogger;
             }

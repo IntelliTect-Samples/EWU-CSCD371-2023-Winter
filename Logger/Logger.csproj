@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-	<LangVersion>11.0</LangVersion>
+    <TargetFramework>Latest</TargetFramework>
+	<LangVersion>Latest</LangVersion>
 	<Nullable>enable</Nullable>
 	  <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 	  <EnableNETAnalyzers>true</EnableNETAnalyzers>

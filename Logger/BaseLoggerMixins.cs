@@ -6,7 +6,7 @@ namespace Logger
     {
         public static void Error(this BaseLogger logger, string message, params object[] paths)
         {
-            if (logger == null)
+            if (logger is null)
             {
                 throw new System.ArgumentNullException(nameof(logger));
             }
@@ -17,7 +17,7 @@ namespace Logger
         }
         public static void Warning(this BaseLogger logger, string message, params object[] paths)
         {
-            if (logger == null)
+            if (logger is null)
             {
                 throw new System.ArgumentNullException(nameof(logger));
             }
@@ -28,7 +28,7 @@ namespace Logger
         }
         public static void Information(this BaseLogger logger, string message, params object[] paths)
         {
-            if (logger == null)
+            if (logger is null)
             {
                 throw new System.ArgumentNullException(nameof(logger));
             }
@@ -39,7 +39,7 @@ namespace Logger
         }
         public static void Debug(this BaseLogger logger, string message, params object[] paths)
         {
-            if (logger == null)
+            if (logger is null)
             {
                 throw new System.ArgumentNullException(nameof(logger));
             }

@@ -20,7 +20,7 @@ namespace Logger
         {
             if (!File.Exists(PathName))
             {
-                throw new System.Exception("File Path does not exitst");
+                throw new System.Exception("File Path does not exist");
 
             }
             using StreamWriter sw = File.CreateText(PathName);

@@ -11,10 +11,15 @@ namespace Logger.Tests
         [DataRow("example.txt")]
         public void Log_PathNotNull_Success(string filePath)
         {
-            // Arrange
             var logger = new FileLogger(filePath);
-            // Assert
             Assert.IsNotNull(logger);
+        }
+
+        public void Create_Success()
+        {
+            FileLogger logger = new(nameof(FileLoggerTests), "myfile.txt");
+
+            return logger;
         }
 
     }
