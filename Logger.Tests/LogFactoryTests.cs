@@ -13,7 +13,6 @@ namespace Logger.Tests
             LogFactory logFactory = new();
 
             // Act
-            //logFactory.CreateLogger(null!);
 
             // Assert
             Assert.IsNull(logFactory.CreateLogger(null!));
@@ -31,6 +30,5 @@ namespace Logger.Tests
             // Assert
             Assert.IsNotNull(logger);
         }
-
     }
 }
