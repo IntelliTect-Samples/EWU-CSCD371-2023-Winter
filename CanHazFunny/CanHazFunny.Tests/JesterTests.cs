@@ -61,5 +61,18 @@ namespace CanHazFunny.Tests
             //Assert
             Assert.AreNotEqual("Super funny Chuck Norris joke.", jester.TellJoke());
         }
+
+        [TestMethod]
+        public void Jester_NewJokeDoesNotContainChuckNorris_ReturnsFalse()
+        {
+            //Arrange
+            Jester jester = new Jester();
+
+            //Act
+            jester.Joke = "Super funny Chuck Norris joke.";
+
+            //Assert
+            Assert.IsFalse(jester.TellJoke().Contains("Chuck Norris"));
+        }
     }
 }
