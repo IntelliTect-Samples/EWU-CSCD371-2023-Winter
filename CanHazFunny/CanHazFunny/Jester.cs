@@ -1,0 +1,7 @@
+namespace CanHazFunny
+{
+    class Jester
+    {
+
+    }
+}
