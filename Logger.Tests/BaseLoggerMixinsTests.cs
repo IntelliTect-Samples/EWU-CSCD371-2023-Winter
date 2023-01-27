@@ -12,11 +12,21 @@ namespace Logger.Tests
         public void Error_WithNullLogger_ThrowsException()
         {
             // Arrange
+            ArgumentNullException expectedException = null!;
             
             // Act
-            BaseLoggerMixins.Error(null!, "");
+            try
+            {
+                BaseLoggerMixins.Error(null!, "");
+            }
+            catch (ArgumentNullException ex)
+            {
+                expectedException = ex;
+                throw ex;
+            }
 
             // Assert
+            Assert.IsNotNull(expectedException);
         }
 
         [TestMethod]
@@ -39,11 +49,21 @@ namespace Logger.Tests
         public void Warning_WithNullLogger_ThrowsException()
         {
             // Arrange
+            ArgumentNullException expectedException = null!;
 
             // Act
-            BaseLoggerMixins.Warning(null!, "");
+            try
+            {
+                BaseLoggerMixins.Warning(null!, "");
+            }
+            catch (ArgumentNullException ex)
+            {
+                expectedException = ex;
+                throw ex;
+            }
 
             // Assert
+            Assert.IsNotNull(expectedException);
         }
 
         [TestMethod]
@@ -66,11 +86,21 @@ namespace Logger.Tests
         public void Information_WithNullLogger_ThrowsException()
         {
             // Arrange
+            ArgumentNullException expectedException = null!;
 
             // Act
-            BaseLoggerMixins.Information(null!, "");
+            try
+            {
+                BaseLoggerMixins.Information(null!, "");
+            }
+            catch (ArgumentNullException ex)
+            {
+                expectedException = ex;
+                throw ex;
+            }
 
             // Assert
+            Assert.IsNotNull(expectedException);
         }
 
         [TestMethod]
@@ -93,11 +123,21 @@ namespace Logger.Tests
         public void Debug_WithNullLogger_ThrowsException()
         {
             // Arrange
+            ArgumentNullException expectedException = null!;
 
             // Act
-            BaseLoggerMixins.Debug(null!, "");
+            try
+            {
+                BaseLoggerMixins.Debug(null!, "");
+            }
+            catch (ArgumentNullException ex)
+            {
+                expectedException = ex;
+                throw ex;
+            }
 
             // Assert
+            Assert.IsNotNull(expectedException);
         }
 
         [TestMethod]
