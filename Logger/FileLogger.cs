@@ -10,7 +10,7 @@ namespace Logger
         {
             if(filePath is null)
             {
-                throw new System.ArgumentNullException("Null file path in FileLogger");
+                throw new System.ArgumentNullException(nameof(filePath));
             }
             _filePath = filePath;    
         }
