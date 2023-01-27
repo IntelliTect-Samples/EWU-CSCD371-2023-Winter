@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
+
 
 namespace Logger
 {
@@ -19,6 +18,7 @@ namespace Logger
             using (StreamWriter sw = File.AppendText(_Path))
             {
                 sw.WriteLine($"{DateTime.Now} {ClassName} {logLevel}: {message}");
+                sw.Close();
             }
         }
     }
