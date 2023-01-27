@@ -5,12 +5,12 @@ namespace Logger;
 
 public class LogFactory
 {
-    private string LogFilePath = "";
+    public string? LogFilePath { get; set; }
     public void ConfigureLogger(string filePath)
     {
         LogFilePath = filePath;
     }
-    public BaseLogger? CreateLogger(string className)
+    public BaseLogger? CreateLogger(string className, string callingClass)
     {
         BaseLogger? log;
         switch (className)
@@ -28,7 +28,7 @@ public class LogFactory
             default:
                 throw new ArgumentException($"Unrecognized className argument '{className}");
         }
-        log.CallingClass = new StackFrame(1).GetMethod().DeclaringType.Name;
+        log.CallingClass = callingClass;
         return log;
     }
 }

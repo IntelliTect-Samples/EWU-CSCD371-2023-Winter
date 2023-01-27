@@ -8,20 +8,20 @@ namespace Logger.Tests
     public class LogFactoryTests
     {
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
         public void Error_WithNoConfiguration_ReturnsNull()
         {
-            LogFactory factory = new LogFactory();
-            BaseLogger log = factory.CreateLogger("FileLogger");
+            LogFactory factory = new();
+            BaseLogger log = factory.CreateLogger("FileLogger", nameof(LogFactoryTests));
+            Assert.IsNull(log);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void Error_WithUnrecognizedClassname_ThrowsArgumentException()
         {
-            LogFactory factory = new LogFactory();
+            LogFactory factory = new();
             factory.ConfigureLogger("log.log");
-            BaseLogger log = factory.CreateLogger("NonexistentLogger");
+            BaseLogger log = factory.CreateLogger("NonexistentLogger", nameof(LogFactoryTests));
         }
     }
 }

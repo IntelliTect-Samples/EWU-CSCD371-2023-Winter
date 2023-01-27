@@ -9,9 +9,9 @@ public class FileLoggerTests
     public void FileLogger_IsNull_ReturnsTrue()
     {
         //Arrange
-        LogFactory factory = new LogFactory();
+        LogFactory factory = new();
         factory.ConfigureLogger(null);
-        BaseLogger fileLogger = factory.CreateLogger("FileLogger");
+        BaseLogger fileLogger = factory.CreateLogger("FileLogger", nameof(FileLoggerTests));
 
         //Act
 
@@ -23,9 +23,9 @@ public class FileLoggerTests
     public void FileLogger_IsNotNull_ReturnsTrue()
     {
         //Arrange
-        LogFactory factory = new LogFactory();
+        LogFactory factory = new();
         factory.ConfigureLogger("FileLoggerTest.log");
-        BaseLogger fileLogger = factory.CreateLogger("FileLogger");
+        BaseLogger fileLogger = factory.CreateLogger("FileLogger", nameof(FileLoggerTests));
 
         //Act
         fileLogger.Log(LogLevel.Error, "Test Error Message");
@@ -38,9 +38,9 @@ public class FileLoggerTests
     public void FileLogger_StoresCallingClass()
     {
         // Arrange
-        LogFactory factory = new LogFactory();
+        LogFactory factory = new();
         factory.ConfigureLogger("FileLoggerTest.log");
-        BaseLogger fileLogger = factory.CreateLogger("FileLogger");
+        BaseLogger fileLogger = factory.CreateLogger("FileLogger", nameof(FileLoggerTests));
 
         // Act
         fileLogger.Log(LogLevel.Information, "This should show FileLoggerTests as the calling class");

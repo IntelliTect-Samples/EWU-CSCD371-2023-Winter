@@ -9,8 +9,8 @@ public class ConsoleLoggerTests
     public void ConsoleLogger_IsNotNull_ReturnsTrue()
     {
         //Arrange
-        LogFactory factory = new LogFactory();
-        BaseLogger consoleLogger = factory.CreateLogger("ConsoleLogger");
+        LogFactory factory = new();
+        BaseLogger consoleLogger = factory.CreateLogger("ConsoleLogger", nameof(ConsoleLoggerTests));
 
         //Act
         consoleLogger.Log(LogLevel.Error, "Test Error Message");
@@ -23,8 +23,8 @@ public class ConsoleLoggerTests
     public void ConsoleLogger_ClassNameIsConsoleLogger()
     {
         //Arrange
-        LogFactory factory = new LogFactory();
-        BaseLogger consoleLogger = factory.CreateLogger("ConsoleLogger");
+        LogFactory factory = new();
+        BaseLogger consoleLogger = factory.CreateLogger("ConsoleLogger", nameof(ConsoleLoggerTests));
 
         //Act
         consoleLogger.Log(LogLevel.Error, "Test Error Message");
