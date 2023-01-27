@@ -14,7 +14,7 @@ namespace Logger.Tests
             // Arrange
 
             // Act
-            FileLogger fileLogger = new FileLogger(null!, "name");
+            FileLogger fileLogger = new FileLogger(null!);
 
             // Assert
         }

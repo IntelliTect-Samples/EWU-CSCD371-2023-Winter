@@ -11,7 +11,7 @@
                 return null!;
             }
 
-            FileLogger output = new FileLogger(FilePath, className);
+            FileLogger output = new FileLogger(FilePath) {ClassName = className};
             return output;
         }
 

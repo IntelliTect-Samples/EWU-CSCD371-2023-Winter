@@ -10,12 +10,27 @@ namespace Logger.Tests
         public void CreateLogger_ClassNameIsNull_RetrurnsNull()
         {
             // Arrange
-            LogFactory logFactory = new LogFactory();
+            LogFactory logFactory = new();
 
             // Act
-            logFactory.CreateLogger(null!);
+            //logFactory.CreateLogger(null!);
 
             // Assert
+            Assert.IsNull(logFactory.CreateLogger(null!));
         }
+
+        [TestMethod]
+        [DataRow(nameof(LogFactoryTests))]
+        public void CreateLogger_ClassNameIsNotNull_ReturnsNotNull(string className)
+        {
+            // Arrange
+            LogFactory logFactory = new();
+            logFactory.ConfigureFileLogger(Path.GetTempFileName());
+            // Act
+            BaseLogger logger = logFactory.CreateLogger(className);
+            // Assert
+            Assert.IsNotNull(logger);
+        }
+
     }
 }

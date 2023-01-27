@@ -5,6 +5,7 @@
 
 	  <EnableNETAnalyzers>true</EnableNETAnalyzers>
 	  <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+	  <CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
 	  <LangVersion>11.0</LangVersion>
 	  <Nullable>enable</Nullable>
 	  
