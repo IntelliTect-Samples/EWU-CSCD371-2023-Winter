@@ -1,78 +1,109 @@
+using CanHazFunny;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace CanHazFunny.Tests
 {
     [TestClass]
     public class JesterTests
     {
+        private Jester TestingJester;
         [TestInitialize] 
         public void Initialize() 
         {
-            
+            TestingJester = new Jester(new MockJokeOutput(), new MockJokeService());
         }
 
         [TestMethod]
         public void Jester_CreateSuccessfully()
         {   
-            //Arrange
-            Jester jester = new Jester();
-
             //Act
 
             //Assert
-            Assert.IsNotNull(jester);
+            Assert.IsNotNull(TestingJester);
         }
 
         [TestMethod]
-        public void Jester_GetJoke_ReturnsNotNull()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Jester_NullOutput_ThrowsArgumentNullException()
+        {
+            // Arrange
+
+            // Act
+            TestingJester.Output = null;
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Jester_NullService_ThrowsArgumentNullException()
+        {
+            // Arrange
+
+            // Act
+            TestingJester.Service = null;
+        }
+
+        [TestMethod]
+        public void Jester_GetJoke_ReturnsJoke()
         {
             //Arrange
-            Jester jester = new Jester();
 
             //Act
-            string joke = jester.GetJoke();
+            string joke = TestingJester.GetJoke();
 
             //Assert
-            Assert.IsNotNull(joke);
+            Assert.AreNotEqual<string>("", joke);
         }
 
         [TestMethod]
         public void Jester_TellJoke_Returns()
         {
             //Arrange
-            Jester jester = new Jester();
 
             //Act
-            jester.Joke = "This is a funny Joke!";
+            TestingJester.TellJoke();
 
             //Assert
-            Assert.AreEqual("This is a funny Joke!", jester.TellJoke());
-        }
-
-        [TestMethod]
-        public void Jester_IfChuckNorrisJoke_GetNewJoke()
-        {
-            //Arrange
-            Jester jester = new Jester();
-
-            //Act
-            jester.Joke = "Super funny Chuck Norris joke.";
-
-            //Assert
-            Assert.AreNotEqual("Super funny Chuck Norris joke.", jester.TellJoke());
+            Assert.IsTrue(((MockJokeOutput)TestingJester.Output).ToldJoke);
         }
 
         [TestMethod]
         public void Jester_NewJokeDoesNotContainChuckNorris_ReturnsFalse()
         {
             //Arrange
-            Jester jester = new Jester();
 
             //Act
-            jester.Joke = "Super funny Chuck Norris joke.";
+            string joke = TestingJester.TellJoke();
 
             //Assert
-            Assert.IsFalse(jester.TellJoke().Contains("Chuck Norris"));
+            Assert.IsFalse(joke.Contains("Chuck Norris"));
         }
+    }
+}
+
+class MockJokeService : IJokeService
+{
+    private int NumRequests;
+    public string GetJoke()
+    {
+        string joke = NumRequests switch
+        {
+            0 => "Chuck Norris",
+            1 => "haha Chuck Norris xD",
+            2 => "Something something Chuck Norris",
+            3 => "yet another Chuck Norris joke",
+            _ => "joke",
+        };
+        NumRequests++;
+        return joke;
+    }
+}
+
+class MockJokeOutput : IJokeOutput
+{
+    public bool ToldJoke;
+    public void TellJoke(string joke)
+    {
+        ToldJoke = true;
     }
 }

@@ -1,48 +1,39 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CanHazFunny
 {
-    public class Jester : IJokeOutput, IJokeService
+    public class Jester : IJokeService
     {
-        public Jester() 
-        {
-            _Joke = GetJoke();
+        private IJokeOutput? _Output;
+        public IJokeOutput Output {
+            get => _Output!;
+            set => _Output = value ?? throw new ArgumentNullException(nameof(Output));
         }
-
-        public string Joke 
+        private IJokeService? _Service;
+        public IJokeService Service {
+            get => _Service!;
+            set => _Service = value ?? throw new ArgumentNullException(nameof(Service));
+        } 
+        public Jester(IJokeOutput? output, IJokeService? service) 
         {
-            get 
-            {
-                return _Joke!;
-            }
-            set
-            {
-                if(value is null) 
-                {
-                    throw new ArgumentNullException(nameof(Joke));
-                }
-                _Joke = value;
-            }
+            Output = output!;
+            Service = service!;
         }
-        private string? _Joke;
 
         public string GetJoke()
         {
-            JokeService thejoke = new JokeService();
-            return thejoke.GetJoke();
+            return Service.GetJoke();
         }
 
         public string TellJoke()
         {
-            while(Joke.Contains("Chuck Norris"))
+            string joke;
+            do
             {
-                Joke = GetJoke();
-            }
-            return Joke;
+                joke = GetJoke();
+            } while (joke.Contains("Chuck Norris"));
+            Output.TellJoke(joke);
+            return joke;
         }
     }
 }
