@@ -38,12 +38,11 @@ namespace CanHazFunny
 
         public string TellJoke()
         {
-            if (this.Joke.Contains("Chuck Norris")) 
+            while(Joke.Contains("Chuck Norris"))
             {
-                this.Joke = GetJoke();
-                return TellJoke();
+                Joke = GetJoke();
             }
-            return this.Joke;
+            return Joke;
         }
     }
 }
