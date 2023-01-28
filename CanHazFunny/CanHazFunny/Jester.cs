@@ -10,7 +10,7 @@ namespace CanHazFunny
     {
         public Jester() 
         {
-            _Joke = this.GetJoke();
+            _Joke = GetJoke();
         }
 
         public string Joke 
