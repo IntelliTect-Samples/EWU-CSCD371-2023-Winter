@@ -43,9 +43,10 @@ namespace CanHazFunny.Tests
             Jester jester = new Jester();
 
             //Act
+            jester.Joke = "This is a funny Joke!";
 
             //Assert
-            Assert.AreEqual(jester, jester);
+            Assert.AreEqual("This is a funny Joke!", jester.TellJoke());
         }
 
         [TestMethod]
