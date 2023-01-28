@@ -6,7 +6,7 @@ public class JokeService : IJokeRetrieve, IJokeDisplay
 {
     private HttpClient HttpClient { get; } = new();
 
-    public string GetJoke()
+    public virtual string GetJoke()
     {
         string joke = HttpClient.GetStringAsync("https://geek-jokes.sameerkumar.website/api").Result;
         return joke;
@@ -14,6 +14,6 @@ public class JokeService : IJokeRetrieve, IJokeDisplay
 
     public void Display(string joke)
     {
-        Console.WriteLine($"{joke}");
+        Console.WriteLine($"{joke}"); 
     }
 }

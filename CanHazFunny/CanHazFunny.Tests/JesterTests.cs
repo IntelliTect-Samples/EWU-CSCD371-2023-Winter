@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace CanHazFunny.Tests
 {
@@ -36,6 +37,29 @@ namespace CanHazFunny.Tests
         {
             // Assemble - Act
             Jester jester = new Jester(null);
+        }
+
+        [TestMethod]
+        public void GivenJokeWithChuckNorris_ReturnsFalse()
+        {
+            // Asseble
+            MockJokeService mockService = new MockJokeService();
+
+            // Act
+            string joke = mockService.GetJoke();
+            bool result = Jester.JokeFilter(joke);
+
+            // Assert
+            Assert.IsFalse(result);
+        }
+
+
+        public class MockJokeService : JokeService
+        {
+            public override string GetJoke()
+            {
+                return "This joke contains ChuCk NORriS";
+            }
         }
     }
 }
