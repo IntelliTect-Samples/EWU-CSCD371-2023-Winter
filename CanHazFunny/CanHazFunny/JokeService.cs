@@ -1,20 +1,19 @@
 ﻿using System.Net.Http;
 using System;
-namespace CanHazFunny
+namespace CanHazFunny;
+
+public class JokeService : IJokeRetrieve, IJokeDisplay
 {
-    public class JokeService : JokeServiceInterface, JokeServiceDisplay
+    private HttpClient HttpClient { get; } = new();
+
+    public string GetJoke()
     {
-        private HttpClient HttpClient { get; } = new();
+        string joke = HttpClient.GetStringAsync("https://geek-jokes.sameerkumar.website/api").Result;
+        return joke;
+    }
 
-        public string GetJoke()
-        {
-            string joke = HttpClient.GetStringAsync("https://geek-jokes.sameerkumar.website/api").Result;
-            return joke;
-        }
-
-        public void Display()
-        {
-            Console.WriteLine($"{this.GetJoke()}");
-        }
+    public void Display(string joke)
+    {
+        Console.WriteLine($"{joke}");
     }
 }
