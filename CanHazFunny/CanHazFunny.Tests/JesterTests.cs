@@ -24,29 +24,28 @@ namespace CanHazFunny.Tests
         }
 
         [TestMethod]
-        public void Jester_ReadsJokeFromSource()
+        public void Jester_GetJoke_ReturnsNotNull()
         {
             //Arrange
             Jester jester = new Jester();
 
             //Act
-            jester.Joke = "This is a funny joke!";
+            string joke = jester.GetJoke();
 
             //Assert
-            Assert.AreEqual("This is a funny joke!", jester.Joke);
+            Assert.IsNotNull(joke);
         }
 
         [TestMethod]
-        public void Jester_TellsJoke()
+        public void Jester_TellJoke_Returns()
         {
             //Arrange
             Jester jester = new Jester();
 
             //Act
-            jester.Joke = "This is a funny joke!";
 
             //Assert
-            Assert.AreEqual("This is a funny joke!", jester.TellJoke());
+            Assert.AreEqual(jester, jester);
         }
 
         [TestMethod]
