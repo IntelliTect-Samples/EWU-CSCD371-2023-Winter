@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.IO;
 
 namespace CanHazFunny.Tests
 {
@@ -38,6 +39,19 @@ namespace CanHazFunny.Tests
             Jester jesty = new(printz, jokez);
 
             Assert.AreEqual(jokez, jesty.JokeService);
+        }
+
+        [TestMethod]
+        public void JesterJokes_TestPrint()
+        {
+            StringWriter sw = new StringWriter();
+            Console.SetOut(sw);
+            new Jester(new JokePrinter(), new JokeService()).TellJoke();
+            StreamWriter reset = new(Console.OpenStandardOutput());
+            reset.AutoFlush = true;
+            Console.SetOut(reset);
+
+            Assert.IsNotNull(sw);
         }
     }
 }

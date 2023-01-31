@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CanHazFunny
+﻿namespace CanHazFunny
 {
     class Program
     {
