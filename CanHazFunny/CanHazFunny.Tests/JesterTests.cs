@@ -30,7 +30,7 @@ namespace CanHazFunny.Tests
             // Arrange
 
             // Act
-            TestingJester.Output = null;
+            TestingJester.Output = null!;
         }
 
         [TestMethod]
@@ -40,7 +40,7 @@ namespace CanHazFunny.Tests
             // Arrange
 
             // Act
-            TestingJester.Service = null;
+            TestingJester.Service = null!;
         }
 
         [TestMethod]
