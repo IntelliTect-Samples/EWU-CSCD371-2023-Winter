@@ -1,6 +1,6 @@
 ﻿namespace CanHazFunny;
 
-class Program
+static class Program
 {
     static void Main(string[] args)
     {

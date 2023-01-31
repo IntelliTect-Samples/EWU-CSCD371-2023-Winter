@@ -1,6 +1,6 @@
 ﻿using System.Net.Http;
 using System;
-using System.IO;
+[assembly: CLSCompliant(true)]
 
 namespace CanHazFunny;
 
@@ -10,13 +10,15 @@ public class JokeService : IJokeRetrieve, IJokeDisplay
 
     public virtual string GetJoke()
     {
+        Uri newUri = new Uri("https://geek-jokes.sameerkumar.website/api?format=json");
         // string joke = HttpClient.GetStringAsync("https://geek-jokes.sameerkumar.website/api").Result;
-        string joke = HttpClient.GetStringAsync("https://geek-jokes.sameerkumar.website/api?format=json").Result;
+        // string joke = HttpClient.GetStringAsync("https://geek-jokes.sameerkumar.website/api?format=json").Result;
+        string joke = HttpClient.GetStringAsync(newUri).Result;
         return joke;
     }
 
     public void Display(string joke)
     {
-        Console.WriteLine($"{joke}"); 
+        Console.WriteLine($"{joke}");
     }
 }
