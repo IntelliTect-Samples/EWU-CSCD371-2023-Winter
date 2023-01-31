@@ -9,7 +9,7 @@ namespace CanHazFunny
     public class Jester
     {
         private readonly IJokeService _jokeService;
-        private readonly IJokeOutputter _jokeOutput;
+        private readonly IJokeOutputter _jokeOutputter;
         
         public Jester(IJokeService? jokeService, IJokeOutputter? jokeOutput)
         {
@@ -22,7 +22,7 @@ namespace CanHazFunny
                 throw new ArgumentNullException(nameof(jokeOutput));
             }
                 _jokeService = jokeService;
-                _jokeOutput = jokeOutput;
+                _jokeOutputter = jokeOutput;
         }
 
         public void TellJoke()
@@ -33,7 +33,7 @@ namespace CanHazFunny
                 joke = _jokeService.GetJoke();
             }
             
-            _jokeOutput.OutputJoke(joke);
+            _jokeOutputter.OutputJoke(joke);
         }
     }
 }
