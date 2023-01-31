@@ -1,17 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30803.129
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CanHazFunny", "CanHazFunny\CanHazFunny.csproj", "{6E0846AC-5763-4EA1-AD60-7967B1D666DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CanHazFunny", "CanHazFunny\CanHazFunny.csproj", "{6E0846AC-5763-4EA1-AD60-7967B1D666DC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CCBDB7C6-C156-4D43-BE79-B420FF988951}"
 	ProjectSection(SolutionItems) = preProject
 		..\Assignment.md = ..\Assignment.md
+		Directory.Build.props = Directory.Build.props
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CanHazFunny.Tests", "CanHazFunny.Tests\CanHazFunny.Tests.csproj", "{713AEBB1-BEE0-451E-8744-17EDC1282165}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CanHazFunny.Tests", "CanHazFunny.Tests\CanHazFunny.Tests.csproj", "{713AEBB1-BEE0-451E-8744-17EDC1282165}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
