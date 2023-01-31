@@ -21,5 +21,15 @@ namespace CanHazFunny
             this.printService = printService;
             this.jokeService = jokeService;
         }
+
+        public void TellJoke()
+        {
+            string joke = jokeService.GetJoke();
+            while(joke.ToLower().Contains("chuck") || joke.ToLower().Contains("norris"))
+            {
+                joke = jokeService.GetJoke();
+            }
+            printService.printJoke(joke);
+        }
     }
 }

@@ -2,6 +2,6 @@
 {
     interface IPrintJoke
     {
-        void printJoke();
+        void printJoke(string joke);
     }
 }

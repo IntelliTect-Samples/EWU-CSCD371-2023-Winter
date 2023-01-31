@@ -1,11 +1,15 @@
-﻿namespace CanHazFunny
+﻿using System;
+
+namespace CanHazFunny
 {
     class Program
     {
         static void Main(string[] args)
         {
-            //Feel free to use your own setup here - this is just provided as an example
-            //new Jester(new IPrintJoke(), new IJokeService()).TellJoke();
+            for (int i = 0; i < 5; i++)
+            {
+                new Jester(new JokePrinter(), new JokeService()).TellJoke();
+            }
         }
     }
 }
