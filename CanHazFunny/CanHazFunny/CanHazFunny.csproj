@@ -5,6 +5,7 @@
     <TargetFramework>net7.0</TargetFramework>
 	  <LangVersion>11.0</LangVersion>
 	  <Nullable>enable</Nullable>
+	  <ImplicitUsings>enable</ImplicitUsings>
   <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
 	  <CodeAnaysisisTreatWarningAsErrors>true</CodeAnaysisisTreatWarningAsErrors>
   <EnableNETAnalyzers>True</EnableNETAnalyzers>
