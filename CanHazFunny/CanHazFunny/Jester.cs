@@ -2,10 +2,13 @@
 
 namespace CanHazFunny
 {
-    internal class Jester
+    public class Jester
     {
-        private IPrintJoke printService;
-        private IJokeService jokeService;
+        private IPrintJoke? printService;
+        private IJokeService? jokeService;
+
+        public IPrintJoke PrintService { get => printService!; set => printService = value; }
+        public IJokeService JokeService { get => jokeService!; set => jokeService = value; }
 
         public Jester(IPrintJoke printService, IJokeService jokeService)
         {
@@ -18,18 +21,18 @@ namespace CanHazFunny
                 throw new ArgumentNullException(nameof(jokeService));
             }
 
-            this.printService = printService;
-            this.jokeService = jokeService;
+            PrintService = printService;
+            JokeService = jokeService;
         }
 
         public void TellJoke()
         {
-            string joke = jokeService.GetJoke();
+            string joke = JokeService.GetJoke();
             while(joke.ToLower().Contains("chuck") || joke.ToLower().Contains("norris"))
             {
-                joke = jokeService.GetJoke();
+                joke = JokeService.GetJoke();
             }
-            printService.printJoke(joke);
+            PrintService.printJoke(joke);
         }
     }
 }

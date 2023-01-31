@@ -1,6 +1,6 @@
 ﻿namespace CanHazFunny
 {
-    interface IJokeService
+    public interface IJokeService
     {
         string GetJoke();
     }

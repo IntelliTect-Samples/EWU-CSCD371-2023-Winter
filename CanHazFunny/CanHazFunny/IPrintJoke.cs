@@ -1,6 +1,6 @@
 ﻿namespace CanHazFunny
 {
-    interface IPrintJoke
+    public interface IPrintJoke
     {
         void printJoke(string joke);
     }

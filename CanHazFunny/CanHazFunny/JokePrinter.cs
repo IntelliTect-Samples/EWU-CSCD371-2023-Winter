@@ -2,7 +2,7 @@
 
 namespace CanHazFunny
 {
-    internal class JokePrinter : IPrintJoke
+    public class JokePrinter : IPrintJoke
     {
         public void printJoke(string joke)
         {
