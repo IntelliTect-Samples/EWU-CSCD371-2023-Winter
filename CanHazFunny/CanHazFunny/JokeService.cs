@@ -19,6 +19,6 @@ public class JokeService : IJokeRetrieve, IJokeDisplay
 
     public void Display(string joke)
     {
-        Console.WriteLine($"{joke}");
+        Console.WriteLine(joke);
     }
 }
