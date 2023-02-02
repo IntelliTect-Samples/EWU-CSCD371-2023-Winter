@@ -7,7 +7,7 @@ public class Jester
 {
     public IJokeService JokeService { get; }
     public IJokeOutput JokeOutput { get; }
-    public Jester(JokeService? _jokeService,IJokeOutput? _jokeOutput)
+    public Jester(IJokeService? _jokeService,IJokeOutput? _jokeOutput)
 	{
         JokeService = _jokeService ?? throw new ArgumentNullException(nameof(_jokeService));
         JokeOutput = _jokeOutput ?? throw new ArgumentNullException(nameof(_jokeOutput));
