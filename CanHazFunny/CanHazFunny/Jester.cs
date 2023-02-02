@@ -3,24 +3,33 @@ namespace CanHazFunny;
 
 public class Jester
 {
-	public JokeService _jokeService { get; set; } = default!;
-	public JokeOutput _jokeOutput { get; set; } = default!;
+	public JokeService _jokeService { get; set; }
+	public JokeOutput _jokeOutput { get; set; }
 
-	public Jester (JokeService _jokeService, JokeOutput _jokeOutput)
+	public Jester (JokeService jokeService, JokeOutput jokeOutput)
 	{
-		_jokeService = _jokeService ?? throw new ArgumentNullException(nameof(_jokeService)); 
-		_jokeOutput = _jokeOutput ?? throw new ArgumentNullException(nameof(_jokeOutput));
+		if(jokeService is null)
+		{
+			throw new ArgumentNullException(nameof(_jokeService));
+		}
+		if (jokeOutput is null)
+		{
+            throw new ArgumentNullException(nameof(_jokeOutput));
+        }
+		_jokeService = jokeService;
+		_jokeOutput = jokeOutput;
 	}
 
 	public void TellJoke()
 	{
-		string joke = _jokeService.GetJoke();
+	
+        string joke = _jokeService.GetJoke();
 
-		while(joke.Contains("Chuck Norris"))
-		{
-			joke = _jokeService.GetJoke();
-		}
-		Console.WriteLine(joke);
+                    while (joke.Contains("Chuck") || joke.Contains("Norris") || joke.Contains("chuck") || joke.Contains("norris")) 
+			{
+				joke = _jokeService.GetJoke();
+			}
+			Console.WriteLine(joke);
 	}
 
 }
