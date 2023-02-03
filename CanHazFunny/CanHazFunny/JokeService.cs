@@ -13,8 +13,8 @@ public class JokeService : IJokeRetrieve, IJokeDisplay
         Uri newUri = new Uri("https://geek-jokes.sameerkumar.website/api?format=json");
         // string joke = HttpClient.GetStringAsync("https://geek-jokes.sameerkumar.website/api").Result;
         // string joke = HttpClient.GetStringAsync("https://geek-jokes.sameerkumar.website/api?format=json").Result;
-        string joke = HttpClient.GetStringAsync(newUri).Result;
-        return joke;
+        string jsonJoke = HttpClient.GetStringAsync(newUri).Result;
+        return jsonJoke.Substring(9, (jsonJoke.Length - 11));
     }
 
     public void Display(string joke)
