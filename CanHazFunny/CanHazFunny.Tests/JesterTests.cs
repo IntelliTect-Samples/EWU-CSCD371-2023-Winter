@@ -10,22 +10,7 @@ namespace CanHazFunny.Tests
         [ExpectedException(typeof(ArgumentNullException))]
         public void Jester_WithNullJokeService_ThrowsException()
         {
-            //Arrange
-            Exception? expectedException = null;
-
-            //Act
-            try
-            {
-                Jester jester = new(null, new JokeOutputter());
-            }
-            catch (ArgumentNullException e)
-            {
-                expectedException = e;
-                throw e;
-            }
-
-            //Assert
-            Assert.AreEqual(typeof(ArgumentNullException), expectedException);
+            new Jester(null, new JokeOutputter());
         }
 
 
@@ -53,12 +38,11 @@ namespace CanHazFunny.Tests
 
 
         [TestMethod]
-        //[ExpectedException(typeof(ArgumentNullException))]
         public void TellJoke_DoesNotContainChuckNorris()
         {
             //Arrange
             TestJokeOutputter testJokeOutputter = new();
-            Jester jester = new Jester(new JokeService(), testJokeOutputter);
+            Jester jester = new (new JokeService(), testJokeOutputter);
 
             //Act
             jester.TellJoke();

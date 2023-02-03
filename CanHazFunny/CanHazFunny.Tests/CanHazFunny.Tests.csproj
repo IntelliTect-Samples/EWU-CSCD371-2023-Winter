@@ -2,9 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
-	  <EnableNETAnalyzers>true</EnableNETAnalyzers>
-	  <LangVersion>11.0</LangVersion>
-	  <Nullable>enable</Nullable>
+	<EnableNETAnalyzers>true</EnableNETAnalyzers>
+	<LangVersion>11.0</LangVersion>
+	<Nullable>enable</Nullable>
 
     <IsPackable>false</IsPackable>
   </PropertyGroup>
