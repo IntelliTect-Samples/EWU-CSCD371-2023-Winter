@@ -8,9 +8,7 @@ namespace CanHazFunny
 {
     public interface IJokeOutputter
     {
-        public void OutputJoke(string joke)
-        {
-            Console.WriteLine(joke);
-        }
+        public void OutputJoke(string joke);
+
     }
 }
