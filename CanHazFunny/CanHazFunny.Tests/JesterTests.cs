@@ -1,6 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using System;
-using System.IO;
 
 namespace CanHazFunny.Tests
 {
@@ -22,36 +22,17 @@ namespace CanHazFunny.Tests
         }
 
         [TestMethod]
-        public void JesterInitialize_TestInputPrintService()
+        public void TellJoke_PrintsJoke()
         {
-            JokePrinter printz = new JokePrinter();
-            JokeService jokez = new JokeService();
-            Jester jesty = new(printz, jokez);
-
-            Assert.AreEqual(printz, jesty.PrintService);
+            //Suggestion from peer PR review
+            Mock<IJokeService> MockJokeService = new();
+            Mock<IPrintJoke> MockJokePrinter = new();
+            Jester jester = new(MockJokePrinter.Object, MockJokeService.Object);
+            MockJokeService.Setup(x => x.GetJoke()).Returns("incredible joke here");
+            jester.TellJoke();
+            MockJokePrinter.Verify(x => x.PrintJoke("incredible joke here"), Times.Once);
         }
 
-        [TestMethod]
-        public void JesterInitialize_TestInputJokeService()
-        {
-            JokePrinter printz = new JokePrinter();
-            JokeService jokez = new JokeService();
-            Jester jesty = new(printz, jokez);
-
-            Assert.AreEqual(jokez, jesty.JokeService);
-        }
-
-        [TestMethod]
-        public void JesterJokes_TestPrint()
-        {
-            StringWriter sw = new StringWriter();
-            Console.SetOut(sw);
-            new Jester(new JokePrinter(), new JokeService()).TellJoke();
-            StreamWriter reset = new(Console.OpenStandardOutput());
-            reset.AutoFlush = true;
-            Console.SetOut(reset);
-
-            Assert.IsNotNull(sw);
-        }
+        //How are we supposed to test the Chuck Norris filter??? Help...
     }
 }
