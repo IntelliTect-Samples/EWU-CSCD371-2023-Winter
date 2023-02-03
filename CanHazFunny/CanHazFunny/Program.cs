@@ -1,10 +1,8 @@
-﻿using CanHazFunny;
-
-namespace CanHazFunny
+﻿namespace CanHazFunny
 {
-    class Program
+    internal static class Program
     {
-        static void Main(string[] args)
+        private static void Main()
         {
             new Jester(new Output(), new JokeService()).TellJoke();
         }

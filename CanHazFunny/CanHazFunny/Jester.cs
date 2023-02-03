@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 
 namespace CanHazFunny
 {
@@ -8,20 +7,17 @@ namespace CanHazFunny
         private readonly IOutput _output;
         private readonly IJokeService _jokeService;
 
-        public Jester(IOutput output, IJokeService jokeService)
+        public Jester(IOutput? output, IJokeService? jokeService)
         {
-            if (output == null) {throw new ArgumentNullException(nameof(output));}
-            if (jokeService == null) {throw new ArgumentNullException(nameof(jokeService));}
-            
-            _output = output;
-            _jokeService = jokeService;
-            
+            _output = output ?? throw new ArgumentNullException(nameof(output));
+            _jokeService = jokeService ?? throw new ArgumentNullException(nameof(jokeService));
         }
 
         public void TellJoke()
         {
             string joke;
             while ((joke = _jokeService.GetJoke()).ToLower().Contains("chuck norris")) {}
+
             _output.Write(joke);
         }
     }

@@ -23,14 +23,14 @@ namespace CanHazFunny.Tests
 
         private class DummyOutput: IOutput
         {
-            private string _joke;
+            private string? _joke;
 
             public void Write(string joke)
             {
                 _joke = joke;
             }
 
-            public string GetLastJoke()
+            public string? GetLastJoke()
             {
                 return _joke;
             }
