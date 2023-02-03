@@ -1,65 +1,89 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
-namespace CanHazFunny.Tests
+namespace CanHazFunny.Tests;
+
+[TestClass]
+public class JesterTests
 {
-    [TestClass]
-    public class JesterTests
+    [TestMethod]
+    public void CreateJester_ReturnsJester()
     {
-        [TestMethod]
-        public void CreateJester_ReturnsJester()
-        {
-            // Assemble
-            JokeService service = new JokeService();
-            Jester jester = new Jester(service);
+        // Assemble
+        Jester jester = new(new JokeService(), new JokeDisplayer());
 
-            // Assert
-            Assert.IsNotNull(jester);
+        // Assert
+        Assert.IsNotNull(jester);
+    }
+
+    [TestMethod]
+    public void CreateJester_SuccessfullyGetJoke()
+    {
+        // Assemble
+        Jester jester = new(new JokeService(), new JokeDisplayer());
+
+        // Act
+        string joke = jester.JokeRetriever.GetJoke();
+
+        // Assert
+        Assert.IsNotNull(joke);
+        Assert.AreNotEqual(joke, "");
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(System.ArgumentNullException))]
+    public void Create_GivenNullJokeService_ThrowsException()
+    {
+        // Assemble - Act
+        Jester jester = new(null, new JokeDisplayer());
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(System.ArgumentNullException))]
+    public void Create_GivenNullJokeDisplayer_ThrowsException()
+    {
+        // Assemble - Act
+        Jester jester = new(new JokeService(), null);
+    }
+
+    [TestMethod]
+    public void JokeFilter_GivenJokeWithChuckNorris_ReturnsFalse()
+    {
+        // Asseble
+        MockJokeService mockService = new MockJokeService();
+
+        // Act
+        string joke = mockService.GetJokeWithChuckNorris();
+        bool result = Jester.JokeFilter(joke);
+
+        // Assert
+        Assert.IsFalse(result);
+    }
+
+    [TestMethod]
+    public void JokeFilter_GivenJokeWithoutChuckNorris_ReturnsTrue()
+    {
+        // Asseble
+        MockJokeService mockService = new MockJokeService();
+
+        // Act
+        string joke = mockService.GetJokeWithoutChuckNorris();
+        bool result = Jester.JokeFilter(joke);
+
+        // Assert
+        Assert.IsTrue(result);
+    }
+
+
+    public class MockJokeService
+    {
+        public string GetJokeWithChuckNorris()
+        {
+            return "This joke contains ChuCk NORriS";
         }
-
-        [TestMethod]
-        public void CreateJester_SuccessfullyGetJoke()
+        public string GetJokeWithoutChuckNorris()
         {
-            // Assemble
-            Jester jester = new Jester(new JokeService());
-
-            // Act
-            string joke = jester.Service.GetJoke();
-
-            // Assert
-            Assert.IsNotNull(joke);
-            Assert.AreNotEqual(joke, "");
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(System.ArgumentNullException))]
-        public void Create_GivenNullService_ThrowsException()
-        {
-            // Assemble - Act
-            Jester jester = new Jester(null);
-        }
-
-        [TestMethod]
-        public void GivenJokeWithChuckNorris_ReturnsFalse()
-        {
-            // Asseble
-            MockJokeService mockService = new MockJokeService();
-
-            // Act
-            string joke = mockService.GetJoke();
-            bool result = Jester.JokeFilter(joke);
-
-            // Assert
-            Assert.IsFalse(result);
-        }
-
-
-        public class MockJokeService : JokeService
-        {
-            public override string GetJoke()
-            {
-                return "This joke contains ChuCk NORriS";
-            }
+            return "This joke doesn't have he-who-shall-not-be-named.";
         }
     }
 }

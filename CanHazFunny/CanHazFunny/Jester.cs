@@ -4,39 +4,45 @@ namespace CanHazFunny;
 
 public class Jester
 {
-    private JokeService? _Service;
-    public JokeService Service 
+    private IJokeRetrieve? _JokeRetriever;
+    public IJokeRetrieve JokeRetriever 
     { 
-        get => _Service!;
-        set => _Service = value ?? throw new ArgumentNullException(nameof(value));
+        get => _JokeRetriever!;
+        set => _JokeRetriever = value ?? throw new ArgumentNullException(nameof(value));
     }
 
-    public Jester(JokeService service)
+    private IJokeDisplay? _JokeDisplayer;
+    public IJokeDisplay JokeDisplayer
     {
-        Service = service;
+        get => _JokeDisplayer!;
+        set => _JokeDisplayer = value ?? throw new ArgumentNullException(nameof(value));
+    }
+
+    public Jester(IJokeRetrieve jokeRetriever, IJokeDisplay jokeDisplayer)
+    {
+        JokeRetriever = jokeRetriever;
+        JokeDisplayer = jokeDisplayer;
     }
 
     public void TellJoke()
     {
-        string joke = Service.GetJoke();
+        string joke;
+        do
+        {
+            joke = JokeRetriever.GetJoke();
+        } while (JokeFilter(joke) == false);
 
-        if (JokeFilter(joke))
-        {
-            Service.Display(joke);
-        }
-        else
-        {
-            Service.Display("That wasn't a very good joke, let me think of another one.");
-        }
+        JokeDisplayer.Display(joke);
     }
 
     public static bool JokeFilter(string joke)
     {
-        if (!string.IsNullOrWhiteSpace(joke) &&
-            !joke.Contains("Chuck Norris", StringComparison.CurrentCultureIgnoreCase))
+        if (string.IsNullOrWhiteSpace(joke) ||
+            joke.Contains("Chuck", StringComparison.CurrentCultureIgnoreCase) ||
+            joke.Contains("Norris", StringComparison.CurrentCultureIgnoreCase))
         {
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 }

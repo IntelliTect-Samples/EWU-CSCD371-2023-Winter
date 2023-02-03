@@ -4,7 +4,7 @@ using System;
 
 namespace CanHazFunny;
 
-public class JokeService : IJokeRetrieve, IJokeDisplay
+public class JokeService : IJokeRetrieve
 {
     private HttpClient HttpClient { get; } = new();
 
@@ -15,10 +15,5 @@ public class JokeService : IJokeRetrieve, IJokeDisplay
         // string joke = HttpClient.GetStringAsync("https://geek-jokes.sameerkumar.website/api?format=json").Result;
         string joke = HttpClient.GetStringAsync(newUri).Result;
         return joke;
-    }
-
-    public void Display(string joke)
-    {
-        Console.WriteLine(joke);
     }
 }
