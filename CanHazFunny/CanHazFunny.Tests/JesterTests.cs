@@ -32,7 +32,7 @@ public class JesterTests
         DummyOutput dummyOutput = new();
         DummyJokeService dummyJokeService = new(jokes);
         new Jester(dummyOutput, dummyJokeService).TellJoke();
-        Assert.AreEqual(dummyOutput.GetLastJoke(), jokes[0]);
+        Assert.AreEqual<String>(dummyOutput.GetLastJoke(), jokes[0]);
     }
 
     [TestMethod]
@@ -47,7 +47,7 @@ public class JesterTests
         DummyOutput dummyOutput = new();
         DummyJokeService dummyJokeService = new(jokes);
         new Jester(dummyOutput, dummyJokeService).TellJoke();
-        Assert.AreEqual(dummyOutput.GetLastJoke(), jokes[1]);
+        Assert.AreEqual<String>(dummyOutput.GetLastJoke(), jokes[1]);
     }
 
     private class DummyJokeService : IJokeService
