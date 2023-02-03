@@ -1,10 +1,9 @@
-﻿namespace CanHazFunny
+﻿namespace CanHazFunny;
+
+internal static class Program
 {
-    internal static class Program
+    private static void Main()
     {
-        private static void Main()
-        {
-            new Jester(new Output(), new JokeService()).TellJoke();
-        }
+        new Jester(new Output(), new JokeService()).TellJoke();
     }
 }

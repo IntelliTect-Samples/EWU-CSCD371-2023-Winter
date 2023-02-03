@@ -1,12 +1,11 @@
 ﻿using System;
 
-namespace CanHazFunny
+namespace CanHazFunny;
+
+public class Output : IOutput
 {
-    public class Output : IOutput
+    public void Write(string joke)
     {
-        public void Write(string joke)
-        {
-            Console.WriteLine(joke);
-        }
+        Console.WriteLine(joke);
     }
 }

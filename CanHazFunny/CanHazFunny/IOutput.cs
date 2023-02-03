@@ -1,7 +1,6 @@
-﻿namespace CanHazFunny
+﻿namespace CanHazFunny;
+
+public interface IOutput
 {
-    public interface IOutput
-    {
-        void Write(string joke);
-    }
+    void Write(string joke);
 }
