@@ -27,7 +27,7 @@ namespace CanHazFunny
 
         public void TellJoke()
         {
-            string joke = "Chuck Norris";
+            string joke = _jokeService.GetJoke();
             while(joke.Contains("Chuck Norris"))
             {              
                 joke = _jokeService.GetJoke();
