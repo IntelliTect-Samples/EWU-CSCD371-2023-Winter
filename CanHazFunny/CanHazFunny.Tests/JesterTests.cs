@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using System;
 
 namespace CanHazFunny.Tests
@@ -6,17 +7,27 @@ namespace CanHazFunny.Tests
     [TestClass]
     public class JesterTests
     {
+        protected Mock<IJokeOutputter> MockJokeOutputter { get; set; } = new Mock<IJokeOutputter>();
+        protected Mock<IJokeService> MockJokeService { get; set; } = new Mock<IJokeService>();
+
+        [TestInitialize]
+        public void CreateMocks()
+        {
+            MockJokeOutputter = new();
+            MockJokeService = new();
+        }
+
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void Jester_WithNullJokeService_ThrowsException()
         {
-            new Jester(null, new JokeOutputter());
+            new Jester(null, MockJokeOutputter.Object);
         }
 
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void Jester_WithNullJokeOutput_ThrowsException()
+        public void Jester_WithNullJokeOutputter_ThrowsException()
         {
             //Arrange
             Exception? expectedException = null;
@@ -24,7 +35,7 @@ namespace CanHazFunny.Tests
             //Act
             try
             {
-                Jester jester = new(new JokeService(), null);
+                Jester jester = new(MockJokeService.Object, null);
             }
             catch (ArgumentNullException e)
             {
@@ -40,27 +51,18 @@ namespace CanHazFunny.Tests
         [TestMethod]
         public void TellJoke_DoesNotContainChuckNorris()
         {
-            //Arrange
-            TestJokeOutputter testJokeOutputter = new();
-            Jester jester = new (new JokeService(), testJokeOutputter);
+            // Arrange
+            Jester jester = new(MockJokeService.Object, MockJokeOutputter.Object);
+            MockJokeService.SetupSequence(x => x.GetJoke())
+                .Returns("Chuck Norris is the only person to ever win a staring contest against Ray Charles and Stevie Wonder.")
+                .Returns("What does a subatomic duck say? Quark.");
 
-            //Act
+            // Act
             jester.TellJoke();
 
-            //Assert
-            Assert.IsFalse(testJokeOutputter.joke.Contains("Chuck Norris"));
-        }
-
-
-        public class TestJokeOutputter : IJokeOutputter
-        {
-            public string joke = "";
-            public TestJokeOutputter() { }
-
-            public void OutputJoke(string joke)
-            {
-                this.joke = joke;
-            }
+            // Assert
+            MockJokeOutputter.Verify(x => x.OutputJoke("Chuck Norris is the only person to ever win a staring contest against Ray Charles and Stevie Wonder."), Times.Never);
+            MockJokeOutputter.Verify(x => x.OutputJoke("What does a subatomic duck say? Quark."), Times.Once);
         }
     }
 }
