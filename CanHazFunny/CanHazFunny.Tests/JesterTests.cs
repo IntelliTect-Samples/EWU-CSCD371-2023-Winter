@@ -17,6 +17,7 @@ namespace CanHazFunny.Tests
             MockJokeService = new();
         }
 
+
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void Jester_WithNullJokeService_ThrowsException()
@@ -29,22 +30,7 @@ namespace CanHazFunny.Tests
         [ExpectedException(typeof(ArgumentNullException))]
         public void Jester_WithNullJokeOutputter_ThrowsException()
         {
-            //Arrange
-            Exception? expectedException = null;
-
-            //Act
-            try
-            {
-                Jester jester = new(MockJokeService.Object, null);
-            }
-            catch (ArgumentNullException e)
-            {
-                expectedException = e;
-                throw e;
-            }
-
-            //Assert
-            Assert.AreEqual(typeof(ArgumentNullException), expectedException);
+            new Jester(MockJokeService.Object, null);
         }
 
 
