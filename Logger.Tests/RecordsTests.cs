@@ -91,4 +91,66 @@ public class RecordsTests
         //Assert
         Assert.IsTrue(book1.Author == book2.Author);
     }
+
+    [TestMethod]
+    public void Book_TestValueEqualityForName_ReturnsTrue()
+    {
+        //Arrange
+        Book book1 = new("The Princess Bride", "William Goldman");
+        Book book2 = new("The Princess Bride", "William Goldman");
+
+        //Act
+
+        //Assert
+        Assert.AreEqual(book1.Name, book2.Name);
+        Assert.IsTrue(book1.Name == book2.Name);
+    }
+
+    [TestMethod]
+    public void Student_TestValueEqualityForName_ReturnTrue()
+    {
+        //Arrange
+        Student student1 = new("John", "EWU");
+        Student student2 = new("John", "EWU");
+        //Act
+
+        //Assert
+        Assert.IsTrue(student1.Name == student2.Name);
+    }
+
+    [TestMethod]
+    public void Student_TestValueEqualityForSchool_ReturnTrue()
+    {
+        //Arrange
+        Student student1 = new("John", "EWU");
+        Student student2 = new("John", "EWU");
+        //Act
+
+        //Assert
+        Assert.IsTrue(student1.School == student2.School);
+    }
+
+    [TestMethod]
+    public void Employee_TestValueEqualityForName_ReturnTrue()
+    {
+        //Arrange
+        Employee employee1 = new("Jane", "Intellitect");
+        Employee employee2 = new("Jane", "Intellitect");
+        //Act
+
+        //Assert
+        Assert.IsTrue(employee1.Name == employee2.Name);
+    }
+
+    [TestMethod]
+    public void Employee_TestValueEqualityForEmployer_ReturnTrue()
+    {
+        //Arrange
+        Employee employee1 = new("Jane", "Intellitect");
+        Employee employee2 = new("Jane", "Intellitect");
+        //Act
+
+        //Assert
+        Assert.IsTrue(employee1.Employer == employee2.Employer);
+    }
 }
