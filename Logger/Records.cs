@@ -13,6 +13,7 @@ public abstract record class BaseRecord(string? Name) : IEntity
 public record class Book(string? Title, string? Author) : BaseRecord(Title)
 {
     public string Title { get; set; } = Title ?? throw new ArgumentNullException(nameof(Title));
+    public string Author { get; set; } = Author?? throw new ArgumentNullException(nameof(Author));
     
 }
 
