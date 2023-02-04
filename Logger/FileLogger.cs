@@ -1,18 +1,21 @@
 ﻿namespace Logger;
 
-public class FileLogger : BaseLogger
+public class FileLogger : BaseLogger, ILogger
 {
-    public FileLogger(string logSource, string filePath)
-    {
-        LogSource = logSource;
-        FilePath=filePath;
-        File = new FileInfo(FilePath);
-    }
+    private FileInfo File { get; }
 
-    public override string LogSource { get; }
-    public string FilePath { get; }
+    public string FilePath { get => File.FullName; }
 
-    FileInfo File { get; }
+    public FileLogger(string logSource, string filePath) : base(logSource) => File = new FileInfo(filePath);
+
+    public FileLogger(FileLoggerConfiguration configuration) : this(configuration.LogSource, configuration.FilePath) {}
+
+    static ILogger ILogger.CreateLogger(in ILoggerConfiguration logggerConfiguration) => 
+        logggerConfiguration is FileLoggerConfiguration configuration
+            ? CreateLogger(configuration)
+            : throw new ArgumentException("Invalid configuration type", nameof(logggerConfiguration));
+
+    public static FileLogger CreateLogger(FileLoggerConfiguration configuration) => new(configuration);
 
     public override void Log(LogLevel logLevel, string message)
     {
