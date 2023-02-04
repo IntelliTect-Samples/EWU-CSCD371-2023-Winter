@@ -5,6 +5,9 @@ public abstract record class BaseRecord(string? Name) : IEntity
     /*
      * We chose to use the implicit version of the method because the source 
      * type is irrelevent for a Name or an ID.
+     * 
+     * We chose to use the implicit versions of the properties because we want all instances
+     * that implement the IEntity interface to be able to use those properties.
      */
     public Guid ID { get; init; } = Guid.NewGuid();
     public string Name { get; set; } = Name ?? throw new ArgumentNullException(nameof(Name));

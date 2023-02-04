@@ -78,4 +78,17 @@ public class RecordsTests
         //Assert
         Assert.IsTrue(book1.Title == book2.Title);
     }
+
+    [TestMethod]
+    public void Book_TestValueEqualityForAuthor_ReturnsTrue()
+    {
+        //Arrange
+        Book book1 = new("The Princess Bride", "William Goldman");
+        Book book2 = new("The Princess Bride", "William Goldman");
+
+        //Act
+
+        //Assert
+        Assert.IsTrue(book1.Author == book2.Author);
+    }
 }
