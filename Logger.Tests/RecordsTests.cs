@@ -50,6 +50,19 @@ public class RecordsTests
         {
             Name = "Joe McLastname"
         };
-        Assert.AreEqual("Joe McLastname", employee.Name);
+        Assert.AreEqual<string>("Joe McLastname", employee.Name);
+    }
+
+    [TestMethod]
+    public void Book_ImplicitUseOfID_TestEqual()
+    {
+        //Arrange
+        Book book = new("The Princess Bride", "William Goldman");
+
+        //Act
+        Guid bookGuid = book.ID;
+
+        //Assert
+        Assert.AreEqual<Guid>(bookGuid, book.ID);
     }
 }
