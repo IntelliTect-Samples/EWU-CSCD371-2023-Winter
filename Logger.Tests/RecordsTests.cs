@@ -33,24 +33,22 @@ public class RecordsTests
         Assert.IsNotNull(book.ID);
     }
 
-    /*[TestMethod]
+    [TestMethod]
     public void Student_NameChange_TestEqual()
     {
-        Student student = new("Joe McSurname", "EWU")
+        Student student = new("Joe", "", "McSurname", "EWU")
         {
             Name = "Joe McLastname"
         };
+
         Assert.AreEqual<string>("Joe McLastname", student.Name);
-    }*/
+    }
 
     [TestMethod]
     public void Employee_NameChange_TestEqual()
     {
-        Employee employee = new("Joe McSurname", "EWU")
-        {
-            Name = "Joe McLastname"
-        };
-        Assert.AreEqual<string>("Joe McLastname", employee.Name);
+        Employee employee = new("Joe", "E", "McSurname", "EWU");
+        Assert.AreEqual<string>("Joe", employee.Name);
     }
 
     [TestMethod]
@@ -134,8 +132,8 @@ public class RecordsTests
     public void Employee_TestValueEqualityForName_ReturnTrue()
     {
         //Arrange
-        Employee employee1 = new("Jane", "Intellitect");
-        Employee employee2 = new("Jane", "Intellitect");
+        Employee employee1 = new("Jane", "E", "McLastName", "Intellitect");
+        Employee employee2 = new("Jane", "E", "McLastName", "Intellitect");
         //Act
 
         //Assert
@@ -146,8 +144,8 @@ public class RecordsTests
     public void Employee_TestValueEqualityForEmployer_ReturnTrue()
     {
         //Arrange
-        Employee employee1 = new("Jane", "Intellitect");
-        Employee employee2 = new("Jane", "Intellitect");
+        Employee employee1 = new("Jane", "E", "McLastName", "Intellitect");
+        Employee employee2 = new("Jane", "E", "McLastName", "Intellitect");
         //Act
 
         //Assert

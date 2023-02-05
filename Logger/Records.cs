@@ -25,9 +25,16 @@ public record class Student(string FirstName, string? MiddleName, string LastNam
 {
     public string School { get; set; } = School ?? throw new ArgumentNullException(nameof(School));
     public FullName FullName = new(FirstName, LastName, MiddleName);
+    public string FirstName { get => FullName.FirstName; }
+    public string MiddleName { get => FullName.MiddleName!; }
+    public string LastName { get => FullName.LastName!; }
 }
 
-public record class Employee(string? Name, string? Employer) : BaseRecord(Name)
+public record class Employee(string FirstName, string? MiddleName, string LastName, string? Employer) : BaseRecord(FirstName)
 {
     public string Employer { get; set; } = Employer ?? throw new ArgumentNullException(nameof(Employer));
+    public FullName FullName = new(FirstName, LastName, MiddleName);
+    public string FirstName { get => FullName.FirstName; }
+    public string MiddleName { get => FullName.MiddleName!; }
+    public string LastName { get => FullName.LastName!; }
 }

@@ -13,7 +13,7 @@ namespace Logger.Tests
         private Storage? TestStorage;
         private Book testBook = new("The Dude Book", "Mr.Man");
         private Student testStudent = new("John", null, "Doe", "EWU");
-        private Employee testEmployee = new("Jane", "Intellitect");
+        private Employee testEmployee = new("Jane", null, "McSurname", "Intellitect");
         [TestInitialize] 
         public void Init() 
         { 
