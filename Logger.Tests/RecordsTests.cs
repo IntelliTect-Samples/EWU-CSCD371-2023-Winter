@@ -45,7 +45,7 @@ public class RecordsTests
     }
 
     [TestMethod]
-    public void Student_ChangeNameMethod_ChangesNameProperty()
+    public void Student_ChangeNameMethod_ChangesValueOfNameProperty()
     {
         //Arrange
         Student student = new("Joe", null, "McSurname", "EWU");
@@ -55,6 +55,46 @@ public class RecordsTests
 
         //Assert
         Assert.AreEqual<string>("Jack", student.Name);
+    }
+
+    [TestMethod]
+    public void Student_SetsFirstMiddleAndLastName_ReturnsTrue()
+    {
+        //Arrange
+        Student student = new("Jane", null, "McSurname", "Intellitect");
+
+        //Act
+
+        //Assert
+        Assert.AreEqual<string>("Jane", student.FirstName);
+        Assert.AreEqual<string>(null!, student.MiddleName);
+        Assert.AreEqual<string>("McSurname", student.LastName);
+    }
+
+    [TestMethod]
+    public void Employee_ChangeNameMethod_ChangesValueOfNameProperty()
+    {
+        //Arrange
+        Employee employee = new("Jane", null, "McSurname", "Intellitect");
+        //Act
+        employee.ChangeName("Jacky", null!, "Kennedy");
+
+        //Assert
+        Assert.AreEqual<string>("Jacky", employee.Name);
+    }
+
+    [TestMethod]
+    public void Employee_SetsFirstMiddleAndLastName_ReturnsTrue()
+    {
+        //Arrange
+        Employee employee = new("Jane", null, "McSurname", "Intellitect");
+
+        //Act
+
+        //Assert
+        Assert.AreEqual<string>("Jane", employee.FirstName);
+        Assert.AreEqual<string>(null!, employee.MiddleName);
+        Assert.AreEqual<string>("McSurname", employee.LastName);
     }
 
     [TestMethod]
