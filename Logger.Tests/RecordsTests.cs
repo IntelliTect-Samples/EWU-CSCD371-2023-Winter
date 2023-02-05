@@ -110,20 +110,20 @@ public class RecordsTests
     public void Student_TestValueEqualityForName_ReturnTrue()
     {
         //Arrange
-        Student student1 = new("John", "EWU");
-        Student student2 = new("John", "EWU");
+        Student student1 = new("John", null, "Doe", "EWU");
+        Student student2 = new("John", null, "Doe", "EWU");
         //Act
 
         //Assert
-        Assert.IsTrue(student1.Name == student2.Name);
+        Assert.IsTrue(student1.FullName == student2.FullName);
     }
 
     [TestMethod]
     public void Student_TestValueEqualityForSchool_ReturnTrue()
     {
         //Arrange
-        Student student1 = new("John", "EWU");
-        Student student2 = new("John", "EWU");
+        Student student1 = new("John", null, "Doe", "EWU");
+        Student student2 = new("John", null, "Doe", "EWU");
         //Act
 
         //Assert
