@@ -21,24 +21,30 @@ public record class Book(string? Title, string? Author) : BaseRecord(Title)
     public string Author { get; set; } = Author?? throw new ArgumentNullException(nameof(Author));
 }
 
-public record class Student(string FirstName, string? MiddleName, string LastName, string? School) : BaseRecord(FirstName)
+public record class Student(string FirstName, string? MiddleName, string LastName, string? School) : BaseRecord(FirstName), IChangeName
 {
     public string School { get; set; } = School ?? throw new ArgumentNullException(nameof(School));
     public FullName FullName = new(FirstName, LastName, MiddleName);
     public string FirstName { get => FullName.FirstName; }
     public string MiddleName { get => FullName.MiddleName!; }
     public string LastName { get => FullName.LastName!; }
-    public Student ChangeName(string first, string middle, string last) 
+    public void ChangeName(string First, string Middle, string Last) 
     {
-        return new Student(first, middle, last, School);
+        FullName = new(First, Last, Middle);
+        Name = First;
     }
 }
 
-public record class Employee(string FirstName, string? MiddleName, string LastName, string? Employer) : BaseRecord(FirstName)
+public record class Employee(string FirstName, string? MiddleName, string LastName, string? Employer) : BaseRecord(FirstName), IChangeName
 {
     public string Employer { get; set; } = Employer ?? throw new ArgumentNullException(nameof(Employer));
     public FullName FullName = new(FirstName, LastName, MiddleName);
     public string FirstName { get => FullName.FirstName; }
     public string MiddleName { get => FullName.MiddleName!; }
     public string LastName { get => FullName.LastName!; }
+    public void ChangeName(string First, string Middle, string Last)
+    {
+        FullName = new(First, Last, Middle);
+        Name = First;
+    }
 }

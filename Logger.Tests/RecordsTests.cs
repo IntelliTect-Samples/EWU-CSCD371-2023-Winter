@@ -51,7 +51,7 @@ public class RecordsTests
         Student student = new("Joe", null, "McSurname", "EWU");
 
         //Act
-        student = student.ChangeName("Jack", null!, "McLastName");
+        student.ChangeName("Jack", null!, "McLastName");
 
         //Assert
         Assert.AreEqual<string>("Jack", student.Name);
