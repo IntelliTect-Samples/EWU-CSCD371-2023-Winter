@@ -28,6 +28,10 @@ public record class Student(string FirstName, string? MiddleName, string LastNam
     public string FirstName { get => FullName.FirstName; }
     public string MiddleName { get => FullName.MiddleName!; }
     public string LastName { get => FullName.LastName!; }
+    public Student ChangeName(string first, string middle, string last) 
+    {
+        return new Student(first, middle, last, School);
+    }
 }
 
 public record class Employee(string FirstName, string? MiddleName, string LastName, string? Employer) : BaseRecord(FirstName)

@@ -45,6 +45,19 @@ public class RecordsTests
     }
 
     [TestMethod]
+    public void Student_ChangeNameMethod_ChangesNameProperty()
+    {
+        //Arrange
+        Student student = new("Joe", null, "McSurname", "EWU");
+
+        //Act
+        student = student.ChangeName("Jack", null!, "McLastName");
+
+        //Assert
+        Assert.AreEqual<string>("Jack", student.Name);
+    }
+
+    [TestMethod]
     public void Employee_NameChange_TestEqual()
     {
         Employee employee = new("Joe", "E", "McSurname", "EWU");
