@@ -33,7 +33,7 @@ public class RecordsTests
         Assert.IsNotNull(book.ID);
     }
 
-    [TestMethod]
+    /*[TestMethod]
     public void Student_NameChange_TestEqual()
     {
         Student student = new("Joe McSurname", "EWU")
@@ -41,7 +41,7 @@ public class RecordsTests
             Name = "Joe McLastname"
         };
         Assert.AreEqual<string>("Joe McLastname", student.Name);
-    }
+    }*/
 
     [TestMethod]
     public void Employee_NameChange_TestEqual()

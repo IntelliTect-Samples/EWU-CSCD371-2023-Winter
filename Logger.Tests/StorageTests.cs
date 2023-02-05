@@ -68,7 +68,7 @@ namespace Logger.Tests
             Assert.IsFalse(TestStorage.Contains(testEmployee));
         }
 
-        /*[TestMethod]
+        [TestMethod]
         public void Storage_GivenEntityID_GetReturnsSameEntity()
         {
             //Arrange
@@ -77,8 +77,8 @@ namespace Logger.Tests
             IEntity sameBook = TestStorage!.Get(testBook.ID)!;
 
             //Assert
-            Assert.AreEqual<string>(testBook.Name,sameBook.Name);
-        }*/
+            Assert.AreEqual(testBook.Name, sameBook.Name);
+        }
 
     }
 }
