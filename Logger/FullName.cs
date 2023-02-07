@@ -1,4 +1,5 @@
 ﻿namespace Logger;
+//Implemented implicitly
 public record struct FullName(string FirstName, string LastName, string? MiddleName = null)
 {
 public string FirstName { get; } = FirstName ?? throw new ArgumentNullException(nameof(FirstName));
