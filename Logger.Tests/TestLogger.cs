@@ -1,15 +1,13 @@
 ﻿namespace Logger.Tests;
 
-public class TestLoggers : BaseLogger, ILogger
+public class TestLogger : BaseLogger, ILogger
 {
-    public TestLoggers(string logSource) : base(logSource) { }
+    public TestLogger(string logSource) : base(logSource) { }
     
     public List<(LogLevel LogLevel, string Message)> LoggedMessages { get; } = new List<(LogLevel, string)>();
 
-    public override string LogSource => throw new NotImplementedException();
-
     public static ILogger CreateLogger(in TestLoggerConfiguration configuration) => 
-        new TestLoggers(configuration.LogSource);
+        new TestLogger(configuration.LogSource);
 
     static ILogger ILogger.CreateLogger(in ILoggerConfiguration configuration) => 
         configuration is TestLoggerConfiguration testLoggerConfiguration
