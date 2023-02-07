@@ -14,6 +14,7 @@ public class FileLogger : BaseLogger, ILogger
         logggerConfiguration is FileLoggerConfiguration configuration
             ? CreateLogger(configuration)
             : throw new ArgumentException("Invalid configuration type", nameof(logggerConfiguration));
+    // loggerConfiguration is misspelled here
 
     public static FileLogger CreateLogger(FileLoggerConfiguration configuration) => new(configuration);
 
