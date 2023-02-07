@@ -1,5 +1,6 @@
 ﻿namespace Logger;
-//We defined each interface implicity to make sure data loss is preveneted, and we avoid conflicts with elements of the same type.
+//We defined each record implicity to make sure data loss is preveneted
+//And so that elements can be accessed without interference 
 public record Book : IEntity
 {
     public Guid Id { get; init; }
