@@ -6,6 +6,7 @@ namespace Logger.Tests;
 [TestClass]
 public class LogFactoryTests : FileLoggerTestsBase
 {
+    //TODO: Add assert statement?
     [TestMethod]
     public void ConfigureFileLogger_GivenFilePath_ReturnsFileLoggerWithSetFilePath()
     {
