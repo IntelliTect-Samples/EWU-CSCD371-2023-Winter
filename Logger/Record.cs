@@ -14,7 +14,7 @@ public class Record
 
         public string fullName => "${firstName}{lastName}{middleName}";
     }
-    //implicitly implements IEntity 
+    //implicitly implements IEntity; more control 
     public record Book(string? title, string? author, int isbn) : IEntity
     {
 
@@ -27,7 +27,7 @@ public class Record
 
         public string bookName => "${title} {author} {isbn}";
     }
-    //implicitly implements IEntity 
+    //implicitly implements IEntity; more control
     public record Student(int studentID, string? name, int grade) : IEntity
     {
         public int studentID { get; } = studentID;
@@ -39,7 +39,7 @@ public class Record
 
         public string bookName => "${studentID} {name} {grade}";
     }
-    //implicitly implements IEntity 
+    //implicitly implements IEntity; more control
     public record Employee(string? name, string? profession) : IEntity
     {
         public string name { get; } = name ?? throw new ArgumentNullException(nameof(name));
