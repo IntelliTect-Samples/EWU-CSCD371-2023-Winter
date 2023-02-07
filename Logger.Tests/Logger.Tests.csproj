@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Logger\Logger.csproj" />
+    <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting"/>
   </ItemGroup>
 
 </Project>

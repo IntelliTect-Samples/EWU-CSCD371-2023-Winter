@@ -1,8 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-
-namespace Logger.Tests;
+﻿namespace Logger.Tests;
 
 [TestClass]
 public class BaseLoggerMixinsTests
