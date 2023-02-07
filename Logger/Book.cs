@@ -1,10 +1,10 @@
 ﻿namespace Logger;
-public record class Book(string title, string author, string publisher, string isbn) : IEntity
+public record class Book(string Title, string Author, string Publisher, string ISBN) : IEntity
 {
-    public string Title { get; set; } = title ?? throw new ArgumentNullException(nameof(title));
-    public string Author { get; set; } = author ?? throw new ArgumentNullException(nameof(author));
-    public string Publisher { get; set; } = publisher ?? throw new ArgumentNullException(nameof(publisher));
-    public string ISBN { get; set; } = isbn ?? throw new ArgumentNullException(nameof(isbn));
+    public string Title { get; set; } = Title ?? throw new ArgumentNullException(nameof(Title));
+    public string Author { get; set; } = Author ?? throw new ArgumentNullException(nameof(Author));
+    public string Publisher { get; set; } = Publisher ?? throw new ArgumentNullException(nameof(Publisher));
+    public string ISBN { get; set; } = ISBN ?? throw new ArgumentNullException(nameof(ISBN));
 
 
     //Implicit, to avoid a backing field and instead use "computed"/"calculated" property, forming the book's

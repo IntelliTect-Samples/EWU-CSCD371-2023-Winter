@@ -1,12 +1,12 @@
 ﻿namespace Logger;
-public record class Student(FullName StudentName, string ClassStanding, string Major, double GPA) : IEntity
+public record class Employee(FullName EmployeeName, string Position, double HourlyWage) : IEntity
 {
-    public FullName fullName = StudentName ?? throw new ArgumentNullException(nameof(StudentName));
-    public string Standing { get; set; } = ClassStanding ?? throw new ArgumentNullException(nameof(ClassStanding));
-    public string Major { get; set; } = Major ?? throw new ArgumentNullException(nameof(Major));
-    public double GPA { get; set; } = GPA;
+    public FullName fullName = EmployeeName ?? throw new ArgumentNullException(nameof(EmployeeName));
+    public string Position { get; set; } = Position ?? throw new ArgumentNullException(nameof(Position));
+    public double HourlyWage { get; set; } = HourlyWage;
 
-    //Implicit, to avoid a backing field and instead use "computed"/"calculated" property, forming the student's
+
+    //Implicit, to avoid a backing field and instead use "computed"/"calculated" property, forming the employee's
     //"name" from their fullName record
     public string Name
     {
@@ -19,7 +19,8 @@ public record class Student(FullName StudentName, string ClassStanding, string M
             {
                 fullName.MiddleName = split[1];
                 fullName.LastName = split[2];
-            } else
+            }
+            else
             {
                 fullName.LastName = split[1];
             }
