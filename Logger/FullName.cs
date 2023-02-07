@@ -1,9 +1,21 @@
 ﻿namespace Logger;
-public record struct FullName(string FirstName, string LastName, string? MiddleName = null)
+public record class FullName(string FirstName, string LastName, string? MiddleName = null)
 {
     public string FirstName { get; set; } = FirstName ?? throw new ArgumentNullException(nameof(FirstName));
     public string LastName { get; set; } = LastName ?? throw new ArgumentNullException(nameof(LastName));
     public string? MiddleName { get; set; } = MiddleName;
+    
+    public string toString()
+    {
+        if (MiddleName is not null)
+        {
+            return $"{FirstName} {MiddleName} {LastName}";
+        } else
+        {
+            return $"{FirstName} {LastName}";
+        }
+    }
+
 }
 
 //All 3 fields are reference types because it would be weird for your name to be a number or boolean (i.e. a value type)
