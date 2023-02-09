@@ -1,3 +1,4 @@
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace GenericsHomework.Tests;
 
 [TestClass]
@@ -20,6 +21,20 @@ public class CircularSinglyLinkedListTests
         Assert.AreEqual("one", list.Get(1));
         Assert.AreEqual("two", list.Get(2));
         Assert.AreEqual("three", list.Get(3));
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(ArgumentException))]
+    public void Append_IfElementAlreadyExists_ThrowsError()
+    {
+        //Arrange
+        CircularSinglyLinkedList<string> list = new();
+
+        //Act
+        list.Append("zero");
+        list.Append("zero");
+
+        //Assert
     }
 
     [TestMethod]
@@ -49,4 +64,30 @@ public class CircularSinglyLinkedListTests
         // Assert
         _ = list.Get(2);
     }
+
+    [TestMethod]
+    public void Exists_IfHeadIsNull_ReturnFalse()
+    {
+        //Arrange
+        CircularSinglyLinkedList<string> list = new();
+
+        //Act
+
+        //Assert
+        Assert.IsFalse(list.Exists("Pizza"));
+    }
+
+    [TestMethod]
+    public void Exists_DataExistsInList_ReturnTrue()
+    {
+        //Arrange
+        CircularSinglyLinkedList<string> list = new();
+
+        //Act
+        list.Append("Pizza");
+
+        //Assert
+        Assert.IsTrue(list.Exists("Pizza"));
+    }
+
 }

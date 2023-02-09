@@ -2,8 +2,6 @@
 
 public class CircularSinglyLinkedList<T>
 {
-    private Node? Head { get; set; }
-
     public class Node
     {
         public T Data
@@ -51,9 +49,11 @@ public class CircularSinglyLinkedList<T>
         }
     }
 
+    public Node? Head { get; set; }
+
     public bool Exists(T data) 
     {
-        if(Head == null) return false;
+        if(Head is null) return false;
         return Head.Exists(Head, data);
     }
 
@@ -61,6 +61,9 @@ public class CircularSinglyLinkedList<T>
     {
         if(Head is null)
             Head = new Node(data);
+        //TODO: Throw Error if Appending duplicate value.
+        //else if(Exists(data))
+        //    throw new ArgumentException(nameof(data));
         else
             Head.Append(Head, data);
     }
