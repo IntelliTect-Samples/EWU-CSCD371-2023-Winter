@@ -5,38 +5,46 @@ namespace Logger.Tests;
 [TestClass]
 public class RecordsTests
 {
+    FullName? Author;
+    FullName? someGuy;
+    [TestInitialize]
+    public void Init() 
+    {
+        Author = new("Arthuer", "Clark", "C");
+        someGuy = new("John", "Doe", null);
+    }
     [TestMethod]
     [ExpectedException(typeof(ArgumentNullException))]
     public void Title_AssignNullInInitializer_ThrowException()
     {
-        _ = new Book(null, "null");
+        _ = new Book(null, Author!);
     }
 
     [TestMethod]
     [ExpectedException(typeof(ArgumentNullException))]
     public void Author_AssignNullInInitializer_ThrowException()
     {
-        _ = new Book("null", null);
+        _ = new Book("null", null!);
     }
 
     [TestMethod]
     public void Book_Name_EqualsTitle()
     {
-        Book book = new("Neuromancer", "William Gibson");
+        Book book = new("Neuromancer", Author!);
         Assert.AreEqual<string>(book.Title, book.Name);
         Assert.AreEqual<string>("Neuromancer", book.Name);
     }
 
     [TestMethod]
     public void ID_NonNull() {
-        Book book = new("2001: A Space Odyssey", "Arthuer C Clarke");
+        Book book = new("2001: A Space Odyssey", Author!);
         Assert.IsNotNull(book.ID);
     }
 
     [TestMethod]
     public void Student_NameChange_TestEqual()
     {
-        Student student = new("Joe", "", "McSurname", "EWU")
+        Student student = new(someGuy!, "EWU")
         {
             Name = "Joe McLastname"
         };
@@ -45,70 +53,38 @@ public class RecordsTests
     }
 
     [TestMethod]
-    public void Student_ChangeNameMethod_ChangesValueOfNameProperty()
-    {
-        //Arrange
-        Student student = new("Joe", null, "McSurname", "EWU");
-
-        //Act
-        student.ChangeName("Jack", null!, "McLastName");
-
-        //Assert
-        Assert.AreEqual<string>("Jack", student.Name);
-    }
-
-    [TestMethod]
     public void Student_SetsFirstMiddleAndLastName_ReturnsTrue()
     {
         //Arrange
-        Student student = new("Jane", null, "McSurname", "Intellitect");
+        Student student = new(someGuy!, "Intellitect");
 
         //Act
 
         //Assert
-        Assert.AreEqual<string>("Jane", student.FirstName);
-        Assert.AreEqual<string>(null!, student.MiddleName);
-        Assert.AreEqual<string>("McSurname", student.LastName);
-    }
-
-    [TestMethod]
-    public void Employee_ChangeNameMethod_ChangesValueOfNameProperty()
-    {
-        //Arrange
-        Employee employee = new("Jane", null, "McSurname", "Intellitect");
-        //Act
-        employee.ChangeName("Jacky", null!, "Kennedy");
-
-        //Assert
-        Assert.AreEqual<string>("Jacky", employee.Name);
+        Assert.AreEqual<string>(someGuy!.FirstName, student.FullName.FirstName);
+        Assert.AreEqual<string>(someGuy!.MiddleName!, student.FullName.MiddleName!);
+        Assert.AreEqual<string>(someGuy!.LastName, student.FullName.LastName);
     }
 
     [TestMethod]
     public void Employee_SetsFirstMiddleAndLastName_ReturnsTrue()
     {
         //Arrange
-        Employee employee = new("Jane", null, "McSurname", "Intellitect");
+        Employee employee = new(someGuy!, "Intellitect");
 
         //Act
 
         //Assert
-        Assert.AreEqual<string>("Jane", employee.FirstName);
-        Assert.AreEqual<string>(null!, employee.MiddleName);
-        Assert.AreEqual<string>("McSurname", employee.LastName);
-    }
-
-    [TestMethod]
-    public void Employee_NameChange_TestEqual()
-    {
-        Employee employee = new("Joe", "E", "McSurname", "EWU");
-        Assert.AreEqual<string>("Joe", employee.Name);
+        Assert.AreEqual<string>(someGuy!.FirstName, employee.FullName.FirstName);
+        Assert.AreEqual<string>(someGuy!.MiddleName!, employee.FullName.MiddleName!);
+        Assert.AreEqual<string>(someGuy!.LastName, employee.FullName.LastName);
     }
 
     [TestMethod]
     public void Book_ImplicitUseOfID_TestEqual()
     {
         //Arrange
-        Book book = new("The Princess Bride", "William Goldman");
+        Book book = new("The Princess Bride", Author!);
 
         //Act
         Guid bookGuid = book.ID;
@@ -121,8 +97,8 @@ public class RecordsTests
     public void Book_TestValueEqualityForTitle_ReturnsTrue()
     {
         //Arrange
-        Book book1 = new("The Princess Bride", "William Goldman");
-        Book book2 = new("The Princess Bride", "William Goldman");
+        Book book1 = new("The Princess Bride", Author!);
+        Book book2 = new("The Princess Bride", Author!);
 
         //Act
 
@@ -134,8 +110,8 @@ public class RecordsTests
     public void Book_TestValueEqualityForAuthor_ReturnsTrue()
     {
         //Arrange
-        Book book1 = new("The Princess Bride", "William Goldman");
-        Book book2 = new("The Princess Bride", "William Goldman");
+        Book book1 = new("The Princess Bride", Author!);
+        Book book2 = new("The Princess Bride", Author!);
 
         //Act
 
@@ -147,8 +123,8 @@ public class RecordsTests
     public void Book_TestValueEqualityForName_ReturnsTrue()
     {
         //Arrange
-        Book book1 = new("The Princess Bride", "William Goldman");
-        Book book2 = new("The Princess Bride", "William Goldman");
+        Book book1 = new("The Princess Bride", Author!);
+        Book book2 = new("The Princess Bride", Author!);
 
         //Act
 
@@ -161,8 +137,8 @@ public class RecordsTests
     public void Student_TestValueEqualityForName_ReturnTrue()
     {
         //Arrange
-        Student student1 = new("John", null, "Doe", "EWU");
-        Student student2 = new("John", null, "Doe", "EWU");
+        Student student1 = new(someGuy!, "EWU");
+        Student student2 = new(someGuy!, "EWU");
         //Act
 
         //Assert
@@ -173,8 +149,8 @@ public class RecordsTests
     public void Student_TestValueEqualityForSchool_ReturnTrue()
     {
         //Arrange
-        Student student1 = new("John", null, "Doe", "EWU");
-        Student student2 = new("John", null, "Doe", "EWU");
+        Student student1 = new(someGuy!, "EWU");
+        Student student2 = new(someGuy!, "EWU");
         //Act
 
         //Assert
@@ -185,8 +161,8 @@ public class RecordsTests
     public void Employee_TestValueEqualityForName_ReturnTrue()
     {
         //Arrange
-        Employee employee1 = new("Jane", "E", "McLastName", "Intellitect");
-        Employee employee2 = new("Jane", "E", "McLastName", "Intellitect");
+        Employee employee1 = new(someGuy!, "Intellitect");
+        Employee employee2 = new(someGuy!, "Intellitect");
         //Act
 
         //Assert
@@ -197,8 +173,8 @@ public class RecordsTests
     public void Employee_TestValueEqualityForEmployer_ReturnTrue()
     {
         //Arrange
-        Employee employee1 = new("Jane", "E", "McLastName", "Intellitect");
-        Employee employee2 = new("Jane", "E", "McLastName", "Intellitect");
+        Employee employee1 = new(someGuy!, "Intellitect");
+        Employee employee2 = new(someGuy!, "Intellitect");
         //Act
 
         //Assert

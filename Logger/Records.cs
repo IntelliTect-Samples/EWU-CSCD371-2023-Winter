@@ -1,6 +1,6 @@
 ﻿namespace Logger;
 
-public abstract record class BaseRecord(string? Name) : IEntity
+public abstract record class BaseEntity : IEntity
 {
     /*
      * We chose to use the implicit version of the method because the source 
@@ -12,39 +12,31 @@ public abstract record class BaseRecord(string? Name) : IEntity
      * said properties.
      */
     public Guid ID { get; init; } = Guid.NewGuid();
-    public string Name { get; set; } = Name ?? throw new ArgumentNullException(nameof(Name));
+    public abstract string Name { get; init; }
 }
 
-public record class Book(string? Title, string? Author) : BaseRecord(Title)
+public record class Book(string? Title, FullName Author) : BaseEntity
 {
     public string Title { get; set; } = Title ?? throw new ArgumentNullException(nameof(Title));
-    public string Author { get; set; } = Author?? throw new ArgumentNullException(nameof(Author));
+    public FullName Author { get; set; } = Author?? throw new ArgumentNullException(nameof(Author));
+    public override string Name { get; init; } = Title?? throw new ArgumentNullException(nameof(Author));
 }
 
-public record class Student(string FirstName, string? MiddleName, string LastName, string? School) : BaseRecord(FirstName), IChangeName
+/*
+ * Person class created to refactor the FullName and Name code in Student and Employee
+ */
+public record class Person(FullName FullName) : BaseEntity
+{ 
+    public FullName FullName { get; init; } = FullName ?? throw new ArgumentNullException();
+    public override string Name { get; init; } = FullName.FirstName ?? throw new ArgumentNullException(nameof(FullName));
+}
+
+public record class Student(FullName FullName, string? School) : Person(FullName)
 {
-    public string School { get; set; } = School ?? throw new ArgumentNullException(nameof(School));
-    public FullName FullName = new(FirstName, LastName, MiddleName);
-    public string FirstName { get => FullName.FirstName; }
-    public string MiddleName { get => FullName.MiddleName!; }
-    public string LastName { get => FullName.LastName!; }
-    public void ChangeName(string First, string Middle, string Last) 
-    {
-        FullName = new(First, Last, Middle);
-        Name = First;
-    }
+    public string School { get; init; } = School ?? throw new ArgumentNullException(nameof(School));
 }
 
-public record class Employee(string FirstName, string? MiddleName, string LastName, string? Employer) : BaseRecord(FirstName), IChangeName
+public record class Employee(FullName FullName, string? Employer) : Person(FullName)
 {
     public string Employer { get; set; } = Employer ?? throw new ArgumentNullException(nameof(Employer));
-    public FullName FullName = new(FirstName, LastName, MiddleName);
-    public string FirstName { get => FullName.FirstName; }
-    public string MiddleName { get => FullName.MiddleName!; }
-    public string LastName { get => FullName.LastName!; }
-    public void ChangeName(string First, string Middle, string Last)
-    {
-        FullName = new(First, Last, Middle);
-        Name = First;
-    }
 }

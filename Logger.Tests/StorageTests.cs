@@ -10,13 +10,13 @@ namespace Logger.Tests
     [TestClass]
     public class StorageTests
     {
-        private Storage? TestStorage;
-        private Book testBook = new("The Dude Book", "Mr.Man");
-        private Student testStudent = new("John", null, "Doe", "EWU");
-        private Employee testEmployee = new("Jane", null, "McSurname", "Intellitect");
-        [TestInitialize] 
-        public void Init() 
-        { 
+        Storage? TestStorage;
+        Book testBook = new("The Dude Book", new FullName("Jane", "Doe", "Ashley"));
+        Student testStudent = new(new FullName("John", "Doe", null), "EWU");
+        Employee testEmployee = new(new FullName("John", "Doe", null), "Intellitect");
+        [TestInitialize]
+        public void Init()
+        {
             TestStorage = new Storage();
             TestStorage!.Add(testBook);
             TestStorage!.Add(testStudent);

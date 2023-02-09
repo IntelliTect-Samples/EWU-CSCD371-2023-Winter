@@ -3,5 +3,5 @@
 public interface IEntity
 {
     Guid ID { get; init; }
-    string Name { get; set; }
+    string Name { get; init; }
 }

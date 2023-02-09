@@ -9,22 +9,20 @@ public class BaseEntityTests
     [ExpectedException(typeof(ArgumentNullException))]
     public void NullName_Throws_ArgumentNullException()
     {
-        _ = new MockBaseEntity(null);
+        _ = new MockBaseEntity(null!);
     }
 
     [TestMethod]
     public void Name_TestEquals()
     {
-        MockBaseEntity entity = new("name");
-        Assert.AreEqual("name", entity.Name);
-        entity.Name = "new name";
-        Assert.AreEqual("new name", entity.Name);
+        MockBaseEntity entity1 = new("name");
+        Assert.AreEqual("name", entity1.Name);
+        MockBaseEntity entity2 = entity1 with { Name = "new name" };
+        Assert.AreEqual("new name", entity2.Name);
     }
 }
 
-internal class MockBaseEntity : BaseEntity
+internal record class MockBaseEntity(string Name) : BaseEntity
 {
-    public MockBaseEntity(string? name) {
-        Name = name!;
-    }
+    public override string Name { get; init; } = Name ?? throw new ArgumentNullException(nameof(Name));
 }
