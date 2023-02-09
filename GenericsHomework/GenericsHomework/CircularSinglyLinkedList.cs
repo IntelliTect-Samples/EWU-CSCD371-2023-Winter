@@ -39,6 +39,22 @@ public class CircularSinglyLinkedList<T>
         {
             return Data!.ToString()!;
         }
+
+        public bool Exists(Node head, T data) 
+        {
+            Node temp = head;
+            while (temp.Next != head) 
+            {
+                if(temp.Data!.Equals(Equals(data))) return true;
+            }
+            return temp.Data!.Equals(data);
+        }
+    }
+
+    public bool Exists(T data) 
+    {
+        if(Head == null) return false;
+        return Head.Exists(Head, data);
     }
 
     public void Append(T data)
