@@ -62,8 +62,8 @@ public class CircularSinglyLinkedList<T>
         if(Head is null)
             Head = new Node(data);
         //TODO: Throw Error if Appending duplicate value.
-        //else if(Exists(data))
-        //    throw new ArgumentException(nameof(data));
+        else if(Exists(data))
+            throw new ArgumentException(nameof(data));
         else
             Head.Append(Head, data);
     }
