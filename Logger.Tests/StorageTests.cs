@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using static Logger.Record;
 
 namespace Logger.Tests;
 
@@ -7,7 +8,7 @@ namespace Logger.Tests;
 public class StorageTests
 {
 	[TestMethod]
-	public void Test_Add_Success()
+	public void TestAddSuccess()
 	{
 		Record.Book book = new Record.Book("Cemetery Road", "Greg Iles", 0062824627);
 
@@ -18,7 +19,7 @@ public class StorageTests
 		Assert.IsTrue(storage.Contains(book));
 	}
     [TestMethod]
-    public void Test_Remove_Success()
+    public void TestRemoveSuccess()
     {
         Record.Book book = new Record.Book("Cemetery Road", "Greg Iles", 0062824627);
 
@@ -28,6 +29,20 @@ public class StorageTests
         storage.Remove(book);
         
         Assert.IsFalse(storage.Contains(book));
+    }
+    [TestMethod]
+    public void TestGetSuccess()
+    {
+        Record.Book book = new Record.Book("Cemetery Road", "Greg Iles", 0062824627);
+
+        Storage storage = new Storage();
+
+        Guid bookId = book.Id;
+
+        storage.Add(book);
+        Book stored = storage.Get(bookId) as Book ?? throw new ArgumentNullException();
+
+        Assert.AreEqual<Book>(stored, book);
     }
 
 }

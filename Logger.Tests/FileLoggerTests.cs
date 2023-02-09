@@ -6,14 +6,14 @@ namespace Logger.Tests;
 public class FileLoggerTests : FileLoggerTestsBase
 {    
     [TestMethod]
-    public void Create_GivenClassAndValidFileName_Success()
+    public void CreateGivenClassAndValidFileNameSuccess()
     {
         Assert.AreEqual(nameof(FileLoggerTests), Logger.LogSource);
         Assert.AreEqual(FilePath, Logger.FilePath);
     }
 
     [TestMethod]
-    public async Task Log_Message_FileAppended()
+    public async Task LogMessageFileAppended()
     {
         Logger.Log(LogLevel.Error, "Message1");
         Logger.Log(LogLevel.Error, "Message2");

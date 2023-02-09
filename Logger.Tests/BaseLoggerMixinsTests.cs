@@ -9,13 +9,13 @@ public class BaseLoggerMixinsTests
 {
     [TestMethod]
     [ExpectedException(typeof(ArgumentNullException))]
-    public void Error_WithNullLogger_ThrowsException()
+    public void ErrorWithNullLoggerThrowsException()
     {
         BaseLoggerMixins.Error(null!, "");
     }
 
     [TestMethod]
-    public void Error_WithData_LogsMessage()
+    public void ErrorWithDataLogsMessage()
     {
         // Arrange
         var logger = new TestLogger(nameof(BaseLoggerMixinsTests));

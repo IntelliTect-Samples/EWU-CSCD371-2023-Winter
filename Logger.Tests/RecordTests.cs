@@ -7,22 +7,22 @@ namespace Logger.Tests;
 public class RecordTests
 {
 	[TestMethod]
-	public void Create_FullName_Success()
+	public void CreateFullNameSuccess()
 	{
-		Record.Person name = new Record.Person("James", "King", "Martin");
+		Record.FullName name = new Record.FullName("James", "King", "Martin");
 
 		Assert.IsNotNull(name);
 	}
     [TestMethod]
     [ExpectedException(typeof(ArgumentNullException))]
-    public void Create_FullName_NotSuccess()
+    public void CreateFullNameNotSuccess()
     {
-        Record.Person name = new Record.Person(null!, "King", "Martin");
+        Record.FullName name = new Record.FullName(null!, "King", "Martin");
 
         Assert.IsNull(name);
     }
     [TestMethod]
-    public void Create_NewBook_Success()
+    public void CreateNewBookSuccess()
     {
         Record.Book book = new Record.Book("Cemetery Road", "Greg Iles", 0062824627);
 
@@ -30,7 +30,7 @@ public class RecordTests
     }
     [TestMethod]
     [ExpectedException(typeof(ArgumentNullException))]
-    public void Create_NewBook_NotSuccess()
+    public void CreateNewBookNotSuccess()
     {
         Record.Book book = new Record.Book("Cemetery Road", null!, 0062824627);
 
@@ -38,35 +38,56 @@ public class RecordTests
 
     }
     [TestMethod]
-    public void Create_Student_Success()
+    public void CreateStudentSuccess()
     {
-        Record.Student harry = new Record.Student(1234, "Harry", 11);
+        Record.FullName name = new Record.FullName("Harry", "Edward", "Styles");
+        Record.Student harry = new Record.Student(1234, FullName: name, 11);
 
         Assert.IsNotNull(harry);
     }
     [TestMethod]
     [ExpectedException(typeof(ArgumentNullException))]
-    public void Create_Student_NotSuccess()
+    public void CreateStudentNoMiddleNameSuccess()
     {
-        Record.Student harry = new Record.Student(1234, null!, 11);
+        Record.FullName name = new Record.FullName("Harry", null!, "Styles");
+        Record.Student harry = new Record.Student(1234, name, 11);
 
-        Assert.IsNull(harry);
+        Assert.IsNotNull(harry);
 
     }
     [TestMethod]
-    public void Create_Employee_Success()
+    public void CreateEmployeeSuccess()
     {
-        Record.Employee jim = new Record.Employee("Jim", "Salesman");
+        Record.FullName name = new Record.FullName("Jim", "Duncan", "Halpert");
+        Record.Employee jim = new Record.Employee(FullName: name, "Salesman");
 
         Assert.IsNotNull(jim);
     }
     [TestMethod]
     [ExpectedException(typeof(ArgumentNullException))]
-    public void Create_Employee_NotSuccess()
+    public void CreateEmployeeNotSuccess()
     {
         Record.Employee jim = new Record.Employee(null!, null!);
 
         Assert.IsNull(jim);
+
+    }
+    [TestMethod]
+    public void FullNameNameComparisionByValueTrueSuccess()
+    {
+        Record.FullName jim = new Record.FullName("Jim", "Duncan", "Halpert");
+        Record.FullName jim2 = new Record.FullName("Jim", "Duncan", "Halpert");
+
+        Assert.AreEqual<Record.FullName>(jim, jim2);
+
+    }
+    [TestMethod]
+    public void FullNameNameComparisionByValueFalseSuccess()
+    {
+        Record.FullName jim = new Record.FullName("Jim", " ", "Halpert");
+        Record.FullName jim2 = new Record.FullName("Jim", "Duncan", "Halpert");
+
+        Assert.AreNotEqual<Record.FullName>(jim, jim2);
 
     }
 }

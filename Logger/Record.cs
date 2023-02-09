@@ -1,54 +1,56 @@
 ﻿using System;
-using Logger;
 using static System.Runtime.InteropServices.OptionalAttribute;
 namespace Logger;
 
+
+/*
+ The reason we implemented our FullName record in a class
+called records is so we could keep all of our records together.
+It makes it easier to navigate and understand our program
+from an outside perspective.  
+*/
 public class Record
 {
-    //We decided to do a reference type because it is better for storing more values
-    public record Person(string? firstName, string? lastName, string? middleName)
+    /*
+    We decided to do a reference type because it is better for storing more
+    values. Our record for FullName is mutable because names can be
+    occasionally changed. Exp. Changing last name after marriage.  
+    */
+    public record FullName(string? firstName, string? lastName, string? middleName)
     {
         public string firstName { get; } = firstName ?? throw new ArgumentNullException(nameof(firstName));
         public string lastName { get; } = lastName ?? throw new ArgumentNullException(nameof(lastName));
-        public string middleName { get; } = firstName ?? throw new ArgumentNullException(nameof(middleName));
+        public string middleName { get; } = middleName ?? throw new ArgumentNullException(nameof(middleName));
 
-        public string fullName => "${firstName}{lastName}{middleName}";
     }
-    //implicitly implements IEntity; more control 
-    public record Book(string? title, string? author, int isbn) : IEntity
+    //implicitly overrding Name in Entity since we are only using Name.
+    public record Person(FullName FullName) : Entity
+    {
+         public override string Name { get => FullName.ToString(); }
+
+         
+    }
+    //implicitly overrding Name in Entity since we are only using Name.
+    public record Book(string? title, string? author, int isbn) : Entity
     {
 
-        public string title { get; } = title ?? throw new ArgumentNullException(nameof(title));
+        public override string Name { get; } = title ?? throw new ArgumentNullException(nameof(title));
         public string author { get; } = author ?? throw new ArgumentNullException(nameof(author));
         public int isbn { get; } = isbn;
-
-        public Guid Id { get => throw new NotImplementedException(); init => throw new NotImplementedException(); }
-        public string Name => throw new NotImplementedException();
-
-        public string bookName => "${title} {author} {isbn}";
     }
-    //implicitly implements IEntity; more control
-    public record Student(int studentID, string? name, int grade) : IEntity
+    //implicitly overrding Name in Entity since we are only using Name.
+    public record Student(int studentId, FullName FullName, int grade) : Entity
     {
-        public int studentID { get; } = studentID;
-        public string name { get; } = name ?? throw new ArgumentNullException(nameof(name));
+
+        public int studentId { get; } = studentId;
+        public override string Name { get => FullName.ToString(); }
         public int grade { get; } = grade;
-
-        public Guid Id { get => throw new NotImplementedException(); init => throw new NotImplementedException(); }
-        public string Name => throw new NotImplementedException();
-
-        public string bookName => "${studentID} {name} {grade}";
     }
-    //implicitly implements IEntity; more control
-    public record Employee(string? name, string? profession) : IEntity
+    //implicitly overrding Name in Entity since we are only using Name.
+    public record Employee(FullName FullName, string? profession) : Entity
     {
-        public string name { get; } = name ?? throw new ArgumentNullException(nameof(name));
+        public override string Name { get => FullName.ToString(); }
         public string profession { get; } = profession ?? throw new ArgumentNullException(nameof(profession));
-
-        public Guid Id { get => throw new NotImplementedException(); init => throw new NotImplementedException(); }
-        public string Name => throw new NotImplementedException();
-
-        public string employeeName => "${name} {profession}";
     }
 
 }   
