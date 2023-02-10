@@ -10,7 +10,7 @@ public class CircularSinglyLinkedList<T>
             set => _Data = value ?? throw new ArgumentNullException(nameof(Data));
         }
         private T? _Data;
-        
+
         public Node Next
         {
             get => _Next!;
@@ -25,7 +25,7 @@ public class CircularSinglyLinkedList<T>
         public void Append(Node head, T data)
         {
             Node temp = head;
-            while (temp.Next != head) 
+            while (temp.Next != head)
             {
                 temp = temp.Next;
             }
@@ -38,10 +38,10 @@ public class CircularSinglyLinkedList<T>
             return Data!.ToString()!;
         }
 
-        public bool Exists(Node head, T data) 
+        public bool Exists(Node head, T data)
         {
             Node temp = head;
-            while (temp.Next != head) 
+            while (temp.Next != head)
             {
                 if (temp.Data!.Equals(data)) return true;
                 else
@@ -53,6 +53,14 @@ public class CircularSinglyLinkedList<T>
 
     public Node? Head { get; set; }
 
+    private int Size;
+
+    public CircularSinglyLinkedList() 
+    {
+        Head = null;
+        Size = 0;
+    }
+
     public bool Exists(T data) 
     {
         if(Head is null) return false;
@@ -62,12 +70,20 @@ public class CircularSinglyLinkedList<T>
     public void Append(T data)
     {
         //TODO: Throw Error if Appending duplicate value.
-        if (Head is null)
+        if (Head is null) 
+        {
             Head = new Node(data);
+            Size++;
+        }
         if (Exists(data))
+        {
             throw new ArgumentException(nameof(data));
+        }
         else
+        {
             Head.Append(Head, data);
+            Size++;
+        }     
     }
 
     public T Get(int index)
@@ -87,6 +103,9 @@ public class CircularSinglyLinkedList<T>
     public void Clear(T data) 
     {
         if (Exists(data))
+        {
             Head = new(data);
+            Size = 1;
+        }
     }
 }
