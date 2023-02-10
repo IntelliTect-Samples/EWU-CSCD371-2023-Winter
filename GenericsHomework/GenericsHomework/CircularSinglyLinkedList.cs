@@ -43,7 +43,9 @@ public class CircularSinglyLinkedList<T>
             Node temp = head;
             while (temp.Next != head) 
             {
-                if(temp.Data!.Equals(Equals(data))) return true;
+                if (temp.Data!.Equals(data)) return true;
+                else
+                    temp = temp.Next;
             }
             return temp.Data!.Equals(data);
         }
@@ -59,10 +61,10 @@ public class CircularSinglyLinkedList<T>
 
     public void Append(T data)
     {
-        if(Head is null)
-            Head = new Node(data);
         //TODO: Throw Error if Appending duplicate value.
-        else if(Exists(data))
+        if (Head is null)
+            Head = new Node(data);
+        if (Exists(data))
             throw new ArgumentException(nameof(data));
         else
             Head.Append(Head, data);
@@ -80,5 +82,11 @@ public class CircularSinglyLinkedList<T>
                 throw new ArgumentOutOfRangeException(nameof(index));
         }
         return currentNode.Data;
+    }
+
+    public void Clear(T data) 
+    {
+        if (Exists(data))
+            Head = new(data);
     }
 }

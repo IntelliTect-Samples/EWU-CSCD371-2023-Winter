@@ -85,9 +85,31 @@ public class CircularSinglyLinkedListTests
 
         //Act
         list.Append("Pizza");
+        list.Append("Pie");
+        list.Append("Cake");
 
         //Assert
         Assert.IsTrue(list.Exists("Pizza"));
+    }
+
+    [TestMethod]
+    public void Clear_GivenNodeData_ClearsAllButSpecifiedNode()
+    {
+        //Arrange
+        CircularSinglyLinkedList<string> list = new();
+
+        //Act
+        list.Append("One");
+        list.Append("Two");
+        list.Append("Three");
+
+        list.Clear("One");
+
+        //Assert
+        Assert.IsTrue(list.Exists("One"));
+        Assert.IsFalse(list.Exists("Two"));
+        Assert.IsFalse(list.Exists("Three"));
+
     }
 
 }
