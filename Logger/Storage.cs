@@ -2,6 +2,7 @@
 public class Storage
 {
     private HashSet<IEntity> Entities { get; } = new();
+    public int Count { get => Entities.Count; }
     
     public void Add(IEntity item)
     {
@@ -16,6 +17,11 @@ public class Storage
     public bool Contains(IEntity item)
     {
         return Entities.Contains(item);
+    }
+
+    public void Clear()
+    {
+        Entities.Clear();
     }
     
     public IEntity? Get(Guid expectedGuid)

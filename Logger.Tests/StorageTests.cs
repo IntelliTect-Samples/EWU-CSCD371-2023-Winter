@@ -11,16 +11,19 @@ namespace Logger.Tests
     public class StorageTests
     {
         Storage? TestStorage;
-        Book testBook = new("The Dude Book", new FullName("Jane", "Doe", "Ashley"));
-        Student testStudent = new(new FullName("John", "Doe", null), "EWU");
-        Employee testEmployee = new(new FullName("John", "Doe", null), "Intellitect");
+        Book TestBook = new("The Dude Book", new FullName("Jane", "Doe", "Ashley"));
+        Student TestStudent = new(new FullName("John", "Doe", null), "EWU");
+        Employee TestEmployee = new(new FullName("John", "Doe", null), "Intellitect");
         [TestInitialize]
         public void Init()
         {
             TestStorage = new Storage();
-            TestStorage!.Add(testBook);
-            TestStorage!.Add(testStudent);
-            TestStorage!.Add(testEmployee);
+        }
+
+        [TestCleanup]
+        public void Cleanup()
+        {
+            TestStorage!.Clear();
         }
 
         [TestMethod]
@@ -29,20 +32,22 @@ namespace Logger.Tests
             //Arrange
 
             //Act
+            TestStorage!.Add(TestBook);
 
             //Assert
-            Assert.IsTrue(TestStorage!.Contains(testBook));
+            Assert.IsTrue(TestStorage!.Contains(TestBook));
         }
 
         [TestMethod]
         public void Storage_AddsEntityStudent_ContainsStudentTrue()
         {
             //Arrange
-            
+
             //Act
+            TestStorage!.Add(TestStudent);
 
             //Assert
-            Assert.IsTrue(TestStorage!.Contains(testStudent));
+            Assert.IsTrue(TestStorage!.Contains(TestStudent));
         }
 
         [TestMethod]
@@ -51,9 +56,10 @@ namespace Logger.Tests
             //Arrange
 
             //Act
+            TestStorage!.Add(TestEmployee);
 
             //Assert
-            Assert.IsTrue(TestStorage!.Contains(testEmployee));
+            Assert.IsTrue(TestStorage!.Contains(TestEmployee));
         }
 
         [TestMethod]
@@ -62,10 +68,11 @@ namespace Logger.Tests
             //Arrange
 
             //Act
-            TestStorage!.Remove(testEmployee);
+            TestStorage!.Add(TestEmployee);
+            TestStorage!.Remove(TestEmployee);
 
             //Assert
-            Assert.IsFalse(TestStorage.Contains(testEmployee));
+            Assert.IsFalse(TestStorage.Contains(TestEmployee));
         }
 
         [TestMethod]
@@ -74,11 +81,37 @@ namespace Logger.Tests
             //Arrange
 
             //Act
-            IEntity sameBook = TestStorage!.Get(testBook.ID)!;
+            TestStorage!.Add(TestBook);
+            IEntity sameBook = TestStorage!.Get(TestBook.ID)!;
 
             //Assert
-            Assert.AreEqual(testBook.Name, sameBook.Name);
+            Assert.AreEqual(TestBook.Name, sameBook.Name);
         }
 
+        [TestMethod]
+        public void Storage_Count_ReturnsCorrectAmount()
+        {
+            // Arrange
+
+            // Act
+            TestStorage!.Add(TestBook);
+            TestStorage!.Add(TestEmployee);
+            int count = TestStorage.Count;
+
+            Assert.AreEqual<int>(2, count);
+        }
+
+        [TestMethod]
+        public void Storage_Cleanup_RemovesAllEntities()
+        {
+            //Arrange
+
+            //Act
+            TestStorage!.Add(TestBook);
+            TestStorage!.Clear();
+
+            //Assert
+            Assert.AreEqual<int>(0, TestStorage.Count);
+        }
     }
 }
