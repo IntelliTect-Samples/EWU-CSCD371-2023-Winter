@@ -53,7 +53,7 @@ public class CircularSinglyLinkedList<T>
 
     public Node? Head { get; set; }
 
-    private int Size;
+    public int Size { get; private set; }
 
     public CircularSinglyLinkedList() 
     {
