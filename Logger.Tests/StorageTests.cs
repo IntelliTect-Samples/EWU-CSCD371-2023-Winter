@@ -111,4 +111,21 @@ public class StorageTests
     }
 
     //Getting methods testing
+    [TestMethod]
+    public void Get_Returns_Expected_ID()
+    {
+        //Arrange
+        Guid guid = Guid.NewGuid();
+        Storage storage = new();
+        Employee entity = new() { 
+            Id = guid, 
+            FullName = new FullName("Name", "Test"), 
+            Employer = "Yo momma" };
+        //Act
+        storage.Add(entity);
+        IEntity emp = storage.Get(guid)!;
+        //Assert
+        Assert.IsNotNull(emp);
+        Assert.AreEqual(entity.Id, emp.Id);
+    }
 }
