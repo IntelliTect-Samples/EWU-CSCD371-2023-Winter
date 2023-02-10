@@ -17,7 +17,7 @@ public class EmployeeTests
     [TestMethod]
     public void Equals_GivenTwoDifferentStudents_ReturnFalse()
     {
-        FullName fullName = new("John", "Smith");
+        FullName fullName = new("John", "Smith", "David");
         Employee emp = new(Guid.NewGuid(), name: fullName);
         Employee emp2 = new(Guid.NewGuid(), name: fullName);
 

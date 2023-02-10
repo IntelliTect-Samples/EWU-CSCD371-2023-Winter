@@ -13,7 +13,7 @@ public class BookTests
 
         Assert.IsInstanceOfType(book, typeof(BaseEntity));
         Assert.IsNotNull(book);
-        Assert.AreEqual("Book Title by J.R.R. Tolkien", book.Name);
+        Assert.AreEqual("Book Title", book.Name);
     }
 
     [TestMethod]

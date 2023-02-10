@@ -10,15 +10,15 @@ public record class Book : BaseEntity
     }
 
     public string Title { get; }
+
     public FullName AuthorName { get; }
 
+    // Name is implemented implicitly because a book still has a type of "name", in this case a title
     public override string Name
     {
         get
         {
-            return AuthorName.MiddleName is null
-                ? string.Format($"{Title} by {AuthorName.FirstName} {AuthorName.LastName}")
-                : string.Format($"{Title} by {AuthorName.FirstName} {AuthorName.MiddleName} {AuthorName.LastName}");
+            return Title;
         }
     }
 }
