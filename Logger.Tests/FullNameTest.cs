@@ -39,10 +39,11 @@ namespace Logger.Tests
             Employee employeeOne = new Employee()
             {
                 Id = Guid.NewGuid(),
-                FullName = new FullName("Asuka", "Soryu", "Langley"),
+
+                FullName = new FullName("Asuka", "Soryu","Langley"),
                 Employer = "Nerv"
             };
-
+            
             Assert.AreEqual(name, employeeOne.FullName.Name);
         }
     }
