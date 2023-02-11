@@ -1,4 +1,3 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace GenericsHomework.Tests;
 
 [TestClass]
@@ -17,10 +16,10 @@ public class CircularSinglyLinkedListTests
         list.Append("three");
 
         // Assert
-        Assert.AreEqual("zero", list.Get(0));
-        Assert.AreEqual("one", list.Get(1));
-        Assert.AreEqual("two", list.Get(2));
-        Assert.AreEqual("three", list.Get(3));
+        Assert.AreEqual<string>("zero", list.Get(0));
+        Assert.AreEqual<string>("one", list.Get(1));
+        Assert.AreEqual<string>("two", list.Get(2));
+        Assert.AreEqual<string>("three", list.Get(3));
     }
 
     [TestMethod]
@@ -142,5 +141,4 @@ public class CircularSinglyLinkedListTests
         //Assert
         Assert.AreEqual<int>(1, list.Size);
     }
-
 }
