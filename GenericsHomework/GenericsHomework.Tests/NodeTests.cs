@@ -1,35 +1,18 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace GenericsHomework.Tests;
 
-namespace GenericsHomework.Tests
+[TestClass]
+public class NodeTests
 {
-    /*
-     * We should probably refacter the Node() class into its own file.
-     */
-    [TestClass]
-    public class NodeTests
+    [TestMethod]
+    public void ToString_NodeToStringMethodUsesStoredDataTypeToStringMethod_ReturnsTrue()
     {
-        [TestMethod]
-        public void MyTestMethod()
-        {
+        //Arrange
+        CircularSinglyLinkedList<int> list = new();
 
-        }
+        //Act
+        list.Append(5);
 
-        [TestMethod]
-        public void ToString_NodeToStringMethodUsesStoredDataTypeToStringMethod_ReturnsTrue()
-        {
-            //Arrange
-            CircularSinglyLinkedList<int> list = new();
-
-            //Act
-            list.Append(5);
-
-            //Assert
-            Assert.AreEqual<string>("5", list.Get(0).ToString());
-        }
+        //Assert
+        Assert.AreEqual<string>("5", list.GetNode(0).ToString());
     }
 }
