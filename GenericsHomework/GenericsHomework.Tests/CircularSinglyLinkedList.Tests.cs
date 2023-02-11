@@ -51,6 +51,19 @@ public class CircularSinglyLinkedListTests
     }
 
     [TestMethod]
+    public void ToString_NodeToStringMethodUsesStoredDataTypeToStringMethod_ReturnsTrue()
+    {
+        //Arrange
+        CircularSinglyLinkedList<int> list = new();
+
+        //Act
+        list.Append(5);
+
+        //Assert
+        Assert.AreEqual<string>("5", list.Get(0).ToString());
+    }
+
+    [TestMethod]
     [ExpectedException(typeof(ArgumentOutOfRangeException))]
     public void Get_OutOfRange_ThrowsException()
     {
