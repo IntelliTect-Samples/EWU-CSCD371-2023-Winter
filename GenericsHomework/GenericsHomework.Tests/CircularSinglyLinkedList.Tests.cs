@@ -109,7 +109,38 @@ public class CircularSinglyLinkedListTests
         Assert.IsTrue(list.Exists("One"));
         Assert.IsFalse(list.Exists("Two"));
         Assert.IsFalse(list.Exists("Three"));
+    }
 
+    [TestMethod]
+    public void Size_IsEqualToTheNumberOfElementsInList_IsEqualTo3()
+    {
+        //Arrange
+        CircularSinglyLinkedList<string> list = new();
+
+        //Act
+        list.Append("One");
+        list.Append("Two");
+        list.Append("Three");
+
+        //Assert
+        Assert.AreEqual<int>(3, list.Size);
+    }
+
+    [TestMethod]
+    public void Size_IsSetToOneIfListIsCleared_IsEqualTo1()
+    {
+        //Arrange
+        CircularSinglyLinkedList<string> list = new();
+
+        //Act
+        list.Append("One");
+        list.Append("Two");
+        list.Append("Three");
+
+        list.Clear("One");
+
+        //Assert
+        Assert.AreEqual<int>(1, list.Size);
     }
 
 }
