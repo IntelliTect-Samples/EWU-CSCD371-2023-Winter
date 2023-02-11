@@ -75,7 +75,7 @@ public class CircularSinglyLinkedList<T>
             Head = new Node(data);
             Size++;
         }
-        if (Exists(data))
+        else if (Exists(data))
         {
             throw new ArgumentException(nameof(data));
         }
