@@ -36,7 +36,7 @@ public class NodeTests
 
 
     [TestMethod]
-    public void CoypTo_CorrectlyCopiesData()
+    public void CopyTo_CorrectlyCopiesData()
     {
         //Arrange
         int[] ints = {0, 0, 0, 0, 0};
