@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace GenericsHomework.Tests
 {
+    /*
+     * We should probably refacter the Node() class into its own file.
+     */
     [TestClass]
     public class NodeTests
     {
