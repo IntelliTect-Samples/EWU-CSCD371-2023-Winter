@@ -17,5 +17,14 @@ public class Node<T>
     {
         return $"Node Value: {Data}";
     }
+
+    public void Append(T data)
+    {
+        Node<T> newNode = new(data);
+        Node<T> nextNode = Next;
+
+        this.Next = newNode;
+        newNode.Next = nextNode;
+    }
 }
 

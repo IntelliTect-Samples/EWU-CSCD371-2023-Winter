@@ -47,4 +47,18 @@ public class NodeTest
         //Assert
         Assert.AreEqual(node, node.Next);
     }
+
+    [TestMethod]
+    public void AppendNodeToExistingNode()
+    {
+        // Assemble
+        Node<int> node1 = new(12);
+        NodeTest<string> node2 = new("Hello World!");
+
+        // Act
+        node1.Append("Hello World!");
+
+        // Assert
+        Assert.IsEqual(node1.Next.Data, node2.Data);
+    }
 }
