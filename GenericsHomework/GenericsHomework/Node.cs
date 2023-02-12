@@ -1,6 +1,8 @@
-﻿namespace GenericsHomework;
+﻿using System.Collections;
 
-public class Node<T> : ICollection<T>
+namespace GenericsHomework;
+
+public class Node<T> : ICollection<T>, IEnumerable<T>
 {
     public T Data
     {
@@ -20,7 +22,12 @@ public class Node<T> : ICollection<T>
 
     public bool IsReadOnly => false;
 
-    public bool IsHead { get; }
+    private CircularSinglyLinkedList<T>? _List;
+    protected CircularSinglyLinkedList<T> List
+    {
+        get => _List!;
+        init => _List = value ?? throw new ArgumentNullException(nameof(List));
+    }
 
     private Node<T>? _Next;
     public Node(T data)
@@ -29,10 +36,12 @@ public class Node<T> : ICollection<T>
         Next = this;
         _Count = 1;
     }
-    public Node(T data, bool isHead): this(data)
+
+    public Node(T data, CircularSinglyLinkedList<T> list) : this(data)
     {
-        IsHead = isHead;
+        List = list;
     }
+
     public void Append(Node<T> head, T data)
     {
         Node<T> temp = head;
@@ -40,10 +49,10 @@ public class Node<T> : ICollection<T>
         {
             temp = temp.Next;
         }
-        Node<T> newNode = new(data);
+        Node<T> newNode = new(data, this.List);
         temp.Next = newNode;
         newNode.Next = head;
-//        _Count++;
+        _Count++;
     }
 
     public override string ToString()
@@ -65,16 +74,17 @@ public class Node<T> : ICollection<T>
 
     public void Add(T item)
     {
-        Node<T> end = this;
-        while(!end.Next.IsHead)
+        Append(List.Head, item);
+        /*Node<T> end = this;
+        while(end.Next != this)
         {
             end = end.Next;
         }
-        end.Next = new(item)
+        end.Next = new(item, this.List)
         {
             Next = this
         };
-        _Count++;
+        _Count++;*/
     }
 
     public void Clear()
@@ -97,7 +107,7 @@ public class Node<T> : ICollection<T>
 
     public void CopyTo(T[] array, int arrayIndex)
     {
-        if(array.Length < this.Count + arrayIndex)
+        if(array.Length < Count + arrayIndex)
             throw new ArgumentOutOfRangeException(nameof(array), "array.Length must be >= list.Count + arrayIndex");
         Node<T> currentNode = this;
         int currentIndex = arrayIndex;
@@ -113,7 +123,7 @@ public class Node<T> : ICollection<T>
         Node<T> currentNode = this;
         do
         {
-            if (currentNode.Data!.Equals(this.Data))
+            if (currentNode.Data!.Equals(Data))
             {
                 currentNode.Next = currentNode.Next.Next;
                 _Count--;
@@ -124,21 +134,18 @@ public class Node<T> : ICollection<T>
         return false;
     }
 
-    // TODO: properly implement this
     public IEnumerator<T> GetEnumerator()
     {
-        throw new NotImplementedException();
+        return this.List;
     }
 
-    // TODO: properly implement this
     IEnumerator<T> IEnumerable<T>.GetEnumerator()
     {
-        throw new NotImplementedException();
+        return this.List;
     }
 
-    // TODO: properly implement this
     System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
     {
-        throw new NotImplementedException();
+        return this.List;
     }
 }

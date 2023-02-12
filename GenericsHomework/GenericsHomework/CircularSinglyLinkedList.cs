@@ -1,15 +1,26 @@
-﻿namespace GenericsHomework;
+﻿using System.Collections;
 
-public class CircularSinglyLinkedList<T>
+namespace GenericsHomework;
+
+public class CircularSinglyLinkedList<T> : IEnumerator<T>
 {
     public Node<T>? Head { get; set; }
 
-    public int Size { get; private set; }
+    public int Size {
+        get => (Head is null) ? 0 : Head.Count;
+    }
+
+    private Node<T>? CurrentNode
+    {
+        get; set;
+    }
+    public T Current => CurrentNode.Data;
+
+    object IEnumerator.Current => CurrentNode!;
 
     public CircularSinglyLinkedList() 
     {
         Head = null;
-        Size = 0;
     }
 
     public bool Exists(T data) 
@@ -22,8 +33,7 @@ public class CircularSinglyLinkedList<T>
     {
         if (Head is null) 
         {
-            Head = new Node<T>(data);
-            Size++;
+            Head = new(data, this);
         }
         else if (Exists(data))
         {
@@ -31,9 +41,8 @@ public class CircularSinglyLinkedList<T>
         }
         else
         {
-            Head.Append(Head, data);
-            Size++;
-        }     
+            Head.Add(data);
+        }
     }
 
     public T Get(int index)
@@ -43,16 +52,17 @@ public class CircularSinglyLinkedList<T>
 
     public Node<T> GetNode(int index)
     {
-        if (Head is null)
+        if (index >= Size || Head is null)
             throw new ArgumentOutOfRangeException(nameof(index));
-        Node<T> currentNode = Head;
+
+        Node<T> tempNode = Head;
         for (int i = 0; i < index; i++)
         {
-            currentNode = currentNode.Next;
-            if (currentNode == Head)
+            tempNode = tempNode.Next;
+            if (tempNode == Head)
                 throw new ArgumentOutOfRangeException(nameof(index));
         }
-        return currentNode;
+        return tempNode;
     }
 
     /*
@@ -80,7 +90,36 @@ public class CircularSinglyLinkedList<T>
         if (Exists(data))
         {
             Head = new(data);
-            Size = 1;
+            Reset();
         }
+    }
+
+    public bool MoveNext()
+    {
+        if (Head is null)
+            return false;
+        if (CurrentNode is null)
+        {
+            CurrentNode = Head;
+        }
+        else
+        {
+            if (CurrentNode!.Next == Head)
+            {
+                return false;
+            }
+            CurrentNode = CurrentNode.Next;
+        }
+        return true;
+    }
+
+    public void Reset()
+    {
+        CurrentNode = null;
+    }
+
+    public void Dispose()
+    {
+        GC.SuppressFinalize(this);
     }
 }
