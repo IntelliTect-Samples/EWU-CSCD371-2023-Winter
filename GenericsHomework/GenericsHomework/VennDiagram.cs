@@ -10,7 +10,7 @@ public class VennDiagram<Circle>
         Title = title ?? "New Venn Diagram";
     }
 
-    override public string ToString()
+    public override string ToString()
     {
         string result = Title;
         if (Circles.Count > 0)

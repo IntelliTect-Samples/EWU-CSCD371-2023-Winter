@@ -8,7 +8,7 @@ public class Circle<T> where T : class
         Items = new();
         Label = label ?? "New Circle";
     }
-    override public string ToString()
+    public override string ToString()
     {
         string result = Label;
         if (Items.Count > 0)
