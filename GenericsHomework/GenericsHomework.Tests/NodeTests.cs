@@ -4,7 +4,7 @@ using System;
 namespace GenericsHomework.Tests
 {
     [TestClass]
-    public class NotesTests
+    public class NodesTests
     {
         [TestMethod]
         public void TestMethod1()
