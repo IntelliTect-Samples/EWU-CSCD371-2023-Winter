@@ -31,9 +31,9 @@ public class NodeTest
         //Act
 
         //Assert
-        Assert.AreEqual("Node Value: 30", node1.ToString());
-        Assert.AreEqual("Node Value: Some Value", node2.ToString());
-        Assert.AreEqual("Node Value: 3.14", node3.ToString());
+        Assert.AreEqual<string>("Node Value: 30", node1.ToString());
+        Assert.AreEqual<string>("Node Value: Some Value", node2.ToString());
+        Assert.AreEqual<string>("Node Value: 3.14", node3.ToString());
     }
 
     [TestMethod]
@@ -45,7 +45,7 @@ public class NodeTest
         //Act
 
         //Assert
-        Assert.AreEqual(node, node.Next);
+        Assert.AreEqual<Node<int>>(node, node.Next);
     }
 
     [TestMethod]
@@ -59,7 +59,7 @@ public class NodeTest
         node1.Append(88);
 
         // Assert
-        Assert.AreEqual(node1.Next.Data, node2.Data);
+        Assert.AreEqual<int>(node1.Next.Data, node2.Data);
     }
 
     [TestMethod]
@@ -73,7 +73,7 @@ public class NodeTest
         node1.Append(node2);
 
         // Assert
-        Assert.AreEqual(node1.Next, node2);
+        Assert.AreEqual<Node<int>>(node1.Next, node2);
     }
 
     [TestMethod]
@@ -82,7 +82,7 @@ public class NodeTest
         // Assemble
         Node<int> node1 = new(100);
         Node<int> node2 = new(200);
-        Node<int> node3= new(200);
+        Node<int> node3 = new(200);
         Node<int> node4 = new(300);
 
         // Act
