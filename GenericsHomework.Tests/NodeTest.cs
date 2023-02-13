@@ -115,4 +115,21 @@ public class NodeTest
         // Act
         node1.Append(node2);
     }
+
+    [TestMethod]
+    public void Clear_AfterListIsCleared_NextPointsToSelf()
+    {
+        // Assemble
+        Node<double> node1 = new(1.00);
+        Node<double> node2 = new(2.00);
+        Node<double> node3 = new(3.00);
+
+        // Act
+        node1.Append(node2);
+        node1.Append(node3);
+        node1.Clear();
+
+        // Assert
+        Assert.IsTrue(node1.Next == node1);
+    }
 }
