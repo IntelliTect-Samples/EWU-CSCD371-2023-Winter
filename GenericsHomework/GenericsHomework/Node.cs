@@ -1,41 +1,45 @@
-﻿using System;
-using System.Collections;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GenericsHomework.GenericsHomework;
-
-public class Node<T>
+﻿namespace GenericsHomework
 {
-    public T? Data { get; set; }
-    private int Size { get; set; }
-    public Node<T> Next { get; set; }
-    public Node(T? data)
+    public class Node<T>
     {
-        Data = data;
-    }
-    public override string ToString()
-    {
-        return Data?.ToString() ?? "null";
-    }
-    public void Append(T data)
-    {
-        Next = new Node<T>(data);
-    }
-    public bool existing(T data)
-    {
-        if(data is null)
+        public T? Data { get; set; }
+        private int Size { get; set; }
+        public Node<T> Next { get; set; }
+        public Node(T? data)
         {
-            throw new ArgumentNullException(nameof(data));
+            Data = data;
         }
-        Node<T> cur = Next;
-        while(cur != null) 
+        public override string ToString()
         {
-            if (cur.Data.Equals(data)) { return true; }
-            cur = cur.Next;
+            return Data?.ToString() ?? "null";
         }
-        return false;
-
+        public void Append(T data)
+        {
+            Next = new Node<T>(data);
+        }
+        public void Clear()
+        {
+            Next = this;
+            /*
+            * The garbage collector in .NET automatically reclaims the memory
+            * occupied by unused nodes in a circular linked list. In class the
+            * professor talked about the automatic garbage collector .NET
+            * uses so that is where our answer is coming from.
+            */
+        }
+        public bool existing(T data)
+        {
+            if (data is null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
+            Node<T> cur = Next;
+            while (cur != null)
+            {
+                if (cur.Data.Equals(data)) { return true; }
+                cur = cur.Next;
+            }
+            return false;
+        }
     }
 }
