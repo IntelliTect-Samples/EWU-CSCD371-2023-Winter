@@ -1,6 +1,7 @@
 ﻿namespace GenericsHomework;
 using System;
 using System.Collections.Generic;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 public class Node<T>
 {
@@ -28,6 +29,8 @@ public class Node<T>
             Next = newNode;
             newNode.Next = nextNode;
         }
+        else
+            throw new InvalidDataException($"The specified data {nameof(data)} already exists in the list!");
     }
 
     public void Append(Node<T> newNode)
@@ -39,6 +42,8 @@ public class Node<T>
             Next = newNode;
             newNode.Next = nextNode;
         }
+        else
+            throw new InvalidDataException($"The specified node {nameof(newNode)} already exists in the list!");
     }
 
     public void Clear()

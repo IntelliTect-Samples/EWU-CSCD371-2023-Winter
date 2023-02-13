@@ -92,4 +92,27 @@ public class NodeTest
         Assert.IsTrue(node1.Exists(node3.Data));
         Assert.IsFalse(node1.Exists(node4.Data));
     }
+
+    [TestMethod]
+    [ExpectedException(typeof(InvalidDataException))]
+    public void Append_IfDataExists_ThrowError()
+    {
+        // Asseble
+        Node<string> node1 = new("Hello!");
+
+        // Act
+        node1.Append("Hello!");
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(InvalidDataException))]
+    public void Append_IfNodeExists_ThrowError()
+    {
+        // Asseble
+        Node<string> node1 = new("Hello!");
+        Node<string> node2 = new("Hello!");
+
+        // Act
+        node1.Append(node2);
+    }
 }
