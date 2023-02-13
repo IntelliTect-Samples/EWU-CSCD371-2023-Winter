@@ -49,16 +49,47 @@ public class NodeTest
     }
 
     [TestMethod]
-    public void AppendNodeToExistingNode()
+    public void GivenData_AppendsNodeToExistingNode()
     {
         // Assemble
         Node<int> node1 = new(12);
-        NodeTest<string> node2 = new("Hello World!");
+        Node<int> node2 = new(88);
 
         // Act
-        node1.Append("Hello World!");
+        node1.Append(88);
 
         // Assert
-        Assert.IsEqual(node1.Next.Data, node2.Data);
+        Assert.AreEqual(node1.Next.Data, node2.Data);
+    }
+
+    [TestMethod]
+    public void GivenNode_AppendsNodeToExistingNode()
+    {
+        // Assemble
+        Node<int> node1 = new(12);
+        Node<int> node2 = new(88);
+
+        // Act
+        node1.Append(node2);
+
+        // Assert
+        Assert.AreEqual(node1.Next, node2);
+    }
+
+    [TestMethod]
+    public void Exists_IfNodeAlreadyExists_ReturnTrue()
+    {
+        // Assemble
+        Node<int> node1 = new(100);
+        Node<int> node2 = new(200);
+        Node<int> node3= new(200);
+        Node<int> node4 = new(300);
+
+        // Act
+        node1.Append(node2);
+
+        // Assert
+        Assert.IsTrue(node1.Exists(node3.Data));
+        Assert.IsFalse(node1.Exists(node4.Data));
     }
 }

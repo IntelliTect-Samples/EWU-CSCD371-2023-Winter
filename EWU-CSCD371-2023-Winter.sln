@@ -3,20 +3,29 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericsHomework", "GenericsHomework\GenericsHomework.csproj", "{DEAD0B28-3941-4B1A-8473-4BC44718A950}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenericsHomework", "GenericsHomework\GenericsHomework.csproj", "{DEAD0B28-3941-4B1A-8473-4BC44718A950}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericsHomework.Tests", "GenericsHomework.Tests\GenericsHomework.Tests.csproj", "{858696A6-A409-41A6-A137-83C94F45E533}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{DEAD0B28-3941-4B1A-8473-4BC44718A950}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DEAD0B28-3941-4B1A-8473-4BC44718A950}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DEAD0B28-3941-4B1A-8473-4BC44718A950}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DEAD0B28-3941-4B1A-8473-4BC44718A950}.Release|Any CPU.Build.0 = Release|Any CPU
+		{858696A6-A409-41A6-A137-83C94F45E533}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{858696A6-A409-41A6-A137-83C94F45E533}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{858696A6-A409-41A6-A137-83C94F45E533}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{858696A6-A409-41A6-A137-83C94F45E533}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0E0EDD8B-57EE-419E-9095-B04ADE6064C7}
 	EndGlobalSection
 EndGlobal
