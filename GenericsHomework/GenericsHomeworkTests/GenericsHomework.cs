@@ -6,11 +6,6 @@ namespace GenericsHomeworkTests;
 
 public class GenericsHomework
 {
-    [SetUp]
-    public void Setup()
-    {
-    }
-
     [Test]
     public void CanCreateNode()
     {
