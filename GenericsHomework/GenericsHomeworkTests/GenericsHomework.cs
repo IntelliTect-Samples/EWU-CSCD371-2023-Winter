@@ -2,10 +2,9 @@ using System.Data;
 using GenericsHomework;
 using NUnit.Framework;
 
-#pragma warning disable NUnit2005
 namespace GenericsHomeworkTests;
 
-public class Tests
+public class GenericsHomework
 {
     [SetUp]
     public void Setup()
