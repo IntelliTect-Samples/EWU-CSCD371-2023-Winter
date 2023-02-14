@@ -12,7 +12,6 @@ namespace GenericsHomework.Tests
             Node<int> node = new(4);
             node.Append(0);
 
-
             Assert.IsTrue(node.Exists(0));
         }
 
@@ -31,7 +30,6 @@ namespace GenericsHomework.Tests
         {
             Node<double> node = new(20.2);
             node.Append(20.2);
-
         }
 
         [TestMethod]
