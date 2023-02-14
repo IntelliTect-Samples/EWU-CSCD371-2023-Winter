@@ -1,5 +1,4 @@
-﻿using System.Data;
-using GenericsHomework;
+﻿using GenericsHomework;
 using NUnit.Framework;
 
 #pragma warning disable NUnit2005
@@ -8,11 +7,17 @@ namespace GenericsHomeworkTests;
 public class GenericsHomeworkICollection
 {
     [Test]
-    public void NotReadOnly() => Assert.False(new Node<string>("test").IsReadOnly);
+    public void NotReadOnly()
+    {
+        Assert.False(new Node<string>("test").IsReadOnly);
+    }
 
     [Test]
-    public void CountsSizeOne() => Assert.AreEqual(1, new Node<string>("test").Count);
-    
+    public void CountsSizeOne()
+    {
+        Assert.AreEqual(1, new Node<string>("test").Count);
+    }
+
     [Test]
     public void CountGreaterThanOne()
     {
@@ -37,7 +42,7 @@ public class GenericsHomeworkICollection
         var node = new Node<string>(item);
         Assert.True(node.Contains(item));
     }
-    
+
     [Test]
     public void ContainsDoesntFindMissingItem()
     {

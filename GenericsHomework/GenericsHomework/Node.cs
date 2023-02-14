@@ -7,7 +7,10 @@ public class Node<T> : ICollection<T>
 {
     private Node<T>? _next;
 
-    public Node(T item) => Item = item;
+    public Node(T item)
+    {
+        Item = item;
+    }
 
     private Node(T item, Node<T> next)
     {
@@ -21,11 +24,11 @@ public class Node<T> : ICollection<T>
         private set => _next = value;
     }
 
-    public T Item { get; private set; }
+    public T Item { get; }
 
     public IEnumerator<T> GetEnumerator()
     {
-        throw new NotImplementedException();
+        return new NodeEnum(this);
     }
 
     IEnumerator IEnumerable.GetEnumerator()
@@ -33,10 +36,13 @@ public class Node<T> : ICollection<T>
         return GetEnumerator();
     }
 
-    public void Add(T item) => Append(item);
+    public void Add(T item)
+    {
+        Append(item);
+    }
 
 
-    // We don't need to worry about a circular loop
+    // We don't need to worry about a circular loop not being garbage collected
     // because we set `Next` to `this` for every `Node`, breaking the loop
     public void Clear()
     {
@@ -45,7 +51,10 @@ public class Node<T> : ICollection<T>
         if (node != this) Next.Clear();
     }
 
-    public bool Contains(T item) => Exists(item);
+    public bool Contains(T item)
+    {
+        return Exists(item);
+    }
 
     public void CopyTo(T[] array, int arrayIndex)
     {
@@ -107,5 +116,41 @@ public class Node<T> : ICollection<T>
         return Item?.ToString();
     }
 
-    public bool Exists(T item) => Equals(item, Item) || (Next != this && Next.Exists(item));
+    public bool Exists(T item)
+    {
+        return Equals(item, Item) || (Next != this && Next.Exists(item));
+    }
+
+    public class NodeEnum : IEnumerator<T>
+    {
+        private readonly Node<T> Home;
+        private Node<T> _current;
+
+        public NodeEnum(Node<T> current)
+        {
+            _current = current;
+            Home = current;
+        }
+
+        public bool MoveNext()
+        {
+            if (_current.Next == Home) return false;
+            _current = _current.Next;
+            return true;
+        }
+
+        public void Reset()
+        {
+            _current = Home;
+        }
+
+        public T Current => _current.Item;
+
+        object IEnumerator.Current => Current;
+
+        public void Dispose()
+        {
+            _current.Remove(Current);
+        }
+    }
 }

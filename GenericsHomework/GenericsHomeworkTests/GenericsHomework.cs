@@ -22,7 +22,7 @@ public class GenericsHomework
         var node = new Node<string>(item);
         Assert.True(node.Exists(item));
     }
-    
+
     [Test]
     public void ExistsDoesntFindMissingItem()
     {
