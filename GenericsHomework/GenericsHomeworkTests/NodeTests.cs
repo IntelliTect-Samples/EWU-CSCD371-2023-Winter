@@ -11,7 +11,7 @@ namespace GenericsHomework.Tests
         {
             Node<int> node = new Node<int>(10);
             Assert.IsNotNull(node);
-            Assert.AreEqual(node, node.Next);
+            Assert.AreEqual<Node<int>>(node, node.Next);
         }
 
         [TestMethod]
@@ -19,7 +19,7 @@ namespace GenericsHomework.Tests
         {
             string testValue = "Test String";
             Node<string> node = new Node<string>(testValue);
-            Assert.AreEqual(testValue, node.ToString());
+            Assert.AreEqual<string>(testValue, node.ToString());
         }
 
         [TestMethod]
@@ -27,7 +27,7 @@ namespace GenericsHomework.Tests
         {
             Node<int> node = new(15);
             node.Clear();
-            Assert.AreEqual(node, node.Next);
+            Assert.AreEqual<Node<int>>(node, node.Next);
         }
 
         [TestMethod]
@@ -39,8 +39,8 @@ namespace GenericsHomework.Tests
 
             node.Clear();
             // Check if all nodes point to themself
-            Assert.AreEqual(node, node.Next);
-            Assert.AreEqual(node2, node2.Next);
+            Assert.AreEqual<Node<int>>(node, node.Next);
+            Assert.AreEqual<Node<int>>(node2, node2.Next);
         }
 
         [TestMethod]
@@ -50,8 +50,8 @@ namespace GenericsHomework.Tests
             node.Append(2); // Create a second node
             var node2 = node.Next;
 
-            Assert.AreEqual(node2, node.Next);
-            Assert.AreEqual(node, node2.Next);
+            Assert.AreEqual<Node<int>>(node2, node.Next);
+            Assert.AreEqual<Node<int>>(node, node2.Next);
         }
 
         [TestMethod]
