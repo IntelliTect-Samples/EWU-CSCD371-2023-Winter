@@ -56,23 +56,27 @@ public class Node<T> : ICollection<T>
         {
             array[arrayIndex++] = node.Item;
             node = node.Next;
-        } while (node.Next != node);
+        } while (node != this);
     }
 
     public bool Remove(T item)
     {
         var node = this;
-        while (true)
+        var prevNode = this;
+        while (prevNode.Next != node) prevNode = node.Next;
+        do
         {
             if (Equals(node.Item, item))
             {
-                node.Item = node.Next.Item;
-                node.Next = node.Next;
+                prevNode.Next = node.Next;
                 return true;
             }
 
-            if (node.Next == node) return false;
-        }
+            node = node.Next;
+            prevNode = prevNode.Next;
+        } while (node != this);
+
+        return false;
     }
 
     public int Count
@@ -81,7 +85,7 @@ public class Node<T> : ICollection<T>
         {
             int i = 1;
             var node = this;
-            while (node.Next != node)
+            while (node.Next != this)
             {
                 node = node.Next;
                 i++;

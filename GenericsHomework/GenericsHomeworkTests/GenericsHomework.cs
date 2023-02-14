@@ -2,6 +2,7 @@ using System.Data;
 using GenericsHomework;
 using NUnit.Framework;
 
+#pragma warning disable NUnit2005
 namespace GenericsHomeworkTests;
 
 public class GenericsHomework
@@ -20,6 +21,14 @@ public class GenericsHomework
         string item = "test";
         var node = new Node<string>(item);
         Assert.True(node.Exists(item));
+    }
+    
+    [Test]
+    public void ExistsDoesntFindMissingItem()
+    {
+        string item = "test";
+        var node = new Node<string>(item);
+        Assert.False(node.Exists("not_item"));
     }
 
     [Test]
