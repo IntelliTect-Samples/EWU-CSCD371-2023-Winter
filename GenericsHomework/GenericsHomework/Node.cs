@@ -74,7 +74,7 @@ public class Node<T> : ICollection<T>, IEnumerable<T>
 
     public void Add(T item)
     {
-        Append(List.Head, item);
+        Append(List.Head!, item);
         /*Node<T> end = this;
         while(end.Next != this)
         {

@@ -14,7 +14,7 @@ public class CircularSinglyLinkedList<T> : IEnumerator<T>
     {
         get; set;
     }
-    public T Current => CurrentNode.Data;
+    public T Current => CurrentNode!.Data;
 
     object IEnumerator.Current => CurrentNode!;
 
