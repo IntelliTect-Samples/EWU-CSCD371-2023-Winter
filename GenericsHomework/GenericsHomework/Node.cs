@@ -20,11 +20,14 @@ namespace GenericsHomework
 
         public Node<T> Append(T value)
         {
-            if (value != null)
-            {
-                Next.Append(value);
-            }
-            return this;
+            if (Exists(value))
+                    throw new ArgumentException();
+             var next = Next;
+             Next = new Node<T>(value)
+             {
+               Next = next
+             };
+            return Next;
         }
 
         public void Clear()
@@ -37,7 +40,10 @@ namespace GenericsHomework
             Next = this;
             next.Clear();
         }
-
+        public bool Contains(T value)
+        {
+            return Exists(value);
+        }
         public bool Exists(T value)
         {
             var currentNode = this;
