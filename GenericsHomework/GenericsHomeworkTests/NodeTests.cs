@@ -9,7 +9,7 @@ namespace GenericsHomework.Tests
         [TestMethod]
         public void Node_Constuctor_Success()
         {
-            Node<int> node = new Node<int>(10);
+            Node<int> node = new(10);
             Assert.IsNotNull(node);
             Assert.AreEqual<Node<int>>(node, node.Next);
         }
@@ -18,7 +18,7 @@ namespace GenericsHomework.Tests
         public void Node_ToString_Success()
         {
             string testValue = "Test String";
-            Node<string> node = new Node<string>(testValue);
+            Node<string> node = new(testValue);
             Assert.AreEqual<string>(testValue, node.ToString());
         }
 
