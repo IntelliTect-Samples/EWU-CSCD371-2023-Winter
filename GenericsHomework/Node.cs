@@ -21,7 +21,6 @@ public class Node<T> where T : notnull
     {
         if (Exists(data)) throw new InvalidDataException($"The specified data {nameof(data)} already exists in the list!");
 
-
         Node<T> newNode = new(data);
         newNode.Next = Next;
         Next = newNode;
@@ -30,19 +29,22 @@ public class Node<T> where T : notnull
 
     public void Append(Node<T> newNode)
     {
-
         if (Exists(newNode.Data)) throw new InvalidDataException($"The specified data {nameof(newNode)} already exists in the list!");
 
-        Node<T> nextNode = Next;
+        newNode.Next = Next;
         Next = newNode;
-        newNode.Next = nextNode;
     }
 
     public void Clear()
     {
-        // We are going through the list and setting all the nodes to point to themselves.
-        // We have to do this because `Next` cannot be null. Otherwise we'd just set `Next` to null for all nodes.
-        // COMMENT ABOUT GC
+        /*
+            We are going through the list and setting all the nodes to point to themselves.
+            We have to do this because `Next` cannot be null. Otherwise we'd just set `Next` to null for all nodes.
+            
+            This works because the garbage collector looks to see if there are any root references to each object.
+            Since the only reference to each node will be itself, it is technically out of scope and doesn't have any root references,
+            and therefore will be garbage collected.
+        */
         Node<T> currentNode = this;
         Node<T> nextNode;
 
