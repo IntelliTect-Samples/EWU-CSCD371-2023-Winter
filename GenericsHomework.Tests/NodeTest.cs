@@ -1,11 +1,10 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace GenericsHomework.Tests;
 
 [TestClass]
 public class NodeTest
 {
     [TestMethod]
-    public void CreateNode_ContructorTakesMultipleTypes_ReturnsNotNull()
+    public void CreateNode_ConstructorTakesMultipleTypes_ReturnsNotNull()
     {
         //Assemble
         Node<int> node1 = new(30);
@@ -31,9 +30,9 @@ public class NodeTest
         //Act
 
         //Assert
-        Assert.AreEqual<string>("Node Value: 30", node1.ToString());
-        Assert.AreEqual<string>("Node Value: Some Value", node2.ToString());
-        Assert.AreEqual<string>("Node Value: 3.14", node3.ToString());
+        Assert.AreEqual<string>("Node value: 30", node1.ToString());
+        Assert.AreEqual<string>("Node value: Some Value", node2.ToString());
+        Assert.AreEqual<string>("Node value: 3.14", node3.ToString());
     }
 
     [TestMethod]
@@ -49,7 +48,7 @@ public class NodeTest
     }
 
     [TestMethod]
-    public void GivenData_AppendsNodeToExistingNode()
+    public void Appends_GivenData_AppendsNodeToExistingNode()
     {
         // Assemble
         Node<int> node1 = new(12);
@@ -90,6 +89,21 @@ public class NodeTest
 
         // Assert
         Assert.IsTrue(node1.Exists(node3.Data));
+    }
+
+    [TestMethod]
+    public void Exists_IfNodeAlreadyExists_ReturnFalse()
+    {
+        // Assemble
+        Node<int> node1 = new(100);
+        Node<int> node2 = new(200);
+        Node<int> node3 = new(200);
+        Node<int> node4 = new(300);
+
+        // Act
+        node1.Append(node2);
+
+        // Assert
         Assert.IsFalse(node1.Exists(node4.Data));
     }
 
@@ -97,7 +111,7 @@ public class NodeTest
     [ExpectedException(typeof(InvalidDataException))]
     public void Append_IfDataExists_ThrowError()
     {
-        // Asseble
+        // Assemble
         Node<string> node1 = new("Hello!");
 
         // Act
@@ -108,7 +122,7 @@ public class NodeTest
     [ExpectedException(typeof(InvalidDataException))]
     public void Append_IfNodeExists_ThrowError()
     {
-        // Asseble
+        // Assemble
         Node<string> node1 = new("Hello!");
         Node<string> node2 = new("Hello!");
 

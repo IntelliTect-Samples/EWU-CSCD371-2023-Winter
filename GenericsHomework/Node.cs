@@ -1,13 +1,11 @@
 ﻿namespace GenericsHomework;
 using System;
-using System.Collections.Generic;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
-public class Node<T>
+public class Node<T> where T : notnull
 {
     public T Data { get; set; }
-    public Node<T> Next { get => _Next; private set => _Next = value ?? throw new ArgumentNullException(nameof(value)); }
-    private Node<T> _Next;
+    public Node<T> Next { get => _Next!; private set => _Next = value ?? throw new ArgumentNullException(nameof(value)); }
+    private Node<T>? _Next;
     public Node(T data)
     {
         Data = data;
@@ -16,48 +14,43 @@ public class Node<T>
 
     public override string ToString()
     {
-        return $"Node Value: {Data}";
+        return $"Node value: {Data}";
     }
 
     public void Append(T data)
     {
-        if (!Exists(data))
-        {
-            Node<T> newNode = new(data);
-            Node<T> nextNode = Next;
+        if (Exists(data)) throw new InvalidDataException($"The specified data {nameof(data)} already exists in the list!");
 
-            Next = newNode;
-            newNode.Next = nextNode;
-        }
-        else
-            throw new InvalidDataException($"The specified data {nameof(data)} already exists in the list!");
+
+        Node<T> newNode = new(data);
+        newNode.Next = Next;
+        Next = newNode;
+
     }
 
     public void Append(Node<T> newNode)
     {
-        if (!Exists(newNode.Data))
-        {
-            Node<T> nextNode = Next;
 
-            Next = newNode;
-            newNode.Next = nextNode;
-        }
-        else
-            throw new InvalidDataException($"The specified node {nameof(newNode)} already exists in the list!");
+        if (Exists(newNode.Data)) throw new InvalidDataException($"The specified data {nameof(newNode)} already exists in the list!");
+
+        Node<T> nextNode = Next;
+        Next = newNode;
+        newNode.Next = nextNode;
     }
 
     public void Clear()
     {
         // We are going through the list and setting all the nodes to point to themselves.
         // We have to do this because `Next` cannot be null. Otherwise we'd just set `Next` to null for all nodes.
-        Node<T> currNode = this;
+        // COMMENT ABOUT GC
+        Node<T> currentNode = this;
         Node<T> nextNode;
 
-        while (currNode.Next != this)
+        while (currentNode.Next != this)
         {
-            nextNode = currNode.Next;
-            currNode.Next = currNode;
-            currNode = nextNode;
+            nextNode = currentNode.Next;
+            currentNode.Next = currentNode;
+            currentNode = nextNode;
         }
 
         Next = this;
@@ -68,14 +61,14 @@ public class Node<T>
         if (data is null)
             throw new ArgumentNullException(nameof(data));
 
-        Node<T> currNode = this;
+        Node<T> currrentNode = this;
         do
         {
-            if (currNode.Data is not null && currNode.Data.Equals(data))
+            if (currrentNode.Data is not null && currrentNode.Data.Equals(data))
                 return true;
 
-            currNode = currNode.Next;
-        } while (currNode != this);
+            currrentNode = currrentNode.Next;
+        } while (currrentNode != this);
 
         return false;
     }
