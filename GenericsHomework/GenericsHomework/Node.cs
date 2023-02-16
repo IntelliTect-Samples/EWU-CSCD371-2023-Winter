@@ -5,9 +5,12 @@
         public T? Data { get; set; }
         private int Size { get; set; }
         public Node<T> Next { get; set; }
+
         public Node(T? data)
         {
-            Data = data;
+
+            this.Data = data;
+            this.Next = this;
         }
         public override string ToString()
         {
@@ -15,7 +18,12 @@
         }
         public void Append(T data)
         {
-            Next = new Node<T>(data);
+            Node<T> cur = this;
+            while (cur.Next != this) 
+            {
+                cur = cur.Next;
+            }
+            cur.Next = new Node<T>(data); 
         }
         public void Clear()
         {
@@ -34,7 +42,8 @@
                 throw new ArgumentNullException(nameof(data));
             }
             Node<T> cur = Next;
-            while (cur != null)
+            Node<T> head = this;
+            while (cur != null && cur!=this)
             {
                 if (cur.Data.Equals(data)) { return true; }
                 cur = cur.Next;
