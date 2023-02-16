@@ -2,10 +2,10 @@
 
 public class Node<T>
 {
-    public T Value { get; set; }
+    public T? Value { get; set; }
     public Node<T> Next { get; private set; }
 
-    public Node(T value)
+    public Node(T? value)
     {
         Value = value;
         Next = this;
@@ -16,6 +16,8 @@ public class Node<T>
         return Value?.ToString() ?? "null";
     }
 
+    // Clear should set every node in the list to point to itself.
+    // This will release the allocated memory because we will remove the circular dependency
     public void Clear()
     {
         Node<T> current = this;
@@ -30,10 +32,10 @@ public class Node<T>
     public void Append(T value)
     {
         if (Exists(value))
-            throw new ArgumentException("Value already exists in the list", nameof(value));
+            throw new ArgumentException("Value already exists in the list ", nameof(value));
 
         // Create a new node and insert it between this and this.Next
-        Node<T> newNode = new Node<T>(value)
+        Node<T> newNode = new(value)
         {
             Next = this.Next
         };

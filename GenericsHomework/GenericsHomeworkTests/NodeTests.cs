@@ -22,6 +22,8 @@ namespace GenericsHomework.Tests
             Assert.AreEqual<string>(testValue, node.ToString());
         }
 
+        // Test Clear with only one node in the circular list
+        // It is testing that node.Next continue to point to self instead of setting to null
         [TestMethod]
         public void Node_ClearOneNode_Success()
         {
@@ -30,6 +32,8 @@ namespace GenericsHomework.Tests
             Assert.AreEqual<Node<int>>(node, node.Next);
         }
 
+        // Test Clear with multiple nodes in the list to make sure
+        // all nodes are traversed and .Next is set to itself
         [TestMethod]
         public void Node_ClearTwoNodes_Success()
         {
