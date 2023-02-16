@@ -18,16 +18,25 @@
         }
         public void Append(T data)
         {
+            if (data == null) return;
+            if(existing(data) == true)
+            {
+                throw new ArgumentException();
+            }
             Node<T> cur = this;
-            while (cur.Next != this) 
+            while (cur.Next != this)
             {
                 cur = cur.Next;
             }
-            cur.Next = new Node<T>(data); 
+            Node<T> newNode = new Node<T>(data);
+            newNode.Next = this;
+            cur.Next = newNode;
+            this.Size++;
         }
         public void Clear()
         {
             Next = this;
+            this.Size = 0;
             /*
             * The garbage collector in .NET automatically reclaims the memory
             * occupied by unused nodes in a circular linked list. In class the
@@ -43,7 +52,7 @@
             }
             Node<T> cur = Next;
             Node<T> head = this;
-            while (cur != null && cur!=this)
+            while (cur != null && cur != this)
             {
                 if (cur.Data.Equals(data)) { return true; }
                 cur = cur.Next;

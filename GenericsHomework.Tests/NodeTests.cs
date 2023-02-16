@@ -17,8 +17,8 @@ namespace GenericsHomework
             node.Append(20);
             node.Append(30);
 
-            Assert.AreEqual(20, node.Next.Data);
-            Assert.AreEqual(30, node.Next.Next.Data);
+            Assert.AreEqual<int>(20, node.Next.Data);
+            Assert.AreEqual<int>(30, node.Next.Next.Data);
         }
 
         [TestMethod]
@@ -44,11 +44,25 @@ namespace GenericsHomework
         }
 
         [TestMethod]
+        public void TestAppendThrowsArgumentExceptionIfDataAlreadyExists()
+        {
+            // Arrange
+            var list = new Node<int>(20);
+            list.Append(30);
+
+            // Act and Assert
+            Assert.ThrowsException<ArgumentException>(() =>
+            {
+                list.Append(30);
+            });
+        }
+
+        [TestMethod]
         public void TestToStringMethod()
         {
             Node<int> node = new Node<int>(10);
 
-            Assert.AreEqual("10", node.ToString());
+            Assert.AreEqual<string>("10", node.ToString());
         }
     }
 }
