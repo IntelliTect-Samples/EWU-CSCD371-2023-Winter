@@ -16,9 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="GenericsHomeworkTests.csproj" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\GenericsHomework\GenericsHomework.csproj" />
   </ItemGroup>
 </Project>
