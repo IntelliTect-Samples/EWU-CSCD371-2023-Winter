@@ -1,5 +1,19 @@
 ﻿using System.Runtime.CompilerServices;
-
+/*
+Given there is a circular list of items,
+provide a comment to indicate whether you need to
+worry about garbage collection because all the items
+point to each other and therefore may never be garbage
+collected. 
+-> No, I do not think you need to worry about
+garbage collection of a linked list.
+As long as the clear, next, and exist methods are implemented
+correctly.
+If they were not implemented correctly, I could
+see where that may become an issue if the
+pointer is pointing to something that should no longer
+exist. 
+*/
 namespace GenericsHomework;
 
 public class Node<T>
