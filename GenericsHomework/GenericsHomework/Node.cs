@@ -41,23 +41,20 @@
 
         public bool Exists(T value)
         {
+            bool result = false;
             Node<T> curr = Next;
-            while(!curr.Equals(this))
+            do
             {
-                if(curr.Value is not null && curr.Value.Equals(value))
+                if (curr.Value is not null && curr.Value.Equals(value))
                 {
-                    return true;
+                    result = true;
+                    break;
                 }
-                else
-                {
-                    curr = curr.Next;
-                }
-            }
-            if (curr.Value is not null && curr.Value.Equals(value))
-            {
-                return true;
-            }
-            return false;
+                curr = curr.Next;
+            } while (!curr.Equals(this));
+
+
+            return result;
         }
     }
 }
