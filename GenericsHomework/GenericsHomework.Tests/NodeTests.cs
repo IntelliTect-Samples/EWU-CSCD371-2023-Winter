@@ -40,6 +40,23 @@ namespace GenericsHomework.Tests
         }
 
         [TestMethod]
+        public void Append_GivenMultipleValues_CreatesNewNodes()
+        {
+            Node<int> node = new(value: 1);
+            node.Append(2);
+            node.Append(3);
+            node.Append(4);
+
+            Assert.AreEqual<int>(1, node.Value);
+            node = node.Next;
+            Assert.AreEqual<int>(4, node.Value);
+            node = node.Next;
+            Assert.AreEqual<int>(3, node.Value);
+            node = node.Next;
+            Assert.AreEqual<int>(2, node.Value);
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void Append_GivenDuplicateValue_ThrowsException()
         {
