@@ -13,16 +13,17 @@ public class NodeTests
         Assert.AreEqual<string>(value.ToString(), test.ToString());
 
     }
-    /*
     [TestMethod]
-    public void NodeAppendPass()
+    public void NodeAppendAndNextPass()
     {
-        Node<string> TestNode = new("new string");
-        Assert.IsNotNull(TestNode);
-        TestNode.Append("test node");
-        Assert.IsTrue(TestNode.Exists("test node"));
+        string value = "jim";
+        string value1 = "pam";
+
+        Node<string> test = new(value);
+        Node<string> test1 = test.Append(value1);
+
+        Assert.AreEqual(test.Next, test1);
     }
-    */
     [TestMethod]
     public void NodeStringPass()
     {
@@ -49,5 +50,33 @@ public class NodeTests
 
         Assert.AreEqual<string>(value.ToString(), test.ToString());
 
+    }
+    [TestMethod]
+    public void NodeClearPass()
+    {
+        string value = "jim";
+        string value1 = "pam";
+        string value2 = "kelly";
+
+        Node<string> test = new(value);
+        test.Append(value1);
+        test.Append(value2);
+        test.Clear();
+
+        Assert.AreEqual(test, test.Next);
+    }
+    [TestMethod]
+    public void NodeExistsPass()
+    {
+        string value = "jim";
+        string value1 = "pam";
+        string value2 = "kelly";
+
+        Node<string> test = new(value);
+        test.Append(value1);
+        test.Append(value2);
+        test.Clear();
+
+        Assert.IsTrue(test.Exists("jim"));
     }
 }

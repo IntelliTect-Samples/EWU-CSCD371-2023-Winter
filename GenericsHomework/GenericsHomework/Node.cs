@@ -1,66 +1,71 @@
 ﻿using System.Runtime.CompilerServices;
 
-namespace GenericsHomework
+namespace GenericsHomework;
+
+public class Node<T>
 {
-    public class Node<T>
+    public T Value { get { return valueActual; } }
+
+    public Node<T> next;
+
+    public T valueActual;
+
+    public Node(T value)
     {
-        public T Value { get; }
-
-        public Node<T> Next { get; private set; }
-        public Node(T value)
-        {
-            Value = value;
-            Next = this;
-        }
-
-        public override string ToString()
-        {
-            return Value?.ToString() ?? "null";
-        }
-
-        public Node<T> Append(T value)
-        {
-            if (Exists(value))
-                    throw new ArgumentException();
-             var next = Next;
-             Next = new Node<T>(value)
-             {
-               Next = next
-             };
-            return Next;
-        }
-
-        public void Clear()
-        {
-            if (Next == this)
-            {
-                return;
-            }
-            var next = Next;
-            Next = this;
-            next.Clear();
-        }
-        public bool Contains(T value)
-        {
-            return Exists(value);
-        }
-        public bool Exists(T value)
-        {
-            var currentNode = this;
-            while (currentNode != null && value != null)
-            {
-                if (currentNode.Equals(value))
-                {
-                    return true;
-                }
-                else if (currentNode.Next != null)
-                {
-                    currentNode = currentNode.Next;
-                }
-            }
-            return false;
-        }
-
+        valueActual = value;
+        next = this;
     }
+    public Node<T> Next
+    {
+        get { return next; }
+        private set { next = value; }
+    }
+    public override string ToString()
+    {
+        return valueActual?.ToString() ?? "is null";
+    }
+
+    public Node<T> Append(T value)
+    {
+        if (Exists(value))
+        {
+            throw new ArgumentException("Duplicate value.");
+        }
+        Node<T> added = new(value);
+        added.Next = Next;
+        Next = added;
+        return added;
+    }
+
+    public void Clear()
+    {
+        var node = this.Next;
+
+        while (node.Next != this)
+        {
+            node = node.Next;
+        }
+        node.Next = Next;
+        Next = this;
+    }
+    public bool Exists(T value)
+    {
+        var currentNode = this;
+        do
+        {
+        if (currentNode.Value is null && value is null)
+        {
+            return true;
+        }
+        else if (currentNode.Value!.Equals(value))
+        {
+            return true;
+        }
+        currentNode = currentNode.Next;
+        }
+        while (currentNode != this);
+        return false;
+    }
+
 }
 
