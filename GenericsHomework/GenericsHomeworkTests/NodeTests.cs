@@ -64,7 +64,7 @@ namespace GenericsHomework.Tests
             Node<int> node = new(1);
             node.Append(2); // Create a second node
             var node2 = node.Next;
-            Assert.ThrowsException<ArgumentException>(()=>node2.Append(1),
+            Assert.ThrowsException<ArgumentException>(() => node2.Append(1),
                 "Value already exists in the list");
         }
 
@@ -78,6 +78,76 @@ namespace GenericsHomework.Tests
             Assert.IsTrue(node.Exists(1));
             Assert.IsTrue(node.Exists(2));
             Assert.IsFalse(node.Exists(3));
+        }
+
+        // Extra credit: Tests
+        [TestMethod]
+        public void Node_Count_Success()
+        {
+            Node<int> node = new(1);
+            node.Append(2); // Create a second node
+            Assert.AreEqual(2, node.Count());
+        }
+
+        [TestMethod()]
+        public void Node_IsReadOnly_False()
+        {
+            Node<int> node = new(1);
+            Assert.IsFalse(node.IsReadOnly);
+        }
+
+        [TestMethod()]
+        public void AddTest()
+        {
+            Node<int> node = new(1);
+            node.Add(2);
+            var node2 = node.Next;
+            Assert.AreEqual<Node<int>>(node2, node.Next);
+            Assert.AreEqual<Node<int>>(node, node2.Next);
+        }
+
+        [TestMethod()]
+        public void ContainsTest()
+        {
+            Node<int> node = new(1);
+            Assert.IsTrue(node.Contains(1));
+            Assert.IsFalse(node.Contains(2));
+        }
+
+        [TestMethod()]
+        public void CopyToTest()
+        {
+            Node<int> node = new(1);
+            node.Add(2);
+            node.Add(3);
+            int[] array = new int[3];
+            node.CopyTo(array, 0);
+            CollectionAssert.AreEqual(array, new int[] {1,3,2});   
+        }
+
+        [TestMethod()]
+        public void RemoveTest()
+        {
+            Node<int> node = new(1);
+            node.Add(2);
+            node.Add(3);
+            Assert.IsTrue(node.Remove(2));
+            Assert.IsFalse(node.Remove(2));
+            Assert.IsFalse(node.Remove(1)); // Cannot remove head of the list
+        }
+
+        [TestMethod()]
+        public void GetEnumeratorTest()
+        {
+            Node<int> node = new(1);
+            node.Add(2);
+            node.Add(3);
+            string items = "";
+            foreach(int item in node)
+            {
+                items += item.ToString() + " ";
+            }
+            Assert.AreEqual("1 3 2 ", items);
         }
     }
 }
