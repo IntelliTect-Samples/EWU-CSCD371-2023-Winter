@@ -5,6 +5,7 @@ namespace PrincessBrideTrivia
 {
     public class Program
     {
+        
         public static void Main(string[] args)
         {
             string filePath = GetFilePath();
@@ -24,7 +25,12 @@ namespace PrincessBrideTrivia
 
         public static string GetPercentCorrect(int numberCorrectAnswers, int numberOfQuestions)
         {
-            return (numberCorrectAnswers / numberOfQuestions * 100) + "%";
+            // fixed calculation error and added decimal rounding to result
+            double rawPercentCorrent = ((double)numberCorrectAnswers / numberOfQuestions * 100);
+            decimal roundedPercentCorrect = Math.Round((decimal)rawPercentCorrent);
+
+            return Decimal.Round(roundedPercentCorrect) + "%";
+            
         }
 
         public static bool AskQuestion(Question question)
@@ -32,6 +38,14 @@ namespace PrincessBrideTrivia
             DisplayQuestion(question);
 
             string userGuess = GetGuessFromUser();
+
+            // Check if userGuess is in range of answers array
+            while (!IsValidGuess(userGuess, question))
+            {
+                Console.WriteLine("Invalid guess. Please try again.");
+                userGuess = GetGuessFromUser();
+            }
+
             return DisplayResult(userGuess, question);
         }
 
@@ -39,6 +53,21 @@ namespace PrincessBrideTrivia
         {
             return Console.ReadLine();
         }
+
+        // added IsValidGuess method
+        public static bool IsValidGuess(string userGuess, Question question)
+         {
+            // check if user guess is a number, 
+            if (!int.TryParse(userGuess, out int guess))
+            {
+                return false;
+            } 
+            else 
+            { 
+                // check if user guess is in range of answers array
+                return guess > 0 && guess <= question.Answers.Length;
+            }
+         }
 
         public static bool DisplayResult(string userGuess, Question question)
         {
@@ -89,6 +118,8 @@ namespace PrincessBrideTrivia
                 question.Answers[1] = answer2;
                 question.Answers[2] = answer3;
                 question.CorrectAnswerIndex = correctAnswerIndex;
+
+                questions[i] = question; //  added question assignment to array
             }
             return questions;
         }

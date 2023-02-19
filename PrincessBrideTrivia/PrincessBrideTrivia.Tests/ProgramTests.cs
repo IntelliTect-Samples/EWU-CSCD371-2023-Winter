@@ -72,6 +72,7 @@ namespace PrincessBrideTrivia.Tests
             Assert.AreEqual(expectedString, percentage);
         }
 
+        
 
         private static void GenerateQuestionsFile(string filePath, int numberOfQuestions)
         {
@@ -86,5 +87,66 @@ namespace PrincessBrideTrivia.Tests
                 File.AppendAllLines(filePath, lines);
             }
         }
+
+         [TestMethod]
+        public void IsValidGuess_ValidNumber_ReturnsTrue()
+        {
+            // Arrange 
+            string userGuess = "2";
+            Question question = new Question();
+            question.Answers = new string[] { "Answer 1", "Answer 2", "Answer 3" };
+
+            // Act 
+            bool result = Program.IsValidGuess(userGuess, question);
+
+            // Assert 
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void IsValidGuess_InvalidNumber_ReturnsFalse()
+        {
+            // Arrange 
+            string userGuess = "4";  
+            Question question = new Question(); 
+            question.Answers = new string[] { "Answer 1", "Answer 2", "Answer 3" };
+
+            // Act 
+            bool result = Program.IsValidGuess(userGuess, question);
+
+            // Assert 
+            Assert.IsFalse(result);    													   
+        }
+
+        [TestMethod]
+        public void IsValidGuess_InvalidCharacter_ReturnsFalse()
+        {
+            // Arrange 
+            string userGuess = "a";  
+            Question question = new Question(); 
+            question.Answers = new string[] { "Answer 1", "Answer 2", "Answer 3" };
+
+            // Act 
+            bool result = Program.IsValidGuess(userGuess, question);
+
+            // Assert 
+            Assert.IsFalse(result);    		
+        }
+
+        [TestMethod]
+        public void IsValidGuess_InvalidCharacterSymbol_ReturnsFalse()
+        {
+            // Arrange 
+            string userGuess = "!"; 
+            Question question = new Question(); 
+            question.Answers = new string[] { "Answer 1", "Answer 2", "Answer 3" };
+
+            // Act 
+            bool result = Program.IsValidGuess(userGuess, question);
+
+            // Assert 
+            Assert.IsFalse(result);
+        }
     }
 }
+
