@@ -8,5 +8,23 @@ namespace Calculate
 {
     public class Program
     {
+        public static void Main(string[] args) 
+        {
+            Program prog = new()
+            {
+                WriteLine = Console.WriteLine,
+                ReadLine = Console.ReadLine!
+            };
+            
+            string test = prog.ReadLine!();
+            prog.WriteLine!(test);
+
+        }
+        public Action<string>? WriteLine { get; init; }
+        public Func<string>? ReadLine { get; init; }
+        public Program() 
+        {
+            
+        }
     }
 }
