@@ -8,11 +8,14 @@ namespace Calculate
 {
     public class Calculator
     {
-        public Calculator() 
-        {
-            MathematicalOperations = new Dictionary<char, Func<float, float, float>>();
-        }
-        public IReadOnlyDictionary<char,Func<float,float,float>>? MathematicalOperations { get; }
+        public IReadOnlyDictionary<char, Func<float, float, float>>? MathematicalOperations 
+            { get; } = new Dictionary<char, Func<float, float, float>>
+            {
+                {'+', Add },
+                {'-', Subtract },
+                {'*', Multiply },
+                {'/', Divide }
+            };
         public static float Add(float leftOperand, float rightOperand) 
         {
             return leftOperand + rightOperand;
@@ -34,21 +37,30 @@ namespace Calculate
             if (equation.Split(" ") is [string { Length: > 0 } leftOperand, 
                 string { Length: > 0} operatr, string { Length: > 0} rightOperand]) 
             {
-                float LeftOperand = float.Parse(leftOperand);
-                float RightOperand = float.Parse(rightOperand);
+                float LeftOperand; 
+                float RightOperand; 
+                try 
+                {
+                    LeftOperand = float.Parse(leftOperand);
+                    RightOperand = float.Parse(rightOperand);
+                } catch(FormatException ex) 
+                {
+                    result = 0;
+                    return false;
+                }
                 switch (operatr) 
                 {
-                    case("+"):
-                        result = Add(LeftOperand, RightOperand);
+                    case ("+"):
+                        result = MathematicalOperations!.GetValueOrDefault('+')!.Invoke(LeftOperand, RightOperand);
                         return true;
                     case ("-"):
-                        result = Subtract(LeftOperand, RightOperand);
+                        result = MathematicalOperations!.GetValueOrDefault('-')!.Invoke(LeftOperand, RightOperand);
                         return true;
                     case ("*"):
-                        result = Multiply(LeftOperand, RightOperand);
+                        result = MathematicalOperations!.GetValueOrDefault('*')!.Invoke(LeftOperand, RightOperand);
                         return true;
                     case ("/"):
-                        result = Divide(LeftOperand, RightOperand);
+                        result = MathematicalOperations!.GetValueOrDefault('/')!.Invoke(LeftOperand, RightOperand);
                         return true;
                     default:
                         result = 0;

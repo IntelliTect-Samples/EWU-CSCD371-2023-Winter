@@ -16,10 +16,25 @@ namespace CalculateTests
             };
 
             //Act
-            
 
             //Assert
             
+        }
+
+        [TestMethod]
+        public void Program_ReadLineProperty_Success()
+        {
+            //Arrange
+            Program prog = new()
+            {
+                WriteLine = Console.WriteLine,
+                ReadLine = Console.ReadLine!
+            };
+
+            //Act
+
+            //Assert
+
         }
     }
 }

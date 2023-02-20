@@ -15,12 +15,20 @@ namespace Calculate
                 WriteLine = Console.WriteLine,
                 ReadLine = Console.ReadLine!
             };
+            prog.WriteLine("Please enter an equation to be solved.");
             string equation = prog.ReadLine!();
             Calculator calc = new();
             float result;
-            calc.TryCalculate(equation, out result);
-            prog.WriteLine!(result.ToString());
-
+            bool calculatedSuccessfully = true;
+            calculatedSuccessfully = calc.TryCalculate(equation, out result);
+            if (calculatedSuccessfully)
+            {
+                prog.WriteLine($"The answer to the equation is: {result}");
+            }
+            else 
+            {
+                prog.WriteLine!("The equation inputed was not in the right format.");
+            }
         }
         public Action<string>? WriteLine { get; init; }
         public Func<string>? ReadLine { get; init; }
