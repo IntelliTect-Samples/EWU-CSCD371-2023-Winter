@@ -29,7 +29,7 @@ namespace Calculate
         {
             return leftOperand / rightOperand;
         }
-        public bool TryCalculate(string equation) 
+        public bool TryCalculate(string equation, out float result) 
         {
             if (equation.Split(" ") is [string { Length: > 0 } leftOperand, 
                 string { Length: > 0} operatr, string { Length: > 0} rightOperand]) 
@@ -39,23 +39,23 @@ namespace Calculate
                 switch (operatr) 
                 {
                     case("+"):
-                        //result = Add(LeftOperand, RightOperand);
+                        result = Add(LeftOperand, RightOperand);
                         return true;
                     case ("-"):
-                        //result = Subtract(LeftOperand, RightOperand);
+                        result = Subtract(LeftOperand, RightOperand);
                         return true;
                     case ("*"):
-                        //result = Multiply(LeftOperand, RightOperand);
+                        result = Multiply(LeftOperand, RightOperand);
                         return true;
                     case ("/"):
-                        //result = Divide(LeftOperand, RightOperand);
+                        result = Divide(LeftOperand, RightOperand);
                         return true;
                     default:
-                        //result = null;
+                        result = 0;
                         return false;
                 }
             }
-            //result = null;
+            result = 0;
             return false;
         }
     }
