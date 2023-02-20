@@ -29,5 +29,34 @@ namespace Calculate
         {
             return leftOperand / rightOperand;
         }
+        public bool TryCalculate(string equation) 
+        {
+            if (equation.Split(" ") is [string { Length: > 0 } leftOperand, 
+                string { Length: > 0} operatr, string { Length: > 0} rightOperand]) 
+            {
+                float LeftOperand = float.Parse(leftOperand);
+                float RightOperand = float.Parse(rightOperand);
+                switch (operatr) 
+                {
+                    case("+"):
+                        //result = Add(LeftOperand, RightOperand);
+                        return true;
+                    case ("-"):
+                        //result = Subtract(LeftOperand, RightOperand);
+                        return true;
+                    case ("*"):
+                        //result = Multiply(LeftOperand, RightOperand);
+                        return true;
+                    case ("/"):
+                        //result = Divide(LeftOperand, RightOperand);
+                        return true;
+                    default:
+                        //result = null;
+                        return false;
+                }
+            }
+            //result = null;
+            return false;
+        }
     }
 }
