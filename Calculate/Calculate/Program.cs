@@ -10,11 +10,15 @@ namespace Calculate
     {
         public static void Main(string[] args) 
         {
-            Program prog = new();
-            string test = prog.ReadLine!();
+            Program prog = new()
+            {
+                WriteLine = Console.WriteLine,
+                ReadLine = Console.ReadLine!
+            };
+            string equation = prog.ReadLine!();
             Calculator calc = new();
             float result;
-            calc.TryCalculate(test, out result);
+            calc.TryCalculate(equation, out result);
             prog.WriteLine!(result.ToString());
 
         }
@@ -22,8 +26,7 @@ namespace Calculate
         public Func<string>? ReadLine { get; init; }
         public Program() 
         {
-            WriteLine = Console.WriteLine;
-            ReadLine = Console.ReadLine!;
+            
         }
     }
 }
