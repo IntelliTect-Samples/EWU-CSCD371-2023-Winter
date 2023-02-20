@@ -12,7 +12,10 @@ namespace Calculate
         {
             Program prog = new();
             string test = prog.ReadLine!();
-            prog.WriteLine!(test);
+            Calculator calc = new();
+            float result;
+            calc.TryCalculate(test, out result);
+            prog.WriteLine!(result.ToString());
 
         }
         public Action<string>? WriteLine { get; init; }
