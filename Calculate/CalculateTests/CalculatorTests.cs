@@ -12,9 +12,9 @@ namespace CalculateTests
         {
             //Arrange
             Calculator calc = new();
+            float result;
 
             //Act
-            float result;
             string equation1 = "42 + 3";
             string equation2 = "42 - 3";
             string equation3 = "42 * 3";
