@@ -43,7 +43,7 @@ namespace Calculate
                 {
                     LeftOperand = float.Parse(leftOperand);
                     RightOperand = float.Parse(rightOperand);
-                } catch(FormatException ex) 
+                } catch (FormatException)
                 {
                     result = 0;
                     return false;
