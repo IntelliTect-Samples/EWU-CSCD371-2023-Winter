@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "99ofkj0yEzjvgwX+tKZXEher9qdcYCLYL24VAOsqNsbuBzyf63SV3ZFLiKrqjaAc3VnBdNjDBf/hWWl0URxfhA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\annik\\source\\repos\\Calculate\\Calculate\\Calculate.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\annik\\.nuget\\packages\\mstest.testframework\\3.0.2\\mstest.testframework.3.0.2.nupkg.sha512"
+  ],
+  "logs": []
+}
