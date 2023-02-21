@@ -2,11 +2,6 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-	  <LangVersion>11.0</LangVersion>
-    <TargetFramework>net7.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-	  <EnableNETAnalyzers>true</EnableNETAnalyzers>
-    <Nullable>enable</Nullable>
   </PropertyGroup>
 
 </Project>
