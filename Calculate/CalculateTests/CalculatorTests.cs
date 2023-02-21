@@ -8,7 +8,7 @@ namespace CalculateTests
     public class CalculatorTests
     {
         [TestMethod]
-        public void Calculator_TryParse_ReturnsTrue()
+        public void Calculator_TryCalculateGivenGoodInput_ReturnsTrue()
         {
             //Arrange
             Calculator calc = new();
@@ -28,7 +28,7 @@ namespace CalculateTests
         }
 
         [TestMethod]
-        public void Calculator_TryParse_ReturnsFalse()
+        public void Calculator_TryCalculateGivenBadInput_ReturnsFalse()
         {
             //Arrange
             Calculator calc = new();
@@ -37,10 +37,16 @@ namespace CalculateTests
             //Act
             string equation1 = "42 +! 3";
             string equation2 = "42+3";
+            string equation3 = "Some bad input";
+            string equation4 = "";
+            string equation5 = "45x + 72b";
 
             //Assert
             Assert.IsFalse(calc.TryCalculate(equation1, out result));
             Assert.IsFalse(calc.TryCalculate(equation2, out result));
+            Assert.IsFalse(calc.TryCalculate(equation3, out result));
+            Assert.IsFalse(calc.TryCalculate(equation4, out result));
+            Assert.IsFalse(calc.TryCalculate(equation5, out result));
         }
 
         [TestMethod]
