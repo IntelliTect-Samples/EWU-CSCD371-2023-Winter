@@ -14,7 +14,7 @@
             int value = 0;
             if (expression.Split(" ") is [string firstOperand, [char op], string secondOperand])
             {
-                if (!Int32.TryParse(firstOperand, out int firstNumber) || 
+                if (!Int32.TryParse(firstOperand, out int firstNumber) ||
                     !Int32.TryParse(secondOperand, out int secondNumber) ||
                     !MathematicalOperations.TryGetValue(op, out Func<int, int, int>? operation))
                 {

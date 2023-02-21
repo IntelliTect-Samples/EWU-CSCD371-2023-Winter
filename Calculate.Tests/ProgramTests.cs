@@ -36,7 +36,7 @@ namespace Calculate.Tests
             bool success = program.Calc.TryCalculate(input!, out int result);
             program.WriteLine(result.ToString());
 
-            Assert.IsTrue( success );
+            Assert.IsTrue(success);
             Assert.AreEqual<string>("3", writer.ToString().Trim());
         }
 

@@ -12,7 +12,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Calculate\Calculate.csproj" />
+		<ProjectReference Include="..\Calculate\Calculate.csproj" />
 		<Using Include="Microsoft.VisualStudio.TestTools.UnitTesting"/>
 	</ItemGroup>
 

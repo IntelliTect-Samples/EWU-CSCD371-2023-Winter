@@ -23,9 +23,9 @@
                 string? input = program.ReadLine();
                 if (input is null) { program.WriteLine("Invalid input, please try again."); }
                 else if (input.ToLower().Equals("exit")) { exit = true; }
-                else 
+                else
                 {
-                    if(program.Calc.TryCalculate(input, out int result))
+                    if (program.Calc.TryCalculate(input, out int result))
                     {
                         program.WriteLine($"The answer is {result}");
                     }
