@@ -9,11 +9,7 @@ namespace CalculateTests
         public void Program_WriteLineProperty_Success()
         {
             //Arrange
-            Program prog = new()
-            {
-                WriteLine = Console.WriteLine,
-                ReadLine = Console.ReadLine!
-            };
+            Program prog = new();
 
             //Act
 
@@ -25,11 +21,7 @@ namespace CalculateTests
         public void Program_ReadLineProperty_Success()
         {
             //Arrange
-            Program prog = new()
-            {
-                WriteLine = Console.WriteLine,
-                ReadLine = Console.ReadLine!
-            };
+            Program prog = new();
 
             //Act
 

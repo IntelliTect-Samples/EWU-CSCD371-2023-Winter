@@ -8,14 +8,16 @@ namespace Calculate
 {
     public class Calculator
     {
-        public IReadOnlyDictionary<char, Func<float, float, float>>? MathematicalOperations 
-            { get; } = new Dictionary<char, Func<float, float, float>>
-            {
-                {'+', Add },
-                {'-', Subtract },
-                {'*', Multiply },
-                {'/', Divide }
-            };
+
+        public Calculator() 
+        {
+            MathematicalOperations = new Dictionary<char, Func<float, float, float>>();
+            ((Dictionary<char, Func<float, float, float>>)MathematicalOperations).Add('+', Add);
+            ((Dictionary<char, Func<float, float, float>>)MathematicalOperations).Add('-', Subtract);
+            ((Dictionary<char, Func<float, float, float>>)MathematicalOperations).Add('*', Multiply);
+            ((Dictionary<char, Func<float, float, float>>)MathematicalOperations).Add('/', Divide);
+        }
+        public IReadOnlyDictionary<char, Func<float, float, float>>? MathematicalOperations;
         public static float Add(float leftOperand, float rightOperand) 
         {
             return leftOperand + rightOperand;
