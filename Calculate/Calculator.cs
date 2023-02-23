@@ -2,10 +2,10 @@
 
 public class Calculator
 {
-    public IReadOnlyDictionary<char, Func<int, int, double>> MathematicalOperators { get; }
+    public IReadOnlyDictionary<char, Func<int, int, double>> MathematicalOperations { get; }
     public Calculator()
     {
-        MathematicalOperators = new Dictionary<char, Func<int, int, double>>()
+        MathematicalOperations = new Dictionary<char, Func<int, int, double>>()
         {
             {'/', Divide},
             {'*', Multiply},
@@ -31,30 +31,24 @@ public class Calculator
 
     public static double Divide(int paramOne, int paramTwo)
     {
-        return ((double)paramOne / paramTwo);
+        return (double) paramOne / paramTwo;
     }
 
     public static bool TryCalculate(string calculation, out double result)
     {
         bool TF = false;
-        result = 0;
+        result = default;
         Calculator calc = new();
-        char[] validOperators =
-        {
-            '+', '-', '*', '/'
-        };
 
         string[] ints = calculation.Split(' ');
-        if (ints.Length < 3)
+        if (ints.Length != 3)
         {
             return TF;
         }
-        int firstInt, secondInt;
-        char op;
-        if(int.TryParse(ints[0], out firstInt) && char.TryParse(ints[1], out op) && validOperators.Contains(op) && int.TryParse(ints[2], out secondInt))
+        if (int.TryParse(ints[0], out int firstInt) && char.TryParse(ints[1], out char op) && calc.MathematicalOperations.ContainsKey(op) && int.TryParse(ints[2], out int secondInt))
         {
             TF = true;
-            Func<int, int, double> operation = calc.MathematicalOperators[op];
+            Func<int, int, double> operation = calc.MathematicalOperations[op];
             result = operation(firstInt, secondInt);
         }
 

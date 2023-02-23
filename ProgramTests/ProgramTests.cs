@@ -5,7 +5,7 @@ namespace Calculate.Tests;
 public class ProgramTests
 {
     [TestMethod]
-    public void TestReadAndWrite()
+    public void ReadLineWriteLine_SetInConstructor_BehavesAsExpected()
     {
         string testReadStringExp = "See me now, a ray of light in the moon-dance...";
         string testWriteStringExp = "She faded into a flower, that would bloom for one bright eve...";

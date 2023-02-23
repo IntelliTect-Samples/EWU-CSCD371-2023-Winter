@@ -6,22 +6,22 @@ namespace Calculate.Tests
     [TestClass]
     public class CalculatorTests
     {
-        Calculator calc = new();
+        readonly Calculator calc = new();
         [TestMethod]
-        public void TestDictionaryContents()
+        public void MathematicalOperations_ContainsValidEntires()
         {
             Func<int, int, double> addition = Calculator.Add;
             Func<int, int, double> subtraction = Calculator.Subtract;
             Func<int, int, double> multiplication = Calculator.Multiply;
             Func<int, int, double> division = Calculator.Divide;
-            Assert.AreEqual<Func<int, int, double>>(addition, calc.MathematicalOperators['+']);
-            Assert.AreEqual<Func<int, int, double>>(subtraction, calc.MathematicalOperators['-']);
-            Assert.AreEqual<Func<int, int, double>>(multiplication, calc.MathematicalOperators['*']);
-            Assert.AreEqual<Func<int, int, double>>(division, calc.MathematicalOperators['/']);
+            Assert.AreEqual<Func<int, int, double>>(addition, calc.MathematicalOperations['+']);
+            Assert.AreEqual<Func<int, int, double>>(subtraction, calc.MathematicalOperations['-']);
+            Assert.AreEqual<Func<int, int, double>>(multiplication, calc.MathematicalOperations['*']);
+            Assert.AreEqual<Func<int, int, double>>(division, calc.MathematicalOperations['/']);
         }
 
         [TestMethod]
-        public void TestAdd()
+        public void AddMethod_PerformsAsExpected()
         {
             double testAddAct = Calculator.Add(1, 2);
             double testAddExp = 3;
@@ -29,7 +29,7 @@ namespace Calculate.Tests
         }
 
         [TestMethod]
-        public void TestSubtract()
+        public void SubtractMethod_PerformsAsExpected()
         {
             double testSubtractAct = Calculator.Subtract(1, 2);
             double testSubtractExp = -1;
@@ -37,7 +37,7 @@ namespace Calculate.Tests
         }
 
         [TestMethod]
-        public void TestMultiply()
+        public void MultiplyMethod_PerformsAsExpected()
         {
             double testMultiplyAct = Calculator.Multiply(3, 5);
             double testMultiplyExp = 15;
@@ -45,7 +45,7 @@ namespace Calculate.Tests
         }
 
         [TestMethod]
-        public void TestDivide()
+        public void DivideMethod_PerformsAsExpected()
         {
             double testDivideAct = Calculator.Divide(5, 2);
             double testDivideExp = 2.5;
@@ -53,7 +53,7 @@ namespace Calculate.Tests
         }
 
         [TestMethod]
-        public void TestTryCalculateAddSuccess()
+        public void TryCalculate_AddMethod_PerformsAsExpected()
         {
             string testCalcInput = "3 + 5";
             double testCalcOutput;
@@ -64,7 +64,7 @@ namespace Calculate.Tests
         }
 
         [TestMethod]
-        public void TestTryCalculateSubtractSuccess()
+        public void TryCalculate_SubtractMethod_PerformsAsExpected()
         {
             string testCalcInput = "5 - 2";
             double testCalcOutput;
@@ -75,7 +75,7 @@ namespace Calculate.Tests
         }
 
         [TestMethod]
-        public void TestTryCalculateMultiplySuccess()
+        public void TryCalculate_MultiplyMethod_PerformsAsExpected()
         {
             string testCalcInput = "3 * 5";
             double testCalcOutput;
@@ -86,7 +86,7 @@ namespace Calculate.Tests
         }
 
         [TestMethod]
-        public void TestTryCalculateDivideSuccess()
+        public void TryCalculate_DivideMethod_PerformsAsExpected()
         {
             string testCalcInput = "5 / 2";
             double testCalcOutput;
@@ -97,7 +97,7 @@ namespace Calculate.Tests
         }
 
         [TestMethod]
-        public void TestTryCalculateFailNoSpace()
+        public void TryCalculate_InvalidInputNoSpace_Fails()
         {
             string testCalcInput = "3+5";
             double testCalcOutput;
@@ -108,7 +108,7 @@ namespace Calculate.Tests
         }
 
         [TestMethod]
-        public void TestTryCalculateFailBadOp()
+        public void TryCalculate_InvalidInputBadOp_Fails()
         {
             string testCalcInput = "3 > 5";
             double testCalcOutput;
@@ -119,7 +119,7 @@ namespace Calculate.Tests
         }
 
         [TestMethod]
-        public void TestTryCalculateFailNonInt()
+        public void TryCalculate_InvalidInputNonInt_Fails()
         {
             string testCalcInput = "3.4325 + 5.2";
             double testCalcOutput;
