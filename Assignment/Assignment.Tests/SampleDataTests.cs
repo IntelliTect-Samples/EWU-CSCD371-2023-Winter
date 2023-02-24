@@ -23,7 +23,7 @@ namespace Assignment.Tests
         }
 
         [TestMethod]
-        public void CsvRows_ReadsFileAndSkipsFirstRow_PrintsAllPeople()
+        public void CsvRows_ReadsFileAndSkipsFirstRow_PrintsAllPeopleToTestConsole()
         {
             //Arrange
             SampleData data = new();
@@ -38,16 +38,29 @@ namespace Assignment.Tests
         }
 
         [TestMethod]
-        public void MyTestMethod()
+        public void GetUniqueSortedListOfStatesGivenCsvRows_MakesDistinctSortedList_CountReturns27()
         {
             //Arrange
             SampleData data = new();
 
             //Act
             IEnumerable<string> states = data.GetUniqueSortedListOfStatesGivenCsvRows();
-            foreach(string state in states) 
+
+            //Assert
+            Assert.AreEqual(27, states.Count());
+        }
+
+        [TestMethod]
+        public void GetUniqueSortedListOfStatesGivenCsvRows_MakesDistinctSortedList_PrintsAllStatesToTestConsole()
+        {
+            //Arrange
+            SampleData data = new();
+
+            //Act
+            IEnumerable<string> states = data.GetUniqueSortedListOfStatesGivenCsvRows();
+            foreach (string state in states)
             {
-                Console.WriteLine(state); 
+                Console.WriteLine(state);
             }
 
             //Assert

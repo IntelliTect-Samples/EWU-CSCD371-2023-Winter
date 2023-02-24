@@ -15,7 +15,14 @@ namespace Assignment
 
         // 2.
         public IEnumerable<string> GetUniqueSortedListOfStatesGivenCsvRows()
-            => CsvRows;
+        {
+            List<string> states = new List<string>();
+            foreach (var row in CsvRows) 
+            {
+                states.Add(row.Split(',').ElementAt(6));
+            }
+            return states.Distinct().OrderBy(state => state);
+        }
 
         // 3.
         public string GetAggregateSortedListOfStatesUsingCsvRows()
