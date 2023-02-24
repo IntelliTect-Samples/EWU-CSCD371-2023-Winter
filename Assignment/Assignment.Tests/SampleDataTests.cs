@@ -65,5 +65,18 @@ namespace Assignment.Tests
 
             //Assert
         }
+
+        [TestMethod]
+        public void GetAggregateSortedListOfStatesUsingCsvRows_MakesSingleStringOfDistinctStates_PrintsStringToConsole()
+        {
+            //Arrange
+            SampleData data = new();
+
+            //Act
+            string states = data.GetAggregateSortedListOfStatesUsingCsvRows();
+            Console.WriteLine(states);
+
+            //Assert
+        }
     }
 }

@@ -31,7 +31,10 @@ namespace Assignment
             string allStates = "";
             foreach(string state in states) 
             {
-                
+                if (allStates.Equals(""))
+                    allStates += state;
+                else
+                    allStates += $", {state}";
             }
             return allStates;
         }
