@@ -86,7 +86,7 @@ namespace Assignment.Tests
             SampleData data = new();
 
             //Act
-            foreach(Person person in data.People) 
+            foreach(IPerson person in data.People) 
             {
                 Console.WriteLine(person.ToString());      
             }
