@@ -4,41 +4,44 @@ namespace Calculate
 {
     internal class Program
     {
-        // private int _WriteLine;
-        // private int _ReadLine;
-        private readonly Action<string> _WriteLine;
-        private readonly Func<string> _ReadLine;
 
-       public Program(Action<string> writeLine, Func<string> readline)
+        public Action<string> WriteLine { get; init; }
+        public Func<string?> ReadLine { get; init; }
+
+        public Program()
         {
-            _WriteLine = writeLine;
-            _ReadLine = readline;
+            WriteLine = Console.WriteLine;
+            ReadLine = Console.ReadLine;
         }
-
-        public static void Main(string[] args)
+        public Program(Action<string> writeLine, Func<string?> readLine)
         {
-            Program program = new Program(Console.WriteLine, Console.ReadLine);
+            WriteLine = writeLine;
+            ReadLine = readLine;
+        }
+        public static void Main()
+        {
+            Program program = new(Console.WriteLine, Console.ReadLine);
 
-           // Calculator calculator = new();
+            Calculator calculator = new();
 
             bool quit = false;
 
-            
-            while (quit == false)
+
+            while (!quit)
             {
                 Console.WriteLine("Please enter a function in the form: x operator y, or q to quit");
 
-                string input = program._ReadLine().Trim();
+                string input = program.ReadLine()?.Trim() ?? "";
 
                 if (string.IsNullOrWhiteSpace(input))
                 {
                     Console.WriteLine("Invalid");
                 }
-                if (Calculator.TryCalculate(input, out int result))
+                if (calculator.TryCalculate(input, out int result))
                 {
-                    program._WriteLine(result.ToString());
+                    program.WriteLine(result.ToString());
                 }
-                else if (input.Equals("q"))
+                else if (input.Equals("q", StringComparison.OrdinalIgnoreCase))
                 {
                     quit = true;
                 }
