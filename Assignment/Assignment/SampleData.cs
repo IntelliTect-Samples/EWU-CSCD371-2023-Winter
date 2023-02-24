@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 
@@ -13,8 +14,8 @@ namespace Assignment
             .Where(row => row.Length > 0);
 
         // 2.
-        public IEnumerable<string> GetUniqueSortedListOfStatesGivenCsvRows() 
-            => throw new NotImplementedException();
+        public IEnumerable<string> GetUniqueSortedListOfStatesGivenCsvRows()
+            => CsvRows;
 
         // 3.
         public string GetAggregateSortedListOfStatesUsingCsvRows()
