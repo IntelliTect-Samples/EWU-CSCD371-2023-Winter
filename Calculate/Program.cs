@@ -1,31 +1,39 @@
-﻿using Calculate;
-namespace Calculate;
-using System;
-
+﻿using System;
 
 class Program
 {
     static void Main()
     {
         var calculator = new Calculator();
+        var program = new Program();
+        program.SetUpInput(Console.WriteLine, Console.ReadLine);
+        program.Run(calculator);
+    }
 
+    public Action<string> WriteLine { get; set; }
+    public Func<string> ReadLine { get; set; }
+    public void SetUpInput(Action<string> writeLine, Func<string> readLine)
+    {
+        WriteLine = writeLine;
+        ReadLine = readLine;
+    }
+
+    public void Run(Calculator calculator)
+    {
         while (true)
         {
-            Console.WriteLine("Enter function in form x + y");
-            string input = Console.ReadLine();
+            WriteLine("Enter function in form x + y");
+            string input = ReadLine();
             if (string.IsNullOrWhiteSpace(input)) break;
 
             if (calculator.TryCalculate(input, out int result))
             {
-                Console.WriteLine(result);
+                WriteLine(result.ToString());
             }
             else
             {
-                Console.WriteLine("Invalid input");
+                WriteLine("Invalid input");
             }
         }
     }
- 
-    public  Action<string> WriteLine { get; init; } = Console.WriteLine;
-    public  Func<string> ReadLine { get; init; } = Console.ReadLine;
 }

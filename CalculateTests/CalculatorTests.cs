@@ -1,7 +1,9 @@
-using Calculate;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Calculate
+using Microsoft.VisualStudio.TestPlatform.TestHost;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+
+namespace CalculatorTests
 {
     [TestClass]
     public class CalculatorTests
@@ -71,15 +73,19 @@ namespace Calculate
         }
 
         [TestMethod]
-        public void TryCalculate_Division_By_Zero_Throws_Exception()
+        public void TryCalculate_Division_By_Zero_Returns_False()
         {
             // Arrange
             Calculator calculator = new Calculator();
             string input = "10 / 0";
 
-            // Act & Assert
-            Assert.ThrowsException<DivideByZeroException>(() => calculator.TryCalculate(input, out int result));
+            // Act
+            bool result = calculator.TryCalculate(input, out int actualResult);
+
+            // Assert
+            Assert.IsFalse(result);
         }
+
 
         [TestMethod]
         public void TryCalculate_Invalid_Input_Returns_False()
@@ -95,5 +101,6 @@ namespace Calculate
             Assert.IsFalse(success);
             Assert.AreEqual(0, result);
         }
+       
     }
 }
