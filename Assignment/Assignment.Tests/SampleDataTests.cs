@@ -78,5 +78,20 @@ namespace Assignment.Tests
 
             //Assert
         }
+
+        [TestMethod]
+        public void People_MakesListOfPeopleSortedByStateCityZip_PrintsListToConsole()
+        {
+            //Arrange
+            SampleData data = new();
+
+            //Act
+            foreach(Person person in data.People) 
+            {
+                Console.WriteLine(person.ToString());      
+            }
+
+            //Assert
+        }
     }
 }

@@ -16,8 +16,8 @@ namespace Assignment
         // 2.
         public IEnumerable<string> GetUniqueSortedListOfStatesGivenCsvRows()
         {
-            List<string> states = new List<string>();
-            foreach (var row in CsvRows) 
+            List<string> states = new();
+            foreach (var row in CsvRows)
             {
                 states.Add(row.Split(',').ElementAt(6));
             }
@@ -29,7 +29,7 @@ namespace Assignment
         {
             string[] states = GetUniqueSortedListOfStatesGivenCsvRows().ToArray();
             string allStates = "";
-            foreach(string state in states) 
+            foreach (string state in states)
             {
                 if (allStates.Equals(""))
                     allStates += state;
@@ -40,7 +40,18 @@ namespace Assignment
         }
 
         // 4.
-        public IEnumerable<IPerson> People => throw new NotImplementedException();
+        public IEnumerable<IPerson> People => CsvRows.SelectMany(row =>
+            {
+                List<IPerson> people = new();
+                string[] personInfo = row.Split(",");
+                Address address = new(personInfo[4], personInfo[5], personInfo[6], personInfo[7]);
+                Person person = new(personInfo[1], personInfo[2], address, personInfo[3]);
+                people.Add(person);
+                return people; 
+            })
+            .OrderBy(item => item.Address.State)
+            .ThenBy(item => item.Address.City)
+            .ThenBy(item => item.Address.Zip);
 
         // 5.
         public IEnumerable<(string FirstName, string LastName)> FilterByEmailAddress(
