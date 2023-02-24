@@ -9,18 +9,28 @@ namespace Calculate.Tests
     public class ProgramTests
     {
         [TestMethod]
-        public void Program_CreateProgram_Success()
+        public void Program_ReadLine_ReturnsValue()
         {
-            Program program = new();
-            StringWriter writer = new();
-            StringReader reader = new("Test input");
-            System.Console.SetOut(writer);
-            System.Console.SetIn(reader);
+            Program program = new()
+            {
+                ReadLine = () => "Test string"
+            };
+
+            Assert.AreEqual<string>("Test string", program.ReadLine()!);
+        }
+
+        [TestMethod]
+        public void Program_WriteLine_WritesValues()
+        {
+            string actual = "";
+            Program program = new()
+            {
+                WriteLine = (text) => actual = text
+            };
 
             program.WriteLine("Test string");
 
-            Assert.AreEqual<string>("Test string", writer.ToString().Trim());
-            Assert.AreEqual<string>("Test input", program.ReadLine()!.Trim());
+            Assert.AreEqual<string>("Test string", actual);
         }
 
         [TestMethod]
@@ -33,7 +43,7 @@ namespace Calculate.Tests
             System.Console.SetIn(reader);
 
             string? input = program.ReadLine();
-            bool success = program.Calc.TryCalculate(input!, out int result);
+            bool success = program.Calc.TryCalculate(input!, out double result);
             program.WriteLine(result.ToString());
 
             Assert.IsTrue(success);
@@ -50,7 +60,7 @@ namespace Calculate.Tests
             System.Console.SetIn(reader);
 
             string? input = program.ReadLine();
-            bool success = program.Calc.TryCalculate(input!, out int result);
+            bool success = program.Calc.TryCalculate(input!, out double result);
             program.WriteLine(result.ToString());
 
             Assert.IsFalse(success);

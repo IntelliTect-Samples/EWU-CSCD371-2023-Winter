@@ -4,7 +4,7 @@
     {
         public Func<string?> ReadLine { get; init; } = System.Console.ReadLine;
 
-        public Action<string?> WriteLine { get; init; } = System.Console.WriteLine;
+        public Action<string> WriteLine { get; init; } = System.Console.WriteLine;
 
         public Calculator Calc { get; }
 
@@ -25,7 +25,7 @@
                 else if (input.ToLower().Equals("exit")) { exit = true; }
                 else
                 {
-                    if (program.Calc.TryCalculate(input, out int result))
+                    if (program.Calc.TryCalculate(input, out double result))
                     {
                         program.WriteLine($"The answer is {result}");
                     }
