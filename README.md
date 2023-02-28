@@ -57,7 +57,7 @@ Chapter 14: Events
    - Use `ISampleData.CsvRows` for your data source. ❌✔
    - Don't forget the list should be unique. ❌✔
    - Sort the list alphabetically. ❌✔
-   - Include a test that leverages a hardcoded list of Spokane-based addresses. ❌✔
+   - Include a test that leverages a hardcoded list of addresses. ❌✔
    - Include a test that uses LINQ to verify the data is sorted correctly (do not use a hardcoded list). ❌✔
 
 3. Implement `ISampleData.GetAggregateSortedListOfStatesUsingCsvRows()` to return a `string` that contains a **unique**, comma separated list of states. ❌✔
