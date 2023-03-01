@@ -35,9 +35,11 @@ public class SampleDataTests
         SampleData data = new SampleData { CsvRows = addresses };
 
         // Act
-        addresses.Distinct().ToList().Sort();
+        List<string> expected = addresses.Distinct().ToList();
+        expected.Sort();
+        List<string> actual = data.GetUniqueSortedListOfStatesGivenCsvRows().ToList();
 
         // Assert
-        Assert.AreEqual<IEnumerable<string>>(data.GetUniqueSortedListOfStatesGivenCsvRows(), addresses);
+        Assert.IsTrue(actual.SequenceEqual(expected));
     }
 }
