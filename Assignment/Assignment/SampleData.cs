@@ -11,12 +11,12 @@ namespace Assignment
         public IEnumerable<string> CsvRows { get; init; } = File.ReadLines("./People.csv").Skip(1);
 
         // 2.
-        public IEnumerable<string> GetUniqueSortedListOfStatesGivenCsvRows() 
-            => CsvRows.Distinct().OrderBy( item => item );
+        public IEnumerable<string> GetUniqueSortedListOfStatesGivenCsvRows()
+            => CsvRows.Distinct().OrderBy(item => item);
 
         // 3.
         public string GetAggregateSortedListOfStatesUsingCsvRows()
-            => throw new NotImplementedException();
+            => string.Join(", ", GetUniqueSortedListOfStatesGivenCsvRows().ToArray());
 
         // 4.
         public IEnumerable<IPerson> People => throw new NotImplementedException();
