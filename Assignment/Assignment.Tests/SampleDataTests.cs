@@ -40,6 +40,21 @@ public class SampleDataTests
         List<string> actual = data.GetUniqueSortedListOfStatesGivenCsvRows().ToList();
 
         // Assert
-        Assert.IsTrue(actual.SequenceEqual(expected));
+        Assert.IsTrue(expected.SequenceEqual(actual));
+    }
+
+    [TestMethod]
+    public void UsingPeopleCsv_ReturnsUniqueSortedList()
+    {
+        // Assemble
+        SampleData data = new();
+        IEnumerable<string> expected = File.ReadLines("./People.csv").Skip(1);
+
+        // Act
+        IEnumerable<string> actual = data.GetUniqueSortedListOfStatesGivenCsvRows().ToList();
+        expected = expected.Distinct().OrderBy( item => item ).ToList();
+
+        // Assert
+        Assert.IsTrue(expected.SequenceEqual(actual));
     }
 }
