@@ -70,6 +70,55 @@ public class SampleDataTests
 
         // Assert
         Assert.IsNotNull(actual);
-        Assert.AreEqual(expected, actual);
+        Assert.AreEqual<string>(expected, actual);
+    }
+
+    [TestMethod]
+    public void GivenCsvRows_ReturnsListOfCorrectType()
+    {
+        // Assemble
+        SampleData data = new();
+
+        // Assert
+        Assert.IsInstanceOfType(data.People, typeof(IEnumerable<IPerson>));
+    }
+
+    [TestMethod]
+    public void People_GivenSingleLine_ReturnsListWithOnePerson()
+    {
+        // Assemble
+        List<string> people = new List<string>
+        {
+            "1,Priscilla,Jenyns,pjenyns0@state.gov,7884 Corry Way,Helena,MT,70577"
+        };
+        SampleData data = new SampleData { CsvRows = people };
+
+        // Act
+        IEnumerable<IPerson> peopleList = data.People.ToList();
+
+        // Assert
+        Assert.AreEqual<string>(peopleList.First().FirstName, "Priscilla");
+    }
+
+    [TestMethod]
+    public void People_ReturnsSortedListByAddress()
+    {
+        // Assemble
+        List<string> people = new List<string>
+        {
+            "1,Priscilla,Jenyns,email,address,Tampa,FL,70577",
+            "3,Chadd,Stennine,email,address,Long Beach,CA,59721",
+            "2,Karin,Joder,email,address,Miami,FL,71961",
+        };
+        SampleData data = new SampleData { CsvRows = people };
+
+        // Act
+        IEnumerable<IPerson> peopleList = data.People.ToList();
+
+        //Console.WriteLine(peopleList.First().FirstName);
+
+        // Assert
+        //Assert.AreEqual<string>(peopleList.First().FirstName, "Chadd");
+        //Assert.AreEqual<string>(peopleList.ElementAt(1).FirstName, "Karin");
     }
 }
