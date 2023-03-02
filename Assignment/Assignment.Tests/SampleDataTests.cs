@@ -1,7 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Net.NetworkInformation;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -26,17 +29,14 @@ public class SampleDataTests
         // Assemble
         List<string> addresses = new List<string>
         {
-            "Washington",
-            "Georgia",
-            "Virginia",
-            "South Carolina",
-            "North Carolina",
+            "1,Priscilla,Jenyns,pjenyns0@state.gov,7884 Corry Way,Helena,MT,70577",
+            "2,Karin,Joder,kjoder1@quantcast.com,03594 Florence Park,Tampa,FL,71961",
+            "3,Chadd,Stennine,cstennine2@wired.com,94148 Kings Terrace,Long Beach,CA,59721",
         };
         SampleData data = new SampleData { CsvRows = addresses };
 
         // Act
-        List<string> expected = addresses.Distinct().ToList();
-        expected.Sort();
+        List<string> expected = new List<string> { "CA", "FL", "MT" };
         List<string> actual = data.GetUniqueSortedListOfStatesGivenCsvRows().ToList();
 
         // Assert
