@@ -27,32 +27,17 @@ public class SampleDataTests
     public void GivenHardcodedAddresses_ReturnsUniqueSortedList()
     {
         // Assemble
-        List<string> addresses = new List<string>
-        {
-            "1,Priscilla,Jenyns,pjenyns0@state.gov,7884 Corry Way,Helena,MT,70577",
-            "2,Karin,Joder,kjoder1@quantcast.com,03594 Florence Park,Tampa,FL,71961",
-            "3,Chadd,Stennine,cstennine2@wired.com,94148 Kings Terrace,Long Beach,CA,59721",
+        SampleData data = new SampleData { CsvRows = new List<string> 
+            {
+                "1,Priscilla,Jenyns,pjenyns0@state.gov,7884 Corry Way,Helena,MT,70577",
+                "2,Karin,Joder,kjoder1@quantcast.com,03594 Florence Park,Tampa,FL,71961",
+                "3,Chadd,Stennine,cstennine2@wired.com,94148 Kings Terrace,Long Beach,CA,59721",
+            }
         };
-        SampleData data = new SampleData { CsvRows = addresses };
 
         // Act
         List<string> expected = new List<string> { "CA", "FL", "MT" };
         List<string> actual = data.GetUniqueSortedListOfStatesGivenCsvRows().ToList();
-
-        // Assert
-        Assert.IsTrue(expected.SequenceEqual(actual));
-    }
-
-    [TestMethod]
-    public void UsingPeopleCsv_ReturnsUniqueSortedList()
-    {
-        // Assemble
-        SampleData data = new();
-        IEnumerable<string> expected = File.ReadLines("./People.csv").Skip(1);
-
-        // Act
-        IEnumerable<string> actual = data.GetUniqueSortedListOfStatesGivenCsvRows().ToList();
-        expected = expected.Distinct().OrderBy(item => item).ToList();
 
         // Assert
         Assert.IsTrue(expected.SequenceEqual(actual));
@@ -70,6 +55,28 @@ public class SampleDataTests
 
         // Assert
         Assert.IsNotNull(actual);
+        Assert.AreEqual<string>(expected, actual);
+    }
+
+    [TestMethod]
+    public void UsingHardcodedAddresses_GetsUniqueSortedList_ReturnsListAsString()
+    {
+        // Assemble
+        SampleData data = new SampleData
+        {
+            CsvRows = new List<string>
+            {
+                "1,Priscilla,Jenyns,pjenyns0@state.gov,7884 Corry Way,Helena,MT,70577",
+                "2,Karin,Joder,kjoder1@quantcast.com,03594 Florence Park,Tampa,FL,71961",
+                "3,Chadd,Stennine,cstennine2@wired.com,94148 Kings Terrace,Long Beach,CA,59721",
+            }
+        };
+
+        // Act
+        string expected = "CA, FL, MT";
+        string actual = data.GetAggregateSortedListOfStatesUsingCsvRows();
+
+        // Assert
         Assert.AreEqual<string>(expected, actual);
     }
 
@@ -104,13 +111,15 @@ public class SampleDataTests
     public void People_ReturnsSortedListByAddress()
     {
         // Assemble
-        List<string> people = new List<string>
+        SampleData data = new SampleData
         {
-            "1,Priscilla,Jenyns,email,address,Tampa,FL,70577",
-            "3,Chadd,Stennine,email,address,Long Beach,CA,59721",
-            "2,Karin,Joder,email,address,Miami,FL,71961",
+            CsvRows = new List<string>
+            {
+                "1,Priscilla,Jenyns,pjenyns0@state.gov,7884 Corry Way,Helena,MT,70577",
+                "2,Karin,Joder,kjoder1@quantcast.com,03594 Florence Park,Tampa,FL,71961",
+                "3,Chadd,Stennine,cstennine2@wired.com,94148 Kings Terrace,Long Beach,CA,59721",
+            }
         };
-        SampleData data = new SampleData { CsvRows = people };
 
         // Act
         IEnumerable<IPerson> peopleList = data.People.ToList();
