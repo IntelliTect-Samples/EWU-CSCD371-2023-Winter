@@ -33,21 +33,12 @@ namespace Assignment.Tests
             };
 
             List<string> expected = new() { "CA", "IL", "NY" };
-            bool isEqual = true;
 
-            List<string> actual = new();
+            IEnumerable<string> actual = hardCodedList.GetUniqueSortedListOfStatesGivenCsvRows();
 
-            foreach (string state in hardCodedList.GetUniqueSortedListOfStatesGivenCsvRows())
-            {
-                actual.Add(state);
-            }
+            static bool ValidateTuple((string First, string Second) tuple) => tuple.First.Equals(tuple.Second);
 
-            for (int i = 0, j = 0; i < expected.Count && j < actual.Count; i++, j++)
-            {
-                if (expected[i] != actual[j]) isEqual = false;
-            }
-
-            Assert.IsTrue(isEqual);
+            Assert.AreEqual<int>(expected.Count, actual.Zip(expected).Where(ValidateTuple).Count());
 
         }
 
