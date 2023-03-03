@@ -62,9 +62,7 @@ public class SampleDataTests
     public void UsingHardcodedAddresses_GetsUniqueSortedList_ReturnsListAsString()
     {
         // Assemble
-        SampleData data = new SampleData
-        {
-            CsvRows = new List<string>
+        SampleData data = new SampleData { CsvRows = new List<string>
             {
                 "1,Priscilla,Jenyns,pjenyns0@state.gov,7884 Corry Way,Helena,MT,70577",
                 "2,Karin,Joder,kjoder1@quantcast.com,03594 Florence Park,Tampa,FL,71961",
@@ -111,9 +109,7 @@ public class SampleDataTests
     public void People_ReturnsSortedListByAddress()
     {
         // Assemble
-        SampleData data = new SampleData
-        {
-            CsvRows = new List<string>
+        SampleData data = new SampleData { CsvRows = new List<string>
             {
                 "1,Priscilla,Jenyns,pjenyns0@state.gov,7884 Corry Way,Helena,MT,70577",
                 "2,Karin,Joder,kjoder1@quantcast.com,03594 Florence Park,Tampa,FL,71961",
@@ -124,10 +120,8 @@ public class SampleDataTests
         // Act
         IEnumerable<IPerson> peopleList = data.People.ToList();
 
-        //Console.WriteLine(peopleList.First().FirstName);
-
         // Assert
-        //Assert.AreEqual<string>(peopleList.First().FirstName, "Chadd");
-        //Assert.AreEqual<string>(peopleList.ElementAt(1).FirstName, "Karin");
+        Assert.AreEqual<string>(peopleList.First().FirstName, "Chadd");
+        Assert.AreEqual<string>(peopleList.ElementAt(1).FirstName, "Karin");
     }
 }
