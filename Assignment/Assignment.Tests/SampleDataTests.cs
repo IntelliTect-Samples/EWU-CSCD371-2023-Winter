@@ -55,6 +55,16 @@ namespace Assignment.Tests
 
             Assert.AreEqual<int>(27, data.GetUniqueSortedListOfStatesGivenCsvRows().Count());
         }
+
+
+        [TestMethod]
+        public void GetAggregateSortedListOfStatesUsingCsvRows_Success()
+        {
+            SampleData data = new ();
+            Console.WriteLine(data.GetAggregateSortedListOfStatesUsingCsvRows());
+
+
+        }
     }
 
 
