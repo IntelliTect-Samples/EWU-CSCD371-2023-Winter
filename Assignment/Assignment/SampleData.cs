@@ -1,16 +1,29 @@
-﻿using System;
+﻿using System.IO;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Assignment
 {
     public class SampleData : ISampleData
     {
         // 1.
-        public IEnumerable<string> CsvRows => throw new NotImplementedException();
+        public IEnumerable<string> CsvRows
+        {
+            get => _CsvRows;
+            init
+            {
+                _CsvRows = value;
+            }
+        }
+
+        private IEnumerable<string> _CsvRows = File.ReadAllLines("People.csv").Skip(1);
 
         // 2.
-        public IEnumerable<string> GetUniqueSortedListOfStatesGivenCsvRows() 
-            => throw new NotImplementedException();
+        public IEnumerable<string> GetUniqueSortedListOfStatesGivenCsvRows()
+        {
+            return CsvRows.Select(row => row.Split(",")[6]).Distinct().OrderBy(state => state);
+        }
 
         // 3.
         public string GetAggregateSortedListOfStatesUsingCsvRows()
