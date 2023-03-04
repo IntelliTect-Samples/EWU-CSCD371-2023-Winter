@@ -168,4 +168,26 @@ public class SampleDataTests
         // Assert
         Assert.AreEqual<string>(expected, actual);
     }
+
+     [TestMethod]
+    public void MethodName()
+    {
+      // Assemble
+      SampleData data = new SampleData
+        {
+            CsvRows = new List<string>
+            {
+                "1,Priscilla,Jenyns,pjenyns0@state.gov,7884 Corry Way,Helena,MT,70577",
+                "2,Karin,Joder,kjoder1@quantcast.com,03594 Florence Park,Tampa,FL,71961",
+                "3,Chadd,Stennine,cstennine2@wired.com,94148 Kings Terrace,Long Beach,CA,59721",
+            }
+        };
+
+      // Act
+      Predicate<string> filter = (string email) => email == "pjenyns0@state.gov";
+      IEnumerable<(string, string)> expected = new List<(string, string)> {("Priscilla","Jenyns")};
+      
+      // Assert
+      Assert.AreEqual<(string, string)>(expected.ToList()[0], data.FilterByEmailAddress(filter).ToList()[0]);
+    }
 }
