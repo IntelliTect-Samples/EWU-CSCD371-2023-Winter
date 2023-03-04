@@ -45,7 +45,7 @@ namespace Assignment
                         );
                 }
 
-                return persons.OrderBy(item => item.Address);
+                return persons.OrderBy(person => person.Address);
             }
         }
 
@@ -55,6 +55,6 @@ namespace Assignment
 
         // 6.
         public string GetAggregateListOfStatesGivenPeopleCollection(
-            IEnumerable<IPerson> people) => people.Select( item => item.Address.State ).Distinct().Aggregate((a, b) => a + ", " + b);
+            IEnumerable<IPerson> people) => people.Select( person => person.Address.State ).Distinct().Aggregate((a, b) => a + ", " + b);
     }
 }
