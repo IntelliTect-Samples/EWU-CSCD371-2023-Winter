@@ -27,16 +27,8 @@ namespace Assignment
         // 3.
         public string GetAggregateSortedListOfStatesUsingCsvRows()
         {
-            string[] states = GetUniqueSortedListOfStatesGivenCsvRows().ToArray();
-            string allStates = "";
-            foreach (string state in states)
-            {
-                if (allStates.Equals(""))
-                    allStates += state;
-                else
-                    allStates += $", {state}";
-            }
-            return allStates;
+            string states = string.Join(", ",GetUniqueSortedListOfStatesGivenCsvRows());
+            return states;
         }
 
         // 4.
@@ -59,6 +51,12 @@ namespace Assignment
 
         // 6.
         public string GetAggregateListOfStatesGivenPeopleCollection(
-            IEnumerable<IPerson> people) => throw new NotImplementedException();
+            IEnumerable<IPerson> people)
+        {
+            string states = people.Select(person => person.Address.State)
+                .Distinct()
+                .Aggregate((state1, state2) => state1 + ", " + state2);
+            return states;
+        }
     }
 }

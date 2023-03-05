@@ -47,7 +47,7 @@ namespace Assignment.Tests
             IEnumerable<string> states = data.GetUniqueSortedListOfStatesGivenCsvRows();
 
             //Assert
-            Assert.AreEqual(27, states.Count());
+            Assert.AreEqual<int>(27, states.Count());
         }
 
         [TestMethod]
@@ -57,13 +57,12 @@ namespace Assignment.Tests
             SampleData data = new();
 
             //Act
-            IEnumerable<string> states = data.GetUniqueSortedListOfStatesGivenCsvRows();
-            foreach (string state in states)
-            {
-                Console.WriteLine(state);
-            }
+            string expected = "AL, AZ, CA, DC, FL, GA, IN, KS, LA, MD, MN, MO, MT, NC, NE, NH, NV, NY, OR, PA, SC, TN, TX, UT, VA, WA, WV";
+            string states = string.Join(", ", data.GetUniqueSortedListOfStatesGivenCsvRows());
+            Console.WriteLine(states);
 
             //Assert
+            Assert.AreEqual<string>(expected, states);
         }
 
         [TestMethod]
@@ -73,10 +72,12 @@ namespace Assignment.Tests
             SampleData data = new();
 
             //Act
+            string expected = data.GetUniqueSortedListOfStatesGivenCsvRows().Aggregate((a, b) => a + ", " + b); ;
             string states = data.GetAggregateSortedListOfStatesUsingCsvRows();
             Console.WriteLine(states);
 
             //Assert
+            Assert.AreEqual<string>(expected, states);
         }
 
         [TestMethod]
@@ -92,6 +93,22 @@ namespace Assignment.Tests
             }
 
             //Assert
+            Assert.AreEqual<int>(50, data.People.Count());
+        }
+
+        [TestMethod]
+        public void GetAggregateListOfStatesGivenPeopleCollection_MakesSingleStringOfDistinctStates_PrintsToConsole()
+        {
+            //Arrange
+            SampleData data = new();
+
+            //Act
+            string expected = data.GetUniqueSortedListOfStatesGivenCsvRows().Aggregate((a,b) => a + ", " + b);
+            string states = data.GetAggregateListOfStatesGivenPeopleCollection(data.People);
+            Console.WriteLine(states);
+
+            //Assert
+            Assert.AreEqual<string>(expected, states);
         }
     }
 }
