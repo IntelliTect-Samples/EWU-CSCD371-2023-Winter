@@ -10,6 +10,7 @@ namespace Assignment.Tests
     [TestClass]
     public class SampleDataTests
     {
+        // 1.)
         [TestMethod]
         public void CsvRows_ReadsFileAndSkipsFirstRow_CountReturns50()
         {
@@ -22,6 +23,7 @@ namespace Assignment.Tests
             Assert.AreEqual<int>(50, data.CsvRows.Count());
         }
 
+        // 1.)
         [TestMethod]
         public void CsvRows_ReadsFileAndSkipsFirstRow_PrintsAllPeopleToTestConsole()
         {
@@ -37,6 +39,7 @@ namespace Assignment.Tests
             //Assert
         }
 
+        // 2.)
         [TestMethod]
         public void GetUniqueSortedListOfStatesGivenCsvRows_MakesDistinctSortedList_CountReturns27()
         {
@@ -50,6 +53,7 @@ namespace Assignment.Tests
             Assert.AreEqual<int>(27, states.Count());
         }
 
+        // 2.)
         [TestMethod]
         public void GetUniqueSortedListOfStatesGivenCsvRows_MakesDistinctSortedList_PrintsAllStatesToTestConsole()
         {
@@ -65,6 +69,7 @@ namespace Assignment.Tests
             Assert.AreEqual<string>(expected, states);
         }
 
+        // 3.)
         [TestMethod]
         public void GetAggregateSortedListOfStatesUsingCsvRows_MakesSingleStringOfDistinctStates_PrintsStringToConsole()
         {
@@ -80,6 +85,7 @@ namespace Assignment.Tests
             Assert.AreEqual<string>(expected, states);
         }
 
+        // 4.)
         [TestMethod]
         public void People_MakesListOfPeopleSortedByStateCityZip_PrintsListToConsole()
         {
@@ -96,6 +102,24 @@ namespace Assignment.Tests
             Assert.AreEqual<int>(50, data.People.Count());
         }
 
+        // 5.)
+        [TestMethod]
+        public void FilterByEmailAddress_ReturnsFirstAndLastName_ReturnsAreEqual()
+        {
+            //Arrange
+            SampleData data = new();
+            IEnumerable<(string firstName, string lastName)> namesAssociatedWithEmailAddress;
+
+            //Act
+            namesAssociatedWithEmailAddress = data.FilterByEmailAddress(email => email == "pjenyns0@state.gov");
+            (string first, string last) actual = namesAssociatedWithEmailAddress.First();
+            (string fn, string ln) expected = ("Priscilla", "Jenyns");
+
+            //Assert
+            Assert.AreEqual<(string, string)>(expected, actual);
+        }
+
+        // 6.)
         [TestMethod]
         public void GetAggregateListOfStatesGivenPeopleCollection_MakesSingleStringOfDistinctStates_PrintsToConsole()
         {
