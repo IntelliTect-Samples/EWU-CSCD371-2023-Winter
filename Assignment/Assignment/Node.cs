@@ -85,9 +85,9 @@ namespace Assignment
 
         public IEnumerable<T> GetAllItems() 
         {
-            foreach (Node<T> items in InternalCollection) 
+            foreach (Node<T> item in InternalCollection) 
             {
-                yield return items.Value;
+                yield return item.Value;
             }
         }
 
