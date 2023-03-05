@@ -65,6 +65,29 @@ namespace Assignment.Tests
 
 
         }
+
+        [TestMethod]
+        public void People_RetrieveList_Success()
+        {
+            SampleData data = new() { CsvRows = new List<string> {
+                    "1,Priscilla,Jenyns,pjenyns0@state.gov,7884 Corry Way,Atlanta,AL,70577",
+                    "2,Karin,Joder,kjoder1@quantcast.com,03594 Florence Park,Atlanta,AL,71961",
+                    "3,Chadd,Stennine,cstennine2@wired.com,94148 Kings Terrace,Atlanta,AL,59721",
+                    "4,Fremont,Pallaske,fpallaske3@umich.edu,16958 Forster Crossing,Atlanta,AL,10687",
+                    "5,Melisa,Kerslake,mkerslake4@dion.ne.jp,283 Pawling Parkway,Atlanta,AL,88632",
+                    "6,Darline,Brauner,dbrauner5@biglobe.ne.jp,33 Menomonie Trail,Atlanta,AL,10687"
+                } 
+            };
+
+
+            foreach (Person peep in data.People)
+            {
+                Console.WriteLine(peep.FirstName + " " + peep.LastName + " " + peep.Address.State
+                    + " " + peep.Address.City + " " + peep.Address.StreetAddress);
+
+            }
+
+        }
     }
 
 

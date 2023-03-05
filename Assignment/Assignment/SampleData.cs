@@ -32,7 +32,22 @@ namespace Assignment
         }
 
         // 4.
-        public IEnumerable<IPerson> People => throw new NotImplementedException();
+        public IEnumerable<IPerson> People { get
+            {
+                Person MakePersons(string row)
+                {
+                    string[] elements = row.Split(",");
+                    Address address = new Address(elements[4], elements[5], elements[6], elements[7]);
+                    return new Person(elements[1], elements[2], address, elements[3]);
+                }
+
+
+                return CsvRows.Select(MakePersons)
+                    .OrderBy(person => person.Address.State)
+                    .ThenBy(person => person.Address.City)
+                    .ThenBy(person => person.Address.StreetAddress); ;
+            }
+        }
 
         // 5.
         public IEnumerable<(string FirstName, string LastName)> FilterByEmailAddress(
