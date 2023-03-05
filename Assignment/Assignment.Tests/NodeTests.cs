@@ -1,5 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Assignment.Tests
 {
@@ -102,6 +104,67 @@ namespace Assignment.Tests
             var node2 = node1.Append(2);
             var node3 = node2.Append(3);
             var node4 = node3.Append(2);
+        }
+
+        // Test methods after this point are added to test IEnumerable:
+
+        [TestMethod]
+        public void ChildItems_ReturnsIEnumerableWithNumberOfItemsLessThanMaximum_AreEqual()
+        {
+            //Arrange
+            Node<int> node1 = new(1);
+            var node2 = node1.Append(2);
+            var node3 = node2.Append(3);
+
+            //Act
+            int expected = 2;
+            int actual = node1.ChildItems(3).Count();
+
+            //Assert
+            Assert.AreEqual<int>(expected, actual);
+        }
+
+        [TestMethod]
+        public void GetAllItems_ReturnsIEnumerableContainingAllItems_AreEqual()
+        {
+            //Arrange
+            Node<int> node1 = new(1);
+            var node2 = node1.Append(2);
+            var node3 = node2.Append(3);
+
+            //Act
+            int expected = 3;
+            int actual = node1.GetAllItems().Count();
+            foreach (int item in node1.GetAllItems()) 
+            {
+                Console.WriteLine(item);
+            }
+
+            //Assert
+            Assert.AreEqual<int>(expected, actual);
+        }
+
+        [TestMethod]
+        public void InternalCollections_RemovesNodesFromListOnceClearIsCalled_AreEqual()
+        {
+            //Arrange
+            Node<int> node1 = new(1);
+            var node2 = node1.Append(2);
+            var node3 = node2.Append(3);
+            var node4 = node3.Append(4);
+            var node5 = node4.Append(5);
+
+            //Act
+            node3.Clear();
+            int expected = 1;
+            int actual = node3.GetAllItems().Count();
+            foreach (int item in node3.GetAllItems()) 
+            {
+                Console.WriteLine(item);
+            }
+
+            //Assert
+            Assert.AreEqual<int>(expected, actual);
         }
     }
 }

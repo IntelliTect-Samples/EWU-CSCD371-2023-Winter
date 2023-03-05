@@ -8,10 +8,13 @@ namespace Assignment
     {
         private readonly T _value;
         private Node<T> _next;
+        private static List<Node<T>> InternalCollection = new List<Node<T>>();
+
         public Node(T value)
         {
             _value = value;
             _next = this;
+            InternalCollection.Add(this);
         }
 
         public T Value { get { return _value; } }
@@ -35,6 +38,7 @@ namespace Assignment
         {
             if (Exists(value)) throw new ArgumentException("This item already exists in the list");
             Node<T> newNode = new(value);
+            //InternalCollection.Add(value);
             newNode.Next = Next;
             Next = newNode;
             return newNode;
@@ -61,8 +65,10 @@ namespace Assignment
             var node = Next;
             while (node.Next != this)
             {
+                InternalCollection.Remove(node);
                 node = node.Next;
             }
+            InternalCollection.Remove(node);
             node.Next = Next;
             Next = this;
             // Note that any disconnected nodes will not be found in the reference tree next time and automatically garbage collected.
@@ -71,7 +77,31 @@ namespace Assignment
 
         public IEnumerator<T> GetEnumerator()
         {
-            throw new NotImplementedException();
+            foreach (Node<T> item in InternalCollection) 
+            {
+                yield return item.Value;
+            }
+        }
+
+        public IEnumerable<T> GetAllItems() 
+        {
+            foreach (Node<T> items in InternalCollection) 
+            {
+                yield return items.Value;
+            }
+        }
+
+        public IEnumerable<T> ChildItems(int maximum) 
+        {
+            int count = maximum;
+            foreach (Node<T> item in InternalCollection) 
+            {
+                if (count > 1) 
+                {
+                    yield return item.Value;
+                }
+                count--;
+            }
         }
 
         IEnumerator IEnumerable.GetEnumerator()
