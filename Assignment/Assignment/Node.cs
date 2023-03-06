@@ -90,4 +90,14 @@ public class Node<T> : IEnumerable<T> where T : notnull
     {
         return GetEnumerator();
     }
+
+    public IEnumerable<T> ChildItems(int maximum)
+    {
+        Node<T>? current = Next;
+        for (int i = 0; current != null && i < maximum; i++)
+        {
+            yield return current.Data;
+            current = current.Next;
+        }
+    }
 }
