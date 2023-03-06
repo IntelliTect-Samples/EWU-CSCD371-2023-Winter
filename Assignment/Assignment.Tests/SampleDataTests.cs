@@ -11,7 +11,7 @@ namespace Assignment.Tests
 	[TestClass]
 	public class SampleDataTests
 	{
-        private readonly SampleData _data = new("/Users/daisypalencia/Desktop/repos/EWU-CSCD371-2023-Winter/Assignment/Assignment/People.csv");
+        private readonly SampleData _data = new("./People.csv");
 
         [TestMethod]
 		public void SampleData_ReadCSV_Success()
