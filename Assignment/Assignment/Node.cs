@@ -83,7 +83,7 @@ public class Node<T> : IEnumerable<T> where T : notnull
         {
             yield return current.Data;
             current = current.Next;
-        } while (current != this || current != null);
+        } while (current != this && current != null);
     }
 
     IEnumerator IEnumerable.GetEnumerator()
