@@ -15,7 +15,6 @@ namespace Assignment
             IEnumerable<string> csv = File.ReadAllLines(filepath);
             CsvRows = csv;
         }
-
         public IEnumerable<string> CsvRows
         {
             get
@@ -28,7 +27,6 @@ namespace Assignment
             }
   
         }    
-
         // 2.
         public IEnumerable<string> GetUniqueSortedListOfStatesGivenCsvRows()
         {
@@ -47,21 +45,18 @@ namespace Assignment
         {
             get
             {
-                IEnumerable<Person> people = from person in CsvRows
-                .OrderBy(state => state.Split(',')[6])
-                .ThenBy(city => city.Split(',')[5])
-                .ThenBy(zip => zip.Split(',')[7])
-                .ToList()
-
-                let personAttribute = person.Split(',')
-                select new Person(personAttribute[1], personAttribute[2],
-                new Address(personAttribute[4], personAttribute[5], personAttribute[6], personAttribute[7]),
-                personAttribute[3]);
+                IEnumerable<Person> people = from person in CsvRows.OrderBy(state => state.Split(',')[6])
+                                             .ThenBy(city => city.Split(',')[5])
+                                             .ThenBy(zip => zip.Split(',')[7])
+                                             .ToList()
+                                             let personAttribute = person.Split(',')
+                                             select new Person(personAttribute[1], personAttribute[2],
+                                             new Address(personAttribute[4], personAttribute[5], personAttribute[6], personAttribute[7]),
+                                             personAttribute[3]);
 
                 return people;
              }
          }
-
         // 5.
         public IEnumerable<(string FirstName, string LastName)> FilterByEmailAddress(Predicate<string> filter)
         {
