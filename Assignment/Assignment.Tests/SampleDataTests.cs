@@ -27,7 +27,9 @@ public class SampleDataTests
     public void GivenHardcodedAddresses_ReturnsUniqueSortedList()
     {
         // Assemble
-        SampleData data = new SampleData { CsvRows = new List<string> 
+        SampleData data = new SampleData
+        {
+            CsvRows = new List<string>
             {
                 "1,Priscilla,Jenyns,pjenyns0@state.gov,7884 Corry Way,Helena,MT,70577",
                 "2,Karin,Joder,kjoder1@quantcast.com,03594 Florence Park,Tampa,FL,71961",
@@ -62,7 +64,9 @@ public class SampleDataTests
     public void UsingHardcodedAddresses_GetsUniqueSortedList_ReturnsListAsString()
     {
         // Assemble
-        SampleData data = new SampleData { CsvRows = new List<string>
+        SampleData data = new SampleData
+        {
+            CsvRows = new List<string>
             {
                 "1,Priscilla,Jenyns,pjenyns0@state.gov,7884 Corry Way,Helena,MT,70577",
                 "2,Karin,Joder,kjoder1@quantcast.com,03594 Florence Park,Tampa,FL,71961",
@@ -109,7 +113,9 @@ public class SampleDataTests
     public void People_ReturnsSortedListByAddress()
     {
         // Assemble
-        SampleData data = new SampleData { CsvRows = new List<string>
+        SampleData data = new SampleData
+        {
+            CsvRows = new List<string>
             {
                 "1,Priscilla,Jenyns,pjenyns0@state.gov,7884 Corry Way,Helena,MT,70577",
                 "2,Karin,Joder,kjoder1@quantcast.com,03594 Florence Park,Tampa,FL,71961",
@@ -169,11 +175,11 @@ public class SampleDataTests
         Assert.AreEqual<string>(expected, actual);
     }
 
-     [TestMethod]
-    public void MethodName()
+    [TestMethod]
+    public void FilterByEmailAddress_GivenListFiltersByEmail_RetrunsFilteredList()
     {
-      // Assemble
-      SampleData data = new SampleData
+        // Assemble
+        SampleData data = new SampleData
         {
             CsvRows = new List<string>
             {
@@ -183,11 +189,11 @@ public class SampleDataTests
             }
         };
 
-      // Act
-      Predicate<string> filter = (string email) => email == "pjenyns0@state.gov";
-      IEnumerable<(string, string)> expected = new List<(string, string)> {("Priscilla","Jenyns")};
-      
-      // Assert
-      Assert.AreEqual<(string, string)>(expected.ToList()[0], data.FilterByEmailAddress(filter).ToList()[0]);
+        // Act
+        Predicate<string> filter = (string email) => email == "pjenyns0@state.gov";
+        IEnumerable<(string, string)> expected = new List<(string, string)> { ("Priscilla", "Jenyns") };
+
+        // Assert
+        Assert.AreEqual<(string, string)>(expected.ToList()[0], data.FilterByEmailAddress(filter).ToList()[0]);
     }
 }
