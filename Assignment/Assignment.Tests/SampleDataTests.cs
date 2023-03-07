@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -52,6 +50,38 @@ namespace Assignment.Tests
             string[] statesArray = uniqueStates.ToArray();
             string expectedStates = String.Join(",", statesArray);
             Assert.AreEqual<string>(sample.GetAggregateSortedListOfStatesUsingCsvRows(), expectedStates);
+        }
+
+        [TestMethod]
+        public void People_ReturnsEnumerableIPerson()
+        {
+            SampleData sample = new();
+            List<IPerson> washingtonResidents = sample.People.Where(person => person.Address.State == "WA").ToList();
+            Assert.IsTrue(washingtonResidents.Count == 3);
+            List<string> states = sample.CsvRows.Select(row => row.Split(",")[6]).Where(state => state == "WA").ToList();
+            List<string> residentStates = washingtonResidents.Select(person => person.Address.State).ToList();
+
+            Assert.AreEqual<int>(states.Except(residentStates).Count(), 0);
+        }
+
+        [TestMethod]
+        public void FilterByEmailAddress_GivenEmailAddress_ReturnsFirstLastName()
+        {
+            SampleData sample = new();
+            IEnumerable<(string firstName, string lastName)> names = sample.FilterByEmailAddress(email => email == "jdaneluttim@jimdo.com");
+
+            Assert.AreEqual<int>(names.Count(), 1);
+            Assert.AreEqual<(string, string)>(names.First(), ("Jermaine", "Danelutti"));
+        }
+        [TestMethod]
+        public void GetAggregateListOfStatesGivenPeopleCollection_ReturnsAggregateList()
+        {
+            SampleData sample = new();
+            string states = sample.GetAggregateListOfStatesGivenPeopleCollection(sample.People);
+            string expected = sample.GetAggregateSortedListOfStatesUsingCsvRows();
+            List<string> statesList = states.Split(",").ToList();
+            List<string> expectedList = expected.Split(",").ToList();
+            Assert.AreEqual<int>(statesList.Except(expectedList).Count(), 0);
         }
     }
 }
