@@ -1,11 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Assignment;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Security.Cryptography;
 
 namespace Assignment.Tests
 {
@@ -40,19 +35,32 @@ namespace Assignment.Tests
         [TestMethod]
         public void GetAggregateSortedListOfStatesUsingCsvRowsTest()
         {
-            Assert.Fail();
+            SampleData sampleData = new SampleData();
+            string statesCSVList = sampleData.GetAggregateSortedListOfStatesUsingCsvRows();
+            IEnumerable<string> sortedStates = sampleData.GetUniqueSortedListOfStatesGivenCsvRows().OrderBy(x => x);
+            Assert.AreEqual<string>(string.Join(",", sortedStates), statesCSVList);
         }
 
         [TestMethod]
         public void FilterByEmailAddressTest()
         {
-            Assert.Fail();
+            SampleData sampleData = new SampleData();
+            var result = sampleData.FilterByEmailAddress(x => x.Equals("dcroserc@reverbnation.com"));
+            Assert.IsNotNull(result);
+            Assert.AreEqual<int>(1, result.Count());
+
+            var names = result.First();
+            Assert.AreEqual<string>("Daile", names.FirstName);
+            Assert.AreEqual<string>("Croser", names.LastName);
         }
 
         [TestMethod]
         public void GetAggregateListOfStatesGivenPeopleCollectionTest()
         {
-            Assert.Fail();
+            SampleData sampleData = new SampleData();
+            // Test only people with first name starting with 'A'
+            string result = sampleData.GetAggregateListOfStatesGivenPeopleCollection(sampleData.People.Where(p => p.FirstName.StartsWith('A')));
+            Assert.AreEqual<string>("AL,PA,UT,WV", result);
         }
     }
 }

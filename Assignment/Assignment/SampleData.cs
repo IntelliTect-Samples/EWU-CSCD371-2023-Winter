@@ -26,7 +26,7 @@ namespace Assignment
 
         // 3.
         public string GetAggregateSortedListOfStatesUsingCsvRows()
-            => string.Join(", ", GetUniqueSortedListOfStatesGivenCsvRows().ToArray());
+            => string.Join(",", GetUniqueSortedListOfStatesGivenCsvRows().ToArray());
 
         // 4.
         public IEnumerable<IPerson> People => from string temp in CsvRows
@@ -40,6 +40,6 @@ namespace Assignment
 
         // 6.
         public string GetAggregateListOfStatesGivenPeopleCollection(
-            IEnumerable<IPerson> people) => people.Select(person => person.Address.State).Distinct().OrderBy(state => state).Aggregate((all, state) => $"{all}, {state}");
+            IEnumerable<IPerson> people) => people.Select(person => person.Address.State).Distinct().OrderBy(state => state).Aggregate((all, state) => $"{all},{state}");
     }
 }
