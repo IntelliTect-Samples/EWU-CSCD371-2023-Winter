@@ -9,10 +9,10 @@ using System.Security.Cryptography;
 
 namespace Assignment.Tests
 {
-    [TestClass()]
+    [TestClass]
     public class SampleDataTests
     {
-        [TestMethod()]
+        [TestMethod]
         public void SampleDataTest()
         {
             SampleData sampleData = new SampleData();
@@ -21,7 +21,7 @@ namespace Assignment.Tests
             Assert.AreEqual<string>("1,Priscilla,Jenyns,pjenyns0@state.gov,7884 Corry Way,Helena,MT,70577", sampleData.CsvRows.First());
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void GetUniqueSortedListOfStatesGivenCsvRowsTest()
         {
             string expectedStates = "AL,AZ,CA,DC,FL,GA,IN,KS,LA,MD,MN,MO,MT,NC,NE,NH,NV,NY,OR,PA,SC,TN,TX,UT,VA,WA,WV";
@@ -37,19 +37,19 @@ namespace Assignment.Tests
             Assert.AreEqual<string>(string.Join(",", sortedStates), string.Join(",", states));
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void GetAggregateSortedListOfStatesUsingCsvRowsTest()
         {
             Assert.Fail();
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void FilterByEmailAddressTest()
         {
             Assert.Fail();
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void GetAggregateListOfStatesGivenPeopleCollectionTest()
         {
             Assert.Fail();

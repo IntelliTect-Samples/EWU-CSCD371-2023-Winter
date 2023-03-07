@@ -24,7 +24,7 @@ namespace Assignment
 
         // 3.
         public string GetAggregateSortedListOfStatesUsingCsvRows()
-            => throw new NotImplementedException();
+            => string.Join(", ", GetUniqueSortedListOfStatesGivenCsvRows().ToArray());
 
         // 4.
         public IEnumerable<IPerson> People => throw new NotImplementedException();
