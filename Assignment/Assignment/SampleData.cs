@@ -8,7 +8,7 @@ namespace Assignment
     public class SampleData : ISampleData
     {
         // 1.
-        public IEnumerable<string> CsvRows => File.ReadLines("People.csv").Skip(1);
+        public IEnumerable<string> CsvRows => File.ReadLines("..\\..\\..\\..\\Assignment\\People.csv").Skip(1);
 
         // 2.
         public IEnumerable<string> GetUniqueSortedListOfStatesGivenCsvRows()
@@ -18,7 +18,8 @@ namespace Assignment
             {
                 states.Add(row.Split(',')[6]);
             }
-            return states.Distinct().Order();
+            states = states.Distinct().Order().ToList();
+            return states;
         }
 
         // 3.

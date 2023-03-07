@@ -19,6 +19,7 @@ public class Node<T> : IEnumerable<T>
     public IEnumerator<T> GetEnumerator()
     {
         Node<T> n = this.Next;
+        yield return this.Item!;
         while(n != this)
         {
             yield return n.Item!;
