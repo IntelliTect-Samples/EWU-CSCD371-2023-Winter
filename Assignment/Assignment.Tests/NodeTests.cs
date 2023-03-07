@@ -47,18 +47,21 @@ public class NodeTests
         int[] expected = new int[4];
 
         // Act
-        List<int> list = node.ChildItems(2).ToList();
+        List<int> list = node.ChildItems(3).ToList();
 
         var enumerator = list.GetEnumerator();
         enumerator.MoveNext();
         expected[0] = enumerator.Current;
         enumerator.MoveNext();
         expected[1] = enumerator.Current;
+        enumerator.MoveNext();
+        expected[2] = enumerator.Current;
 
 
 
         // Assert
-        Assert.AreEqual(2, expected[0]);
-        Assert.AreEqual(3, expected[0]);
+        Assert.AreEqual<int>(4, expected[0]);
+        Assert.AreEqual<int>(3, expected[1]);
+        Assert.AreEqual<int>(2, expected[2]);
     }
 }
