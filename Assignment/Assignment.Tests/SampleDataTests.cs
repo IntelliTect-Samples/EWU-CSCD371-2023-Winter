@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Data;
 using System.Linq;
 
@@ -29,16 +30,18 @@ namespace Assignment.Tests
 
         // 2.)
         [TestMethod]
-        public void GetUniqueSortedListOfStatesGivenCsvRows_MakesDistinctSortedList_CountReturns27()
+        public void GetUniqueSortedListOfStatesGivenCsvRows_MakesDistinctSortedList_ReturnsTrue()
         {
             //Arrange
             SampleData data = new();
-           
+
             //Act
+            IEnumerable<string> csvRowsTest = data.CsvRows.Select(row => row.Split(',')[6]).OrderBy(item => item).Distinct();
             IEnumerable<string> states = data.GetUniqueSortedListOfStatesGivenCsvRows();
 
             //Assert
             Assert.AreEqual<int>(27, states.Count());
+            Assert.IsTrue(states.SequenceEqual(csvRowsTest));
         }
 
         // 2.)
@@ -75,12 +78,17 @@ namespace Assignment.Tests
 
         // 4.)
         [TestMethod]
-        public void People_MakesListOfPeopleSortedByStateCityZip_PrintsListToConsole()
+        public void People_MakesListOfPeopleSortedByStateCityZip_ReturnsTrue()
         {
             //Arrange
             SampleData data = new();
 
             //Act
+            IEnumerable<string> csvRowsTest = data.CsvRows.OrderBy(item => item.Split(",")[6])
+            .ThenBy(item => item.Split(",")[5])
+            .ThenBy(item => item.Split(",")[7])
+            .Select(row => row.Split(',')[1]);
+
             foreach(IPerson person in data.People)
             {
                 Console.WriteLine(person.ToString());
@@ -88,6 +96,7 @@ namespace Assignment.Tests
 
             //Assert
             Assert.AreEqual<int>(50, data.People.Count());
+            Assert.IsTrue(data.People.Select(person => person.FirstName).SequenceEqual(csvRowsTest));
         }
 
         // 5.)
