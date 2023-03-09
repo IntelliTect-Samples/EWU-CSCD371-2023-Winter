@@ -77,18 +77,12 @@ namespace Assignment
 
         public IEnumerator<T> GetEnumerator()
         {
-            foreach (Node<T> item in InternalCollection) 
+            Node<T> node = this;
+            do
             {
-                yield return item.Value;
-            }
-        }
-
-        public IEnumerable<T> GetAllItems() 
-        {
-            foreach (Node<T> item in InternalCollection) 
-            {
-                yield return item.Value;
-            }
+                yield return node.Value;
+                node = node.Next;
+            } while (node.Next != Next);
         }
 
         public IEnumerable<T> ChildItems(int maximum) 
@@ -106,7 +100,7 @@ namespace Assignment
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return GetEnumerator();
         }
     }
 }

@@ -18,25 +18,13 @@ namespace Assignment.Tests
             SampleData data = new();
 
             //Act
-            
-            //Assert
-            Assert.AreEqual<int>(50, data.CsvRows.Count());
-        }
-
-        // 1.)
-        [TestMethod]
-        public void CsvRows_ReadsFileAndSkipsFirstRow_PrintsAllPeopleToTestConsole()
-        {
-            //Arrange
-            SampleData data = new();
-
-            //Act
-            foreach(string item in data.CsvRows)
+            foreach (string item in data.CsvRows)
             {
                 Console.WriteLine(item);
             }
 
             //Assert
+            Assert.AreEqual<int>(50, data.CsvRows.Count());
         }
 
         // 2.)
@@ -45,7 +33,7 @@ namespace Assignment.Tests
         {
             //Arrange
             SampleData data = new();
-
+           
             //Act
             IEnumerable<string> states = data.GetUniqueSortedListOfStatesGivenCsvRows();
 
@@ -77,7 +65,7 @@ namespace Assignment.Tests
             SampleData data = new();
 
             //Act
-            string expected = data.GetUniqueSortedListOfStatesGivenCsvRows().Aggregate((a, b) => a + ", " + b); ;
+            string expected = data.GetUniqueSortedListOfStatesGivenCsvRows().Aggregate((a, b) => a + ", " + b);
             string states = data.GetAggregateSortedListOfStatesUsingCsvRows();
             Console.WriteLine(states);
 
@@ -93,9 +81,9 @@ namespace Assignment.Tests
             SampleData data = new();
 
             //Act
-            foreach(IPerson person in data.People) 
+            foreach(IPerson person in data.People)
             {
-                Console.WriteLine(person.ToString());      
+                Console.WriteLine(person.ToString());
             }
 
             //Assert

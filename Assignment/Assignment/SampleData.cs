@@ -27,23 +27,26 @@ namespace Assignment
         // 3.
         public string GetAggregateSortedListOfStatesUsingCsvRows()
         {
-            string states = string.Join(", ",GetUniqueSortedListOfStatesGivenCsvRows());
+            string states = string.Join(", ", GetUniqueSortedListOfStatesGivenCsvRows().ToArray());
             return states;
         }
 
         // 4.
-        public IEnumerable<IPerson> People => CsvRows.SelectMany(row =>
+        public IEnumerable<IPerson> People => CsvRows.OrderBy(item => item.Split(",")[6])
+            .ThenBy(item => item.Split(",")[5])
+            .ThenBy(item => item.Split(",")[7])
+            .SelectMany(row =>
             {
                 List<IPerson> people = new();
                 string[] personInfo = row.Split(",");
                 Address address = new(personInfo[4], personInfo[5], personInfo[6], personInfo[7]);
                 Person person = new(personInfo[1], personInfo[2], address, personInfo[3]);
                 people.Add(person);
-                return people; 
-            })
-            .OrderBy(item => item.Address.State)
-            .ThenBy(item => item.Address.City)
-            .ThenBy(item => item.Address.Zip);
+                return people;
+            });
+            //.OrderBy(item => item.Address.State)
+            //.ThenBy(item => item.Address.City)
+            //.ThenBy(item => item.Address.Zip);
 
         // 5.
         public IEnumerable<(string FirstName, string LastName)> FilterByEmailAddress(
