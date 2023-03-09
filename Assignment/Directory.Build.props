@@ -1,6 +1,7 @@
 <Project>
 <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+	<LangVersion>11.0</LangVersion>
+    <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
