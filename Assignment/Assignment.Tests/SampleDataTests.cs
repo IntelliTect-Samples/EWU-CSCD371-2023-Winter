@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -25,11 +26,14 @@ public class SampleDataTests
     [TestMethod]
     public void GetUniqueSortedListOfStatesGivenCsvRows_HardcodedTest()
     {
-        //TODO: Figure out what's going wrong here
         string[] act = sample.GetUniqueSortedListOfStatesGivenCsvRows().ToArray();
         string[] exp = { "AL", "AZ", "CA", "DC", "FL", "GA", "IN", "KS", "LA", "MD", "MN", "MO", "MT", "NC", 
             "NE", "NH", "NV", "NY", "OR", "PA", "SC", "TN", "TX", "UT", "VA", "WA", "WV" };
-        Assert.AreEqual<string[]>(exp, act);
+        int i = 0;
+        foreach (string s in exp) {
+            Assert.AreEqual<string>(s, act[i]);
+            i++;
+        }
     }
     [TestMethod]
     public void GetUniqueSortedListOfStatesGivenCsvRows_NotHardcodedTest()
@@ -70,7 +74,34 @@ public class SampleDataTests
     [TestMethod]
     public void FilterByEmailAddress_Test()
     {
-        //TODO: Figure out how to test this adequately
+        Predicate<string> f1 = (string email) => email.Contains(".gov");
+        Predicate<string> f2 = (string email) => email == "fdoughertyi@stanford.edu";
+        List<(string FirstName, string LastName)> e1 = new()
+        {
+            ("Arthur", "Myles"),
+            ("Ev", "Challace"),
+            ("Marijn", "McKennan"),
+            ("Priscilla", "Jenyns"),
+            ("Amelia", "Toal")
+        };
+        List<(string FirstName, string LastName)> e2 = new()
+        {
+            ("Fayette", "Dougherty")
+        };
+        var a1 = sample.FilterByEmailAddress(f1);
+        var a2 = sample.FilterByEmailAddress(f2);
+        int j = 0;
+        foreach ( var a in a1)
+        {
+            Assert.AreEqual<(string, string)>(e1[j], a);
+            j++;
+        }
+        j = 0;
+        foreach ( var a in a2)
+        {
+            Assert.AreEqual<(string, string)>(e2[j], a);
+            j++;
+        }
     }
     [TestMethod]
     public void GetAggregateListOfStatesGivenPeopleCollection_MainTest()

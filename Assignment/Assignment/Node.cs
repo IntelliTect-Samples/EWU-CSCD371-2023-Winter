@@ -19,12 +19,12 @@ public class Node<T> : IEnumerable<T>
     public IEnumerator<T> GetEnumerator()
     {
         Node<T> n = this.Next;
-        yield return this.Item!;
         while(n != this)
         {
             yield return n.Item!;
             n = n.Next;
         }
+        yield return this.Item!;
     }
     IEnumerator IEnumerable.GetEnumerator() { 
         return GetEnumerator();
@@ -43,6 +43,10 @@ public class Node<T> : IEnumerable<T>
                 n = n.Next;
             }
             i++;
+        }
+        if (i < max)
+        {
+            list.Add(this.Item!);
         }
         return list;
     }
