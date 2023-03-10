@@ -26,9 +26,9 @@ namespace Assignment
             int thirdValue = result.Current;
 
             // Assert
-            Assert.AreEqual(1, firstValue);
-            Assert.AreEqual(2, secondValue);
-            Assert.AreEqual(3, thirdValue);
+            Assert.AreEqual<int>(1, firstValue);
+            Assert.AreEqual<int>(2, secondValue);
+            Assert.AreEqual<int>(3, thirdValue);
         }
 
         [TestMethod]

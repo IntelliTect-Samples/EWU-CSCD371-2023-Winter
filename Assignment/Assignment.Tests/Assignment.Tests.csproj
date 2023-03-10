@@ -14,5 +14,14 @@
 		<ProjectReference Include="..\Assignment.Interfaces\Assignment.Interfaces.csproj" />
 		<ProjectReference Include="..\Assignment\Assignment.csproj" />
 	</ItemGroup>
+	<ItemGroup>
+	  <Compile Update="NodeTests.cs">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Compile>
+	  <Compile Update="SampleDataTests.cs">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Compile>
+	</ItemGroup>
+	
 
 </Project>
