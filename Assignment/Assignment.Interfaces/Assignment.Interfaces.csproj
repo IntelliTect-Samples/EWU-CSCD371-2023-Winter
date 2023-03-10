@@ -2,4 +2,7 @@
   <PropertyGroup>
     <RootNamespace>Assignment</RootNamespace>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Linq.Async" Version="6.0.1" />
+  </ItemGroup>
 </Project>

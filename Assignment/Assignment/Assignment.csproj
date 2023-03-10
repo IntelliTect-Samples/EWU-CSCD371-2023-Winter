@@ -1,7 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <PackageReference Include="System.Linq.Async" Version="6.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Assignment.Interfaces\Assignment.Interfaces.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="People.csv">
+      <CopyToOutputDirectory>CopyIfNewer</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
