@@ -9,7 +9,6 @@ public class SampleData : ISampleData
 {
     // 1.
     public IEnumerable<string> CsvRows { get => _CsvRows; init { _CsvRows = value; } }
-
     private IEnumerable<string> _CsvRows = File.ReadAllLines("People.csv").Skip(1);
 
     // 2.
@@ -39,7 +38,7 @@ public class SampleData : ISampleData
             return CsvRows.Select(MakePersons)
                 .OrderBy(person => person.Address.State)
                 .ThenBy(person => person.Address.City)
-                .ThenBy(person => person.Address.StreetAddress);
+                .ThenBy(person => person.Address.Zip);
         }
     }
 

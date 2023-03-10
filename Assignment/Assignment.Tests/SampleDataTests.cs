@@ -77,15 +77,17 @@ public class SampleDataTests
     {
         // Arrange
         SampleData data = new() { CsvRows = hardCodedCSVList };
+        IPerson fremont = data.People.First();
 
         // Assert
         Assert.AreEqual<int>(6, data.People.Count());
-        Assert.AreEqual<string>("Fremont", data.People.First().FirstName);
-        Assert.AreEqual<string>("Pallaske", data.People.First().LastName);
-        Assert.AreEqual<string>("fpallaske3@state.gov", data.People.First().EmailAddress);
-        Assert.AreEqual<string>("AL", data.People.First().Address.State);
-        Assert.AreEqual<string>("Atlanta", data.People.First().Address.City);
-        Assert.AreEqual<string>("16958 Forster Crossing", data.People.First().Address.StreetAddress);
+        Assert.AreEqual<string>("Fremont", fremont.FirstName);
+        Assert.AreEqual<string>("Pallaske", fremont.LastName);
+        Assert.AreEqual<string>("fpallaske3@state.gov", fremont.EmailAddress);
+        Assert.AreEqual<string>("AL", fremont.Address.State);
+        Assert.AreEqual<string>("Atlanta", fremont.Address.City);
+        Assert.AreEqual<string>("16958 Forster Crossing", fremont.Address.StreetAddress);
+        Assert.AreEqual<string>("10687", fremont.Address.Zip);
     }
 
     [TestMethod]
@@ -96,10 +98,10 @@ public class SampleDataTests
         List<string> expected = new() { "Fremont Pallaske", "Priscilla Jenyns" };
 
         // Act
-        IEnumerable<string> actual = data.FilterByEmailAddress(EmailFilter).Select(person => $"{person.FirstName} {person.LastName}");
+        IEnumerable<string> actual = data.FilterByEmailAddress(value => value.Contains(".gov"))
+            .Select(person => $"{person.FirstName} {person.LastName}");
 
         // Assert
-        static bool EmailFilter(string value) => value.Contains(".gov");
         Assert.AreEqual<int>(expected.Count, expected.Zip(actual).Where(IsEqual).Count());
     }
 
