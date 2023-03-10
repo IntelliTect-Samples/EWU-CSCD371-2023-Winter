@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿namespace Assignment;
 
-namespace Assignment
+public interface IPerson
 {
-    public interface IPerson
-    {
-        string FirstName { get; }
-        string LastName { get; }
-        IAddress Address { get; }
+    string FirstName { get; }
+    string LastName { get; }
+    IAddress Address { get; }
 
-        string EmailAddress { get; }
-    }
+    string EmailAddress { get; }
 }

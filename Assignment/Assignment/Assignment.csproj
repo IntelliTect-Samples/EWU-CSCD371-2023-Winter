@@ -1,7 +1,7 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
-  <ItemGroup>
-    <ProjectReference Include="..\Assignment.Interfaces\Assignment.Interfaces.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Assignment.Interfaces\Assignment.Interfaces.csproj"/>
+    </ItemGroup>
 
 </Project>
