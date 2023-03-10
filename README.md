@@ -9,9 +9,9 @@ with the Task Parallel Library (TPL).
 
 ### Due Dates
 
-- Assignment 9&10 is due (even though you are pairing) **Monday March 21, 11:59 PM.**
-- Code reviews (be everyone individually) are due **Wednesday March 23, 11:59 PM**. (Thus all PRs will be reviewed twice.)
-- Final PR is due **Thursday March 24, 11:59 PM**.
+- Assignment 9&10 is due (even though you are pairing) **Monday March 20, 11:59 PM.**
+- Code reviews (be everyone individually) are due **Wednesday March 22, 11:59 PM**. (Thus all PRs will be reviewed twice.)
+- Final PR is due **Thursday March 23, 11:59 PM**.
 - **The combination of Assignment 9&10 will be graded - starting Friday March 24.**
 
 ## Reading
@@ -48,10 +48,12 @@ Previously Assigned
 
 ## Fundamentals
 
-- Ensure you enable:
-  - nullable reference types is enabled ❌✔
-  - net6 targeted ❌✔
-  - C# 10.0 ❌✔
-  - and enabled .NET analyzers for both projects ❌✔
+- Place all shared project properties into a `Directory.Build.Props` file.
+- Place all shared project items into a `Directory.Build.targets` file.
+- Ensure nullable reference types is enabled  ❌✔
+- Ensure that you turn on code analysis for all projects(EnableNETAnalyzers)  ❌✔
+- Set `LangVersion` and the `TargetFramework` to the latest released versions available (preview versions optional)   ❌✔
+- and enabled .NET analyzers for both projects ❌✔
+- For this assignment, consider using `Assert.AreEqual<T>()` (the generic version)  ❌✔
 - All of the above should be unit tested ❌✔
 - Choose simplicity over complexity ❌✔
