@@ -351,3 +351,30 @@ MigrationBackup/
 
 # Live unit testing files.
 *.lutconfig
+*.json
+Assignment/Assignment.Interfaces/Assignment.Interfaces.csproj
+Assignment/Assignment.Interfaces/IAddress.cs
+Assignment/Assignment.Interfaces/IAsyncSampleData.cs
+Assignment/Assignment.Interfaces/IPerson.cs
+Assignment/Assignment.Interfaces/ISampleData.cs
+Assignment/Assignment.sln
+Assignment/Assignment.Tests/Assignment.Tests.csproj
+Assignment/Assignment/Address.cs
+Assignment/Assignment/Assignment.csproj
+Assignment/Assignment/People.csv
+Assignment/Assignment/Person.cs
+Assignment/Assignment/SampleData.cs
+Assignment/Directory.Build.props
+Assignment/Assignment.Interfaces/Assignment.Interfaces.csproj
+Assignment/Assignment.Interfaces/IAddress.cs
+Assignment/Assignment.Interfaces/IAsyncSampleData.cs
+Assignment/Assignment.Interfaces/IPerson.cs
+Assignment/Assignment.Interfaces/ISampleData.cs
+Assignment/Assignment.sln
+Assignment/Assignment.Tests/Assignment.Tests.csproj
+Assignment/Assignment/Address.cs
+Assignment/Assignment/Assignment.csproj
+Assignment/Assignment/People.csv
+Assignment/Assignment/Person.cs
+Assignment/Assignment/SampleData.cs
+Assignment/Directory.Build.props
